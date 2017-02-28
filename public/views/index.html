@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Google Server-Side Auth Example</title>
+    <script src="/public/vendors/angular.min.js"></script>
+    <script src="/public/vendors/angular-route.min.js"></script>
+    <script src="/public/scripts/app.js"></script>
+    <script src="/public/scripts/services/authFactory.js"></script>
+    <script src="/public/scripts/controllers/navController.js"></script>
+    <script src="/public/scripts/controllers/authController.js"></script>
+    <script src="/public/scripts/controllers/calendarController.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/vendors/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/public/vendors/skeleton.css" />
+  </head>
+  <body>
+    <!-- Bring in the Angular app -->
+    <main class="container" ng-app="theGoogles">
+      <!-- NavController is on every page -->
+      <header ng-controller="NavController as nav">
+        <h1>How can I get my Google Calender???</h1>
+        <nav>
+          <ul class="row">
+            <li class="two columns"><a href="#home">Home</a></li>
+            <li class="two columns"><a href="#calendar">Calendar</a></li>
+            <li class="six columns" ng-show="nav.displayLogout">Hi {{nav.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
+          </ul>
+        </nav>
+        <!-- Show a helpful message when needed -->
+        <section id="message" class="nav.message.type" ng-show="nav.message.text">
+          {{nav.message.text}}
+        </section>
+      </header>
+      <!-- Pull in views via ngRoutes here -->
+      <ng-view></ng-view>
+    </main>
+  </body>
+</html>

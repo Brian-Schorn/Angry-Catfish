@@ -1,0 +1,13 @@
+<!-- Consider this the main view -->
+<h2>Login Page</h2>
+<!-- Shown for users that are NOT logged in -->
+<section ng-hide="auth.loggedIn">
+  <!-- I got this button image from Googles sign-in button brand guidelines page -->
+  <a href= "/auth/google"><img src="/public/assets/btn_google_signin_dark_normal_web.png" /></a>
+</section>
+<!-- Shown for users that are logged in -->
+<section ng-show="auth.loggedIn">
+  <p>
+    You are logged in!
+  </p>
+</section>
