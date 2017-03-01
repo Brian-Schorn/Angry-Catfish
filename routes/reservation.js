@@ -22,13 +22,62 @@ router.get('/', function (req, res) {
 });
 
 //Retrieve all reservations for a Date
-
+router.get('/date', function (req, res) {
+  date = new Date req.query.date;
+  dateEnd = new Date(date.setDate(date.getDate() + 1));
+  console.log("Searching Reservations by Date:", date, dateEnd);
+  Reservation.find({resDate : {
+        '$gte': date,
+        '$lte': dateEnd
+    }}, function (err, result) {
+    if (err){
+      console.log("Error Getting Info From The DB", err);
+      res.sendStatus(500);
+      return;
+    }
+    console.log("Reservation /date GET request:",result);
+    res.send(result)
+  });
+});
 //Retrieve all reservations for a Bike ID
-
+router.get('/bikeID', function (req, res) {
+  bikeQueryID = req.query.bikeID;
+  Reservation.find({bikeID: bikeQueryID}, function (err, result) {
+    if (err){
+      console.log("Error Getting Info From The DB", err);
+      res.sendStatus(500);
+      return;
+    }
+    console.log("Reservation /bikeID GET request:",result);
+    res.send(result)
+  });
+});
 //Retrieve all reservations for a TransactionID
-
+router.get('/transactionID', function (req, res) {
+  transactionQueryID = req.query.transactionID;
+  Reservation.find({transaction: transactionQueryID}, function (err, result) {
+    if (err){
+      console.log("Error Getting Info From The DB", err);
+      res.sendStatus(500);
+      return;
+    }
+    console.log("Reservation /transactionID GET request:",result);
+    res.send(result)
+  });
+});
 //Retrieve all reservations for an Email
-
+router.get('/email', function (req, res) {
+  email = req.query.email;
+  Reservation.find({custEmail: email}, function (err, result) {
+    if (err){
+      console.log("Error Getting Info From The DB", err);
+      res.sendStatus(500);
+      return;
+    }
+    console.log("Reservation /email GET request:",result);
+    res.send(result)
+  });
+});
 
 
 
@@ -59,14 +108,15 @@ router.delete('/:id', function(req, res){
   });
 });
 
+//Update Reservation by ID PUT REQUEST
 router.put('/:id', function(req, res){
-  Reservation.findByIdAndUpdate(id, req.body, function (err) {
+  Reservation.findByIdAndUpdate(req.params.id, req.body, function (err) {
     if (err) {
       console.log("Error Updating Reservation: ", err);
       res.sendStatus(500);
       return;
     }
-    console.log("PUT request, updated Reservation: ", id);
+    console.log("PUT request, updated Reservation: ", req.params.id);
     res.send(204)
   });
 });

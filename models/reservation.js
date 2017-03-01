@@ -6,8 +6,8 @@
 var mongoose = require('mongoose');
 
 var reservationSchema = mongoose.Schema({
-  bikeID: [String],
   transactionID: Number,
+  bikeID: [String],
   resDate: [Date],
   custName: String,
   custEmail: String,
@@ -16,6 +16,7 @@ var reservationSchema = mongoose.Schema({
   pedalType: String,
   needHelmet: Boolean,
   waiverSigned: Boolean
+  totalPrice: Number
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

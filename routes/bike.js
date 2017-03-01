@@ -50,13 +50,13 @@ router.delete('/:id', function(req, res){
 });
 
 router.put('/:id', function(req, res){
-  Bike.findByIdAndUpdate(id, req.body, function (err) {
+  Bike.findByIdAndUpdate(req.params.id, req.body, function (err) {
     if (err) {
       console.log("Error Updating Bike: ", err);
       res.sendStatus(500);
       return;
     }
-    console.log("PUT request, updated bike: ", id);
+    console.log("PUT request, updated bike: ", req.params.id);
     res.send(204)
   });
 });
