@@ -9,7 +9,7 @@ var reservationSchema = mongoose.Schema({
   reservationID: Number,
   bikeID: Number,
   transactionID: Number,
-  resDate: Date,
+  resDate: [Date],
   custName: String,
   custEmail: String,
   custPhone: String,
