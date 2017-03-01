@@ -10,6 +10,9 @@ var auth = require('./routes/auth');
 var isLoggedIn = require('./utils/auth');
 var private = require('./routes/private/index');
 var database = require('./utils/database');
+var bike = require('./routes/bike');
+var reservation = require('./routes/reservation');
+
 /** ---------- EXPRESS APP CONFIG ---------- **/
 var app = express();
 app.use('/public', express.static('public'));  // serve files from public
@@ -42,6 +45,8 @@ app.use(passport.session());
 /** ---------- ROUTES ---------- **/
 app.use('/auth', auth);
 app.use('/private', isLoggedIn, private);
+app.use('/bike', bike);
+app.use('/reservation', reservation);
 app.use('/', index);
 /** ---------- SERVER START ---------- **/
 app.listen(3000, function () {
