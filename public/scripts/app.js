@@ -3,10 +3,10 @@ var angryCatfishApp = angular.module('angryCatfish', ['ngRoute']);
 angryCatfishApp.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider
-    .when('/calendar', {
-      templateUrl: '/public/views/templates/calendar.html',
-      controller: 'CalendarController',
-      controllerAs: 'calendar',
+    .when('/testPage', {
+      templateUrl: '/public/views/templates/testPage.html',
+      controller: 'testController',
+      controllerAs: 'test',
     })
     .when('/login', {
       templateUrl: '/public/views/templates/login.html',
@@ -16,5 +16,7 @@ angryCatfishApp.config(['$routeProvider', function ($routeProvider) {
     .otherwise({
       redirectTo: 'login',
     });
+    // $locationProvider.html5Mode(true);
+
 },
 ]);
