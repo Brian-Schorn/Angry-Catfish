@@ -6,8 +6,7 @@
 var mongoose = require('mongoose');
 
 var reservationSchema = mongoose.Schema({
-  reservationID: Number,
-  bikeID: Number,
+  bikeID: [String],
   transactionID: Number,
   resDate: Date,
   custName: String,
