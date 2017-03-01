@@ -15,7 +15,7 @@ var reservationSchema = mongoose.Schema({
   custAddress: String,
   pedalType: String,
   needHelmet: Boolean,
-  waiverSigned: Boolean
+  waiverSigned: Boolean,
   totalPrice: Number
 });
 

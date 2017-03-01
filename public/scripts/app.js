@@ -1,6 +1,6 @@
-var googleAuthApp = angular.module('theGoogles', ['ngRoute']);
+var angryCatfishApp = angular.module('angryCatfish', ['ngRoute']);
 
-googleAuthApp.config(['$routeProvider', function ($routeProvider) {
+angryCatfishApp.config(['$routeProvider', function ($routeProvider) {
 
   $routeProvider
     .when('/calendar', {

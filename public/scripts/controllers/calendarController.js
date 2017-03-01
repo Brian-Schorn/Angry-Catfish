@@ -1,4 +1,4 @@
-googleAuthApp.controller('CalendarController', function ($http) {
+angryCatfishApp.controller('CalendarController', function ($http) {
   console.log('loaded CC');
   var _this = this;
   _this.data = '';

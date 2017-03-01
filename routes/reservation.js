@@ -23,7 +23,7 @@ router.get('/', function (req, res) {
 
 //Retrieve all reservations for a Date
 router.get('/date', function (req, res) {
-  date = new Date req.query.date;
+  date = new Date(req.query.date);
   dateEnd = new Date(date.setDate(date.getDate() + 1));
   console.log("Searching Reservations by Date:", date, dateEnd);
   Reservation.find({resDate : {
