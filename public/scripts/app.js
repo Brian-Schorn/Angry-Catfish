@@ -1,6 +1,6 @@
-var angryCatfishApp = angular.module('angryCatfish', ['ngRoute']);
+var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate']);
 
-angryCatfishApp.config(['$routeProvider', function ($routeProvider) {
+angryCatfishApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
   $routeProvider
     .when('/testPage', {
@@ -16,6 +16,10 @@ angryCatfishApp.config(['$routeProvider', function ($routeProvider) {
     .otherwise({
       redirectTo: 'login',
     });
+    $locationProvider.html5Mode({
+       enabled: true,
+       requireBase: false
+});
     // $locationProvider.html5Mode(true);
 
 },

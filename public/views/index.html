@@ -2,8 +2,10 @@
 <html>
   <head>
     <title>Angry Catfish</title>
+    <base href="/">
     <script src="/public/vendors/angular.min.js"></script>
     <script src="/public/vendors/angular-route.min.js"></script>
+    <script src="/public/vendors/angular-animate.min.js"></script>
     <script src="/public/scripts/app.js"></script>
     <script src="/public/scripts/services/authFactory.js"></script>
     <script src="/public/scripts/services/bikeService.js"></script>
@@ -23,7 +25,7 @@
         <nav>
           <ul class="row">
             <li class="two columns"><a href="#home">Home</a></li>
-            <li class="two columns"><a href="#/testPage">Test Page</a></li>
+            <li class="two columns"><a href="/testPage">Test Page</a></li>
             <li class="six columns" ng-show="nav.displayLogout">Hi {{nav.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
           </ul>
         </nav>
