@@ -21,41 +21,23 @@ router.get('/', function (req, res) {
   });
 });
 
-//Retrieve all reservations for a Date
-router.get('/date', function (req, res) {
-  date = new Date(req.query.date);
-  dateEnd = new Date(date.setDate(date.getDate() + 1));
-  console.log("Searching Reservations by Date:", date, dateEnd);
-  Reservation.find({resDate : {
-        '$gte': date,
-        '$lte': dateEnd
-    }}, function (err, result) {
-    if (err){
-      console.log("Error Getting Info From The DB", err);
-      res.sendStatus(500);
-      return;
-    }
-    console.log("Reservation /date GET request:",result);
-    res.send(result)
-  });
-});
 //Retrieve all reservations for a Bike ID
 router.get('/bikeID', function (req, res) {
-  bikeQueryID = req.query.bikeID;
+  var bikeQueryID = req.query.bikeID;
   Reservation.find({bikeID: bikeQueryID}, function (err, result) {
     if (err){
       console.log("Error Getting Info From The DB", err);
       res.sendStatus(500);
       return;
     }
-    console.log("Reservation /bikeID GET request:",result);
     res.send(result)
   });
 });
+
 //Retrieve all reservations for a TransactionID
 router.get('/transactionID', function (req, res) {
   transactionQueryID = req.query.transactionID;
-  Reservation.find({transaction: transactionQueryID}, function (err, result) {
+  Reservation.find({transactionID: transactionQueryID}, function (err, result) {
     if (err){
       console.log("Error Getting Info From The DB", err);
       res.sendStatus(500);
@@ -78,6 +60,27 @@ router.get('/email', function (req, res) {
     res.send(result)
   });
 });
+
+//Retrieve all reservations for a Date
+router.get('/date', function (req, res) {
+  date = new Date(req.params.date);
+  dateEnd = new Date(date.setDate(date.getDate() + 1));
+  console.log("Searching Reservations by Date:", date, dateEnd);
+  Reservation.find({resDate : {
+        '$gte': date,
+        '$lte': dateEnd
+    }}, function (err, result) {
+    if (err){
+      console.log("Error Getting Info From The DB", err);
+      res.sendStatus(500);
+      return;
+    }
+    console.log("Reservation /date GET request:",result);
+    res.send(result)
+  });
+});
+
+
 
 
 

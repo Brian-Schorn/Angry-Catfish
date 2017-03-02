@@ -40,7 +40,7 @@ _this.testBike2 = {
   ],
   "bikeDesc" : "This is definetly a bike"
 }
-
+//Bike Buttons linking to BikeService
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList;
@@ -66,10 +66,37 @@ _this.testBike2 = {
     });
   };
 
+//Reservation Buttons linking to resrvationService
 
+  _this.getReservations = function(){
+    reservationService.getReservations().then(function(resList){
+      _this.resList = resList;
+      console.log(_this.resList);
+    });
+  };
 
+  _this.getReservationsByBikeID = function(bikeID){
+    console.log("BikeID", bikeID);
+    reservationService.getReservationsByBikeID(bikeID).then(function(resList){
+      _this.resList = resList;
+      console.log(_this.resList);
+    });
+  };
 
-  _this.getReservations = reservationService.getReservations;
+  _this.getReservationsByTransactionID = function(transactionID){
+    console.log("TransactionID", transactionID);
+    reservationService.getReservationsByTransactionID(transactionID).then(function(resList){
+      _this.resList = resList;
+      console.log(_this.resList);
+    });
+  };
 
+  _this.getReservationsByEmail = function(email){
+    console.log("Email", email);
+    reservationService.getReservationsByEmail(email).then(function(resList){
+      _this.resList = resList;
+      console.log(_this.resList);
+    });
+  };
 
 });
