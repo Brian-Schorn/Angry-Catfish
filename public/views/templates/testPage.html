@@ -2,7 +2,14 @@
 <section>
   <p>
     <button ng-click="test.getBikes()">Get Bikes</button>
+    <button ng-click="test.addBike(test.testBike)">Add Bike</button>
+    <button ng-click="test.updateBike(test.bikeList.data[0]._id, test.testBike2)">Update Bike</button>
+
+    <button ng-click="test.deleteBike(test.bikeList.data[0]._id)">Delete Bike</button>
+
+
     <button ng-click="test.getReservations()">Get Reservations</button>
+
 
   </p>
 </section>
