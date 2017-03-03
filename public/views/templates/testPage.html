@@ -62,7 +62,13 @@
     <hr />
     <button type="button" class="btn btn-sm btn-info" ng-click="test.today()">Today</button>
     <button type="button" class="btn btn-sm btn-danger" ng-click="test.clear()">Clear</button>
-    <button uib-tooltip="Submit Dates" class="btn btn-sm btn-default" ng-click="submitDates(test.dt)">Submit</button>
+    <button uib-tooltip="Submit Dates" class="btn btn-sm btn-default" ng-click="test.submitDates(test.dt)">Submit</button>
+
+    <ul>
+      <li ng-repeat="bike in test.bikeList">{{bike.bikeModel}} || Bike ID: <button type="button" class="btn" ng-click="test.selectedBike = bike._id">{{bike._id}}</button></li>
+    </ul>
+    <button type="button" class="btn" ng-click="test.printBike(test.selectedBike)">console log reservation</button>
+    <button type="button" class="btn" ng-click="test.addReservation()">Add reservation</button>
 
 </div>
 
