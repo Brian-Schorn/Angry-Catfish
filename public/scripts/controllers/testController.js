@@ -1,13 +1,209 @@
-angryCatfishApp.controller('testController', function ($http, $scope, BikeService, ReservationService) {
+//// filter for search box
+angryCatfishApp.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
+      });
+    } else {
+      // Let the output be the input untouched
+      out = items;
+    }
+
+    return out;
+  };
+}); // end of app.filter
+
+angryCatfishApp.controller('testController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
   console.log('loaded Test Controller');
   var _this = this;
   var bikeService = BikeService;
   var reservationService = ReservationService;
+  // var searchService = SearchService;
 
+/// start of search box
+
+// _this.disabled = undefined;
+// _this.searchEnabled = undefined;
+//
+// _this.setInputFocus = function (){
+//   $scope.$broadcast('UiSelectDemo1');
+// };
+//
+// _this.enable = function() {
+//   _this.disabled = false;
+// };
+//
+// _this.disable = function() {
+//   _this.disabled = true;
+// };
+//
+// _this.enableSearch = function() {
+//   _this.searchEnabled = true;
+// };
+//
+// _this.disableSearch = function() {
+//   _this.searchEnabled = false;
+// };
+//
+// _this.clear = function() {
+//   _this.person.selected = undefined;
+//   _this.address.selected = undefined;
+//   _this.country.selected = undefined;
+// };
+//
+// _this.firstLetterGroupFn = function (item){
+//     return item.name[0];
+// };
+//
+// _this.reverseOrderFilterFn = function(groups) {
+//   return groups.reverse();
+// };
+//
+// _this.personAsync = {selected : "wladimir@email.com"};
+// _this.peopleAsync = [];
+//
+// $timeout(function(){
+//  _this.peopleAsync = [
+//       { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
+//       { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
+//     ];
+// },3000);
+//
+// _this.counter = 0;
+// _this.onSelectCallback = function (item, model){
+//   _this.counter++;
+//   _this.eventResult = {item: item, model: model};
+// };
+//
+// _this.removed = function (item, model) {
+//   _this.lastRemoved = {
+//       item: item,
+//       model: model
+//   };
+// };
+//
+// _this.person = {};
+
+// _this.person.selectedValue = _this.peopleObj[3];
+// _this.person.selectedSingle = 'Samantha';
+// _this.person.selectedSingleKey = '5';
+// To run the demos with a preselected person object, uncomment the line below.
+//_this.person.selected = _this.person.selectedValue;
+
+_this.people = [
+  { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
+  { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
+];
+
+// _this.multipleDemo = {};
+// _this.multipleDemo.selectedPeople = [_this.people[1], _this.people[0]];
+// _this.multipleDemo.selectedPeople2 = _this.multipleDemo.selectedPeople;
+// _this.multipleDemo.selectedPeopleSimple = [];
+// _this.multipleDemo.removeSelectIsFalse = [];
+
+// _this.appendToBodyDemo = {
+//   remainingToggleTime: 0,
+//   present: true,
+//   startToggleTimer: function() {
+//     var scope = _this.appendToBodyDemo;
+//     var promise = $interval(function() {
+//       if (scope.remainingTime < 1000) {
+//         $interval.cancel(promise);
+//         scope.present = !scope.present;
+//         scope.remainingTime = 0;
+//       } else {
+//         scope.remainingTime -= 1000;
+//       }
+//     }, 1000);
+//     scope.remainingTime = 3000;
+//   }
+// };
+
+// _this.addPerson = function(item, model){
+//   if(item.hasOwnProperty('isTag')) {
+//     delete item.isTag;
+//     _this.people.push(item);
+//   }
+// }
+
+///// end of search box
 
   //Test Bike Data
-  _this.testBike = {
-    "bikeCategory" : "Fat Bike",
+
+//   _this.testBike = {
+//     "bikeCategory" : "Fat Bike",
+//     "bikeMake" : "Surly",
+//     "bikeModel" : "X5000",
+//     "bikeSize" : "standard",
+//     "searchTags" : [
+//         "Fat",
+//         "Sexy"
+//     ],
+//     "buyPrice" : "8000",
+//     "rentalPrice" : 75,
+//     "bulletPoints" : [
+//         "Super Good",
+//         "Not Bad"
+//     ],
+//     "bikeDesc" : "This is definetly a bike"
+// }
+//
+// _this.testBike2 = {
+//   "bikeCategory" : "Skinny Bike",
+//   "bikeMake" : "Surly",
+//   "bikeModel" : "X5000",
+//   "bikeSize" : "standard",
+//   "searchTags" : [
+//       "Fat",
+//       "Sexy"
+//   ],
+//   "buyPrice" : "8000",
+//   "rentalPrice" : 75,
+//   "bulletPoints" : [
+//       "Super Good",
+//       "Not Bad"
+//   ],
+//   "bikeDesc" : "This is definetly a bike"
+// }
+//
+_this.testBikes = [
+    {
+      "bikeCategory" : "Fat Bike",
+      "bikeMake" : "Surly",
+      "bikeModel" : "X5000",
+      "bikeSize" : "standard",
+      "searchTags" : [
+          "Fat",
+          "Sexy"
+      ],
+      "buyPrice" : "8000",
+      "rentalPrice" : 75,
+      "bulletPoints" : [
+          "Super Good",
+          "Not Bad"
+      ],
+      "bikeDesc" : "This is definetly a bike"
+  },
+  {
+    "bikeCategory" : "Skinny Bike",
     "bikeMake" : "Surly",
     "bikeModel" : "X5000",
     "bikeSize" : "standard",
@@ -22,32 +218,22 @@ angryCatfishApp.controller('testController', function ($http, $scope, BikeServic
         "Not Bad"
     ],
     "bikeDesc" : "This is definetly a bike"
-}
+  }
+];
 
-_this.testBike2 = {
-  "bikeCategory" : "Skinny Bike",
-  "bikeMake" : "Surly",
-  "bikeModel" : "X5000",
-  "bikeSize" : "standard",
-  "searchTags" : [
-      "Fat",
-      "Sexy"
-  ],
-  "buyPrice" : "8000",
-  "rentalPrice" : 75,
-  "bulletPoints" : [
-      "Super Good",
-      "Not Bad"
-  ],
-  "bikeDesc" : "This is definetly a bike"
-}
+
+
 //Bike Buttons linking to BikeService
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList;
-      console.log(_this.bikeList);
+      console.log('bike list', _this.bikeList);
     });
   };
+
+  _this.getBikes();
+  console.log(_this.bikeList);
+
   _this.addBike = function(bike){
     bikeService.addBike(bike).then(function(bikeList){
       _this.bikeList = bikeList;
@@ -192,22 +378,22 @@ $scope.events = [
   }
 ];
 
-function getDayClass(data) {
-  var date = data.date,
-    mode = data.mode;
-  if (mode === 'day') {
-    var dayToCheck = new Date(date).setHours(0,0,0,0);
+    function getDayClass(data) {
+      var date = data.date,
+        mode = data.mode;
+      if (mode === 'day') {
+        var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-    for (var i = 0; i < $scope.events.length; i++) {
-      var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+        for (var i = 0; i < $scope.events.length; i++) {
+          var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-      if (dayToCheck === currentDay) {
-        return $scope.events[i].status;
+          if (dayToCheck === currentDay) {
+            return $scope.events[i].status;
+          }
+        }
       }
-    }
-  }
 
-  return '';
-}
+      return '';
+    }
 
 });

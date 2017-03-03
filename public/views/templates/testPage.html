@@ -70,3 +70,121 @@
 
   </p>
 </section>
+
+
+
+<!-- search box -->
+
+<style>
+       body {
+           padding: 15px;
+       }
+
+       .select2 > .select2-choice.ui-select-match {
+           /* Because of the inclusion of Bootstrap */
+           height: 29px;
+       }
+
+       .selectize-control > .selectize-dropdown {
+           top: 36px;
+       }
+       /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+       .select-box {
+         background: #fff;
+         position: relative;
+         z-index: 1;
+       }
+       .alert-info.positioned {
+         margin-top: 1em;
+         position: relative;
+         z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+       }
+   </style>
+</head>
+
+<body class="ng-cloak">
+ <button class="btn btn-default btn-xs" ng-click="test.enable()">Enable ui-select</button>
+ <button class="btn btn-default btn-xs" ng-click="test.disable()">Disable ui-select</button>
+ <button class="btn btn-default btn-xs" ng-click="test.clear()">Clear ng-model</button>
+
+ <!-- <h3>Deselect callback with single property binding</h3>
+ <ui-select multiple ng-model="test.multipleDemo.deSelectedPeople" on-remove="test.removed($item, $model)" theme="bootstrap" ng-disabled="test.disabled" close-on-select="false" style="width: 800px;" title="Choose a person">
+   <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+   <ui-select-choices repeat="person.email as person in test.people | propsFilter: {name: $select.search, age: $select.search}">
+     <div ng-bind-html="person.name | highlight: $select.search"></div>
+     <small>
+       email: {{person.email}}
+       age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+     </small>
+   </ui-select-choices>
+ </ui-select>
+ <p>Last Removed:</p>
+<pre>
+$item = {{test.lastRemoved.item}}
+$model = {{test.lastRemoved.model}}
+</pre> -->
+
+ <hr>
+ <h3>Bikes</h3>
+ <ui-select multiple ng-model="test.multipleDemo.selectedPeopleSimple" theme="bootstrap" ng-disabled="test.disabled" close-on-select="false" style="width: 200px;" title="Choose a Bike">
+   <ui-select-match placeholder="Select person...">{{$item.name}} &lt;{{$item.email}}&gt;</ui-select-match>
+   <ui-select-choices repeat="person.email as person in test.people | propsFilter: {name: $select.search, age: $select.search}">
+     <div ng-bind-html="person.name | highlight: $select.search"></div>
+     <small>
+       email: {{person.email}}
+       <!-- age: <span ng-bind-html="''+person.age | highlight: $select.search"></span> -->
+     </small>
+   </ui-select-choices>
+ </ui-select>
+ <p>Selected: {{test.multipleDemo.selectedPeopleSimple}}</p>
+
+ <hr>
+ <h3>Bikes</h3>
+ <div>
+   <ui-select multiple ng-model="test.cycle1" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+     <ui-select-match placeholder="bikes">{{$item.bikeCategory}}</ui-select-match>
+     <ui-select-choices repeat="bike.bikeCategory as bike in test.testBikes">
+       <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
+       <small>
+         bikeCategory: {{bike.bikeCategory}}
+       </small>
+     </ui-select-choices>
+   </ui-select>
+   <p>Selected: {{test.cycle1}}</p>
+
+   <ui-select multiple ng-model="test.cycle2" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+     <ui-select-match placeholder="bikes">{{$item.bikeMake}}</ui-select-match>
+     <ui-select-choices repeat="bike.bikeMake as bike in test.testBikes">
+       <div ng-bind-html="bike.bikeMake | highlight: $select.search"></div>
+       <small>
+         bikeMake: {{bike.bikeMake}}
+       </small>
+     </ui-select-choices>
+   </ui-select>
+   <p>Selected: {{test.cycle2}}</p>
+
+   <ui-select multiple ng-model="test.cycle3" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+     <ui-select-match placeholder="bikes">{{$item.bikeModel}}</ui-select-match>
+     <ui-select-choices repeat="bike.bikeModel as bike in test.testBikes">
+       <div ng-bind-html="bike.bikeModel | highlight: $select.search"></div>
+       <small>
+         bikeCategory: {{bike.bikeModel}}
+       </small>
+     </ui-select-choices>
+   </ui-select>
+   <p>Selected: {{test.cycle3}}</p>
+   
+   <ui-select multiple ng-model="test.cycle4" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+     <ui-select-match placeholder="bikes">{{$item.bikeSize}}</ui-select-match>
+     <ui-select-choices repeat="bike.bikeSize as bike in test.testBikes">
+       <div ng-bind-html="bike.bikeSize | highlight: $select.search"></div>
+       <small>
+         bikeCategory: {{bike.bikeSize}}
+       </small>
+     </ui-select-choices>
+   </ui-select>
+   <p>Selected: {{test.cycle4}}</p>
+ </div>
+
+
+ <div style="height:500px"></div>
