@@ -52,19 +52,19 @@ _this.testBike2 = {
 
   _this.addBike = function(bike){
     bikeService.addBike(bike).then(function(bikeList){
-      _this.bikeList = bikeList;
+      _this.bikeList = bikeList.data;
       console.log(_this.bikeList);
     });
   };
   _this.updateBike = function(id, bike){
     bikeService.updateBike(id, bike).then(function(bikeList){
-      _this.bikeList = bikeList;
+      _this.bikeList = bikeList.data;
       console.log(_this.bikeList);
     });
   };
   _this.deleteBike = function(id){
     bikeService.deleteBike(id).then(function(bikeList){
-      _this.bikeList = bikeList;
+      _this.bikeList = bikeList.data;
       console.log(_this.bikeList);
     });
   };
@@ -219,9 +219,10 @@ _this.printBike = function(bikeID){
   console.log("Dates:", _this.dt.start, _this.dt.end);
 }
 
-_this.transactionID = 0;
+_this.addResStatus = false;
+
 _this.addReservation = function(){
-  _this.transactionID++
+  _this.addResStatus = true;
   _this.dates = [];
   _this.dt.start.setHours(0,0,0,0);
   _this.dt.end.setHours(0,0,0,0);
@@ -233,7 +234,6 @@ _this.addReservation = function(){
   _this.bikes = [];
   _this.bikes.push(_this.selectedBike);
   _this.reservationObj = {
-    "transactionID" : _this.transactionID,
     "bikeID" : _this.bikes,
     "resDate" : _this.dates,
     "custName" : "Brian Schorn",
@@ -248,6 +248,7 @@ _this.addReservation = function(){
   console.log(_this.reservationObj);
   reservationService.addReservation(_this.reservationObj).then(function(){
     console.log("reservation Added");
+    _this.addResStatus = false;
   });
 
 };

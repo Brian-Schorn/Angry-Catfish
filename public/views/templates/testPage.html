@@ -3,9 +3,9 @@
   <p>
     <button ng-click="test.getBikes()">Get Bikes</button>
     <button ng-click="test.addBike(test.testBike)">Add Bike</button>
-    <button ng-click="test.updateBike(test.bikeList.data[0]._id, test.testBike2)">Update Bike</button>
+    <button ng-click="test.updateBike(test.bikeList[0]._id, test.testBike2)">Update Bike</button>
 
-    <button ng-click="test.deleteBike(test.bikeList.data[0]._id)">Delete Bike</button>
+    <button ng-click="test.deleteBike(test.bikeList[0]._id)">Delete Bike</button>
 
     <br />
     <button ng-click="test.getReservations()">Get Reservations</button>
@@ -68,7 +68,7 @@
       <li ng-repeat="bike in test.bikeList">{{bike.bikeModel}} || Bike ID: <button type="button" class="btn" ng-click="test.selectedBike = bike._id">{{bike._id}}</button></li>
     </ul>
     <button type="button" class="btn" ng-click="test.printBike(test.selectedBike)">console log reservation</button>
-    <button type="button" class="btn" ng-click="test.addReservation()">Add reservation</button>
+    <button type="button" class="btn" ng-click="test.addReservation()" ng-disabled="test.addResStatus">Add reservation</button>
 
 </div>
 
