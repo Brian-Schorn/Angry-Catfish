@@ -1,6 +1,8 @@
+
 var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize', 'ui.bootstrap']);
 
 angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+
 
   $routeProvider
     .when('/testPage', {
@@ -20,6 +22,8 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       enabled: true,
       requireBase: false
     });
+
+
 
 },
 ]);

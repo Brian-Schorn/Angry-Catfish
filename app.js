@@ -47,7 +47,7 @@ app.use('/auth', auth);
 app.use('/private', isLoggedIn, private);
 app.use('/bike', bike);
 app.use('/reservation', reservation);
-app.use('/', index);
+app.use('/*', index);
 /** ---------- SERVER START ---------- **/
 app.listen(3000, function () {
   console.log('Now running on port ', 3000);
