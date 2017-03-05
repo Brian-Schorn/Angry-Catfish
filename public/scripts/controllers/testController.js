@@ -1,14 +1,16 @@
 //// filter for search box
 angryCatfishApp.filter('propsFilter', function() {
+  console.log("propsFilter hit!")
   return function(items, props) {
     var out = [];
-
+    console.log("i's:", items);
     if (angular.isArray(items)) {
+      // console.log("items conditional hit, items:", items)
       var keys = Object.keys(props);
-
+    console.log("p's:", props);
       items.forEach(function(item) {
         var itemMatches = false;
-
+        // console.log("Filter!!!")
         for (var i = 0; i < keys.length; i++) {
           var prop = keys[i];
           var text = props[prop].toLowerCase();
@@ -17,7 +19,6 @@ angryCatfishApp.filter('propsFilter', function() {
             break;
           }
         }
-
         if (itemMatches) {
           out.push(item);
         }
@@ -31,12 +32,54 @@ angryCatfishApp.filter('propsFilter', function() {
   };
 }); // end of app.filter
 
+// filter to remove duplicate items on ng repeat
+// here we define our unique filter
+angryCatfishApp.filter('unique', function() {
+   // we will return a function which will take in a collection
+   // and a keyname
+   return function(collection, keyname) {
+      // we define our output and keys array;
+      var output = [],
+          keys = [];
+
+      // we utilize angular's foreach function
+      // this takes in our original collection and an iterator function
+      angular.forEach(collection, function(item) {
+          // we check to see whether our object exists
+          var key = item[keyname];
+          // if it's not already part of our keys array
+          if(keys.indexOf(key) === -1) {
+              // add it to our keys array
+              keys.push(key);
+              // push this item to our final output array
+              output.push(item);
+          }
+      });
+      // return our array which should be devoid of
+      // any duplicates
+      return output;
+   };
+});
+
 angryCatfishApp.controller('testController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
   console.log('loaded Test Controller');
   var _this = this;
   var bikeService = BikeService;
   var reservationService = ReservationService;
   // var searchService = SearchService;
+
+  _this.clearSearch = function() {
+    console.log('Clear Search', _this.search)
+    _this.search = null;
+    // _this.getBikes()
+  };
+
+_this.filterBikes = function(categoryFilter){
+  console.log('filter bike hit', categoryFilter)
+};
+
+
+
 
 /// start of search box
 
@@ -64,7 +107,7 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
 // };
 //
 // _this.clear = function() {
-//   _this.person.selected = undefined;
+//   _this.bike.selected = undefined;
 //   _this.address.selected = undefined;
 //   _this.country.selected = undefined;
 // };
@@ -77,14 +120,10 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
 //   return groups.reverse();
 // };
 //
-// _this.personAsync = {selected : "wladimir@email.com"};
 // _this.peopleAsync = [];
 //
 // $timeout(function(){
-//  _this.peopleAsync = [
-//       { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
-//       { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
-//     ];
+//  _this.bikeList1
 // },3000);
 //
 // _this.counter = 0;
@@ -100,25 +139,18 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
 //   };
 // };
 //
-// _this.person = {};
-
-// _this.person.selectedValue = _this.peopleObj[3];
-// _this.person.selectedSingle = 'Samantha';
-// _this.person.selectedSingleKey = '5';
-// To run the demos with a preselected person object, uncomment the line below.
-//_this.person.selected = _this.person.selectedValue;
-
-_this.people = [
-  { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
-  { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
-];
-
+// // _this.person.selectedValue = _this.peopleObj[3];
+// // _this.person.selectedSingle = 'Samantha';
+// // _this.person.selectedSingleKey = '5';
+// // _this.person.selected = _this.person.selectedValue;
+//
+//
 // _this.multipleDemo = {};
-// _this.multipleDemo.selectedPeople = [_this.people[1], _this.people[0]];
+// // _this.multipleDemo.selectedPeople = [_this.people[1], _this.people[0]];
 // _this.multipleDemo.selectedPeople2 = _this.multipleDemo.selectedPeople;
 // _this.multipleDemo.selectedPeopleSimple = [];
 // _this.multipleDemo.removeSelectIsFalse = [];
-
+// //
 // _this.appendToBodyDemo = {
 //   remainingToggleTime: 0,
 //   present: true,
@@ -136,7 +168,7 @@ _this.people = [
 //     scope.remainingTime = 3000;
 //   }
 // };
-
+// //
 // _this.addPerson = function(item, model){
 //   if(item.hasOwnProperty('isTag')) {
 //     delete item.isTag;
@@ -148,62 +180,8 @@ _this.people = [
 
   //Test Bike Data
 
-//   _this.testBike = {
-//     "bikeCategory" : "Fat Bike",
-//     "bikeMake" : "Surly",
-//     "bikeModel" : "X5000",
-//     "bikeSize" : "standard",
-//     "searchTags" : [
-//         "Fat",
-//         "Sexy"
-//     ],
-//     "buyPrice" : "8000",
-//     "rentalPrice" : 75,
-//     "bulletPoints" : [
-//         "Super Good",
-//         "Not Bad"
-//     ],
-//     "bikeDesc" : "This is definetly a bike"
-// }
-//
-// _this.testBike2 = {
-//   "bikeCategory" : "Skinny Bike",
-//   "bikeMake" : "Surly",
-//   "bikeModel" : "X5000",
-//   "bikeSize" : "standard",
-//   "searchTags" : [
-//       "Fat",
-//       "Sexy"
-//   ],
-//   "buyPrice" : "8000",
-//   "rentalPrice" : 75,
-//   "bulletPoints" : [
-//       "Super Good",
-//       "Not Bad"
-//   ],
-//   "bikeDesc" : "This is definetly a bike"
-// }
-//
-_this.testBikes = [
-    {
-      "bikeCategory" : "Fat Bike",
-      "bikeMake" : "Surly",
-      "bikeModel" : "X5000",
-      "bikeSize" : "standard",
-      "searchTags" : [
-          "Fat",
-          "Sexy"
-      ],
-      "buyPrice" : "8000",
-      "rentalPrice" : 75,
-      "bulletPoints" : [
-          "Super Good",
-          "Not Bad"
-      ],
-      "bikeDesc" : "This is definetly a bike"
-  },
-  {
-    "bikeCategory" : "Skinny Bike",
+  _this.testBike = {
+    "bikeCategory" : "Fat Bike",
     "bikeMake" : "Surly",
     "bikeModel" : "X5000",
     "bikeSize" : "standard",
@@ -218,15 +196,30 @@ _this.testBikes = [
         "Not Bad"
     ],
     "bikeDesc" : "This is definetly a bike"
-  }
-];
+}
 
-
+_this.testBike2 = {
+  "bikeCategory" : "Skinny Bike",
+  "bikeMake" : "Surly",
+  "bikeModel" : "X5000",
+  "bikeSize" : "standard",
+  "searchTags" : [
+      "Fat",
+      "Sexy"
+  ],
+  "buyPrice" : "8000",
+  "rentalPrice" : 75,
+  "bulletPoints" : [
+      "Super Good",
+      "Not Bad"
+  ],
+  "bikeDesc" : "This is definetly a bike"
+}
 
 //Bike Buttons linking to BikeService
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
-      _this.bikeList = bikeList;
+      _this.bikeList = bikeList.data;
       console.log('bike list', _this.bikeList);
     });
   };

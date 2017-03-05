@@ -71,41 +71,88 @@
   </p>
 </section>
 
+<!-- search form -->
+<hr>
 
+<form class="form">
 
-<!-- search box -->
+  <div class="form-group col-sm-1 col-sm-offset-3" style="padding:0;">
+    <label>Category</label>
+    <select class="form-control" ng-model="search.bikeCategory" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeCategory'" >{{bike.bikeCategory}}</option>
+    </select>
+  </div>
 
-<style>
-       body {
-           padding: 15px;
-       }
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Make</label>
+    <select class="form-control" ng-model="search.bikeMake" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeMake'" >{{bike.bikeMake}}</option>
+    </select>
+  </div>
 
-       .select2 > .select2-choice.ui-select-match {
-           /* Because of the inclusion of Bootstrap */
-           height: 29px;
-       }
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Model</label>
+    <select class="form-control" ng-model="search.bikeModel">
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeModel'" >{{bike.bikeModel}}</option>
+    </select>
+  </div>
 
-       .selectize-control > .selectize-dropdown {
-           top: 36px;
-       }
-       /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
-       .select-box {
-         background: #fff;
-         position: relative;
-         z-index: 1;
-       }
-       .alert-info.positioned {
-         margin-top: 1em;
-         position: relative;
-         z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
-       }
-   </style>
-</head>
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Size</label>
+    <select class="form-control" ng-model="search.bikeSize" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeSize'" >{{bike.bikeSize}}</option>
+    </select>
+  </div>
 
-<body class="ng-cloak">
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Date</label>
+    <select class="form-control" ng-model="search.dates" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'dates'" >{{bike.dates}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Search</label>
+    <input class="form-control" ng-model="search.searchTags" ></input>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Clear</label>
+    <button type="button" class="btn btn-sm btn-danger form-control" ng-click="test.clearSearch()">Clear</button>
+  </div>
+
+</form>
+
+<hr>
+
+<table id="searchTextResults">
+  <tr>
+    <th>Category</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Size</th>
+    <th>Object</th>
+  </tr>
+  <tr ng-repeat="cycle in test.bikeList | filter:search">
+    <td>{{cycle.bikeCategory}}</td>
+    <td>{{cycle.bikeMake}}</td>
+    <td>{{cycle.bikeModel}}</td>
+    <td>{{cycle.bikeSize}}</td>
+    <td>{{cycle}}</td>
+  </tr>
+</table>
+
+<hr>
+
+<!-- <div class="ng-cloak">
  <button class="btn btn-default btn-xs" ng-click="test.enable()">Enable ui-select</button>
  <button class="btn btn-default btn-xs" ng-click="test.disable()">Disable ui-select</button>
- <button class="btn btn-default btn-xs" ng-click="test.clear()">Clear ng-model</button>
+ <button class="btn btn-default btn-xs" ng-click="test.clear()">Clear ng-model</button> -->
 
  <!-- <h3>Deselect callback with single property binding</h3>
  <ui-select multiple ng-model="test.multipleDemo.deSelectedPeople" on-remove="test.removed($item, $model)" theme="bootstrap" ng-disabled="test.disabled" close-on-select="false" style="width: 800px;" title="Choose a person">
@@ -132,7 +179,6 @@ $model = {{test.lastRemoved.model}}
      <div ng-bind-html="person.name | highlight: $select.search"></div>
      <small>
        email: {{person.email}}
-       <!-- age: <span ng-bind-html="''+person.age | highlight: $select.search"></span> -->
      </small>
    </ui-select-choices>
  </ui-select>
@@ -140,51 +186,71 @@ $model = {{test.lastRemoved.model}}
 
  <hr>
  <h3>Bikes</h3>
- <div>
-   <ui-select multiple ng-model="test.cycle1" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
-     <ui-select-match placeholder="bikes">{{$item.bikeCategory}}</ui-select-match>
-     <ui-select-choices repeat="bike.bikeCategory as bike in test.testBikes">
-       <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
-       <small>
-         bikeCategory: {{bike.bikeCategory}}
-       </small>
-     </ui-select-choices>
-   </ui-select>
-   <p>Selected: {{test.cycle1}}</p>
+ <form class="form-inline">
 
-   <ui-select multiple ng-model="test.cycle2" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
-     <ui-select-match placeholder="bikes">{{$item.bikeMake}}</ui-select-match>
-     <ui-select-choices repeat="bike.bikeMake as bike in test.testBikes">
-       <div ng-bind-html="bike.bikeMake | highlight: $select.search"></div>
-       <small>
-         bikeMake: {{bike.bikeMake}}
-       </small>
-     </ui-select-choices>
-   </ui-select>
-   <p>Selected: {{test.cycle2}}</p>
+   <div class="form-group">
+     <label>Category</label>
+     <ui-select multiple ng-model="test.cycle.bikeCategory" theme="bootstrap" ng-change="test.filterBikes(test.cycle)" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+       <ui-select-match placeholder="bikes">{{$item.bikeCategory}}</ui-select-match>
+       <ui-select-choices repeat="bike.bikeCategory as bike in test.bikeList | propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search, }">
+         <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
+         <small>
+           bikeCategory: {{bike.bikeCategory}}
+         </small>
+       </ui-select-choices>
+     </ui-select>
+     <p>Selected: {{test.cycle.bikeCategory}}</p>
 
-   <ui-select multiple ng-model="test.cycle3" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
-     <ui-select-match placeholder="bikes">{{$item.bikeModel}}</ui-select-match>
-     <ui-select-choices repeat="bike.bikeModel as bike in test.testBikes">
-       <div ng-bind-html="bike.bikeModel | highlight: $select.search"></div>
-       <small>
-         bikeCategory: {{bike.bikeModel}}
-       </small>
-     </ui-select-choices>
-   </ui-select>
-   <p>Selected: {{test.cycle3}}</p>
-   
-   <ui-select multiple ng-model="test.cycle4" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
-     <ui-select-match placeholder="bikes">{{$item.bikeSize}}</ui-select-match>
-     <ui-select-choices repeat="bike.bikeSize as bike in test.testBikes">
-       <div ng-bind-html="bike.bikeSize | highlight: $select.search"></div>
-       <small>
-         bikeCategory: {{bike.bikeSize}}
-       </small>
-     </ui-select-choices>
-   </ui-select>
-   <p>Selected: {{test.cycle4}}</p>
+   </div>
+   <!-- <pre>
+   $item = {{test.lastRemoved.item}}
+   $model = {{test.lastRemoved.model}}
+   </pre> -->
+
+    <div class="form-group">
+      <label>Make</label>
+       <ui-select multiple ng-model="test.cycle.bikeMake" theme="bootstrap" ng-change="test.filterBikes(test.cycle)" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+         <ui-select-match placeholder="bikes">{{$item.bikeMake}}</ui-select-match>
+         <ui-select-choices repeat="bike.bikeMake as bike in test.bikeList">
+           <div ng-bind-html="bike.bikeMake | highlight: $select.search"></div>
+           <small>
+             bikeMake: {{bike.bikeMake}}
+           </small>
+         </ui-select-choices>
+       </ui-select>
+       <p>Selected: {{test.cycle.bikeMake}}</p>
+    </div>
+
+    <div class="form-group">
+      <label>Model</label>
+       <ui-select multiple ng-model="test.cycle.bikeModel" theme="bootstrap" ng-change="test.filterBikes(test.cycle)" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+         <ui-select-match placeholder="bikes">{{$item.bikeModel}}</ui-select-match>
+         <ui-select-choices repeat="bike.bikeModel as bike in test.bikeList">
+           <div ng-bind-html="bike.bikeModel | highlight: $select.search"></div>
+           <small>
+             bikeCategory: {{bike.bikeModel}}
+           </small>
+         </ui-select-choices>
+       </ui-select>
+       <p>Selected: {{test.cycle.bikeModel}}</p>
+    </div>
+
+
+    <div class="form-group">
+      <label>Size</label>
+     <ui-select multiple ng-model="test.cycle.bikeSize" theme="bootstrap" ng-change="test.filterBikes(test.cycle)" ng-disabled="test.disabled" close-on-select="true" style="width: 200px;" title="Choose a Bike">
+       <ui-select-match placeholder="bikes">{{$item.bikeSize}}</ui-select-match>
+       <ui-select-choices repeat="bike.bikeSize as bike in test.bikeList">
+         <div ng-bind-html="bike.bikeSize | highlight: $select.search"></div>
+         <small>
+           bikeCategory: {{bike.bikeSize}}
+         </small>
+       </ui-select-choices>
+     </ui-select>
+     <p>Selected: {{test.cycle.bikeSize}}</p>
+   </div>
+ </form>
+
+ <div ng-repeat="bike in test.bikeList">
+  <p>{{bike}}</p>
  </div>
-
-
- <div style="height:500px"></div>
