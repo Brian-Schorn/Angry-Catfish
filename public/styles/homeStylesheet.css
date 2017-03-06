@@ -1,0 +1,40 @@
+#searchForm {
+  text-align: center;
+}
+
+#bikeDisplay {
+  display: inline-block;
+}
+
+#searchForm .form-group {
+  display: inline-block;
+}
+
+.bikeBox {
+  text-align: center;
+  margin: 25px;
+  height: 250px;
+  width: 250px;
+  border: 2px solid black;
+  /*transition: all 1s ease;
+  background-color: #9eb3c7;*/
+}
+
+.bikeBox a {
+  text-decoration: none;
+}
+
+.bikeBox img {
+  height: 200px;
+  width: 220px;
+}
+
+#searchForm .form-group {
+  padding: 0px;
+}
+
+
+/*.bikeBox:hover {
+     transform:scale(1.1);
+     background-color: white;
+}*/
