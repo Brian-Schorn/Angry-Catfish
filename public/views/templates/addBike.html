@@ -56,7 +56,7 @@ Add Bike Page
   <ul>
     <li ng-repeat="tag in addBike.newBike.searchTags">{{tag}}</li>
     <label>Search Tags: <input type="string" ng-model="addBike.newTag" name="searchTag" /></label>
-    <span ng-show="addBikeForm.$submitted || addBikeForm.searchTag.$touched">
+    <span ng-show="addBikeForm.$submitted">
         <!-- <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
       </span><input type="button" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag" /><br />
 
@@ -66,7 +66,7 @@ Add Bike Page
   <ul>
     <li ng-repeat="image in addBike.newBike.imageUrls">{{image}}</li>
     <label>Image URL: <input type="string" ng-model="addBike.newImage.newImage" name="imageURL" /></label>
-    <span ng-show="addBikeForm.$submitted || addBikeForm.imageURL.$touched">
+    <span ng-show="addBikeForm.$submitted">
         <span ng-hide="addBike.newBike.imageUrls.length > 0" class="error">One Image Required</span>
       </span><input type="button" ng-click="addBike.addImage(addBike.newImage.newImage)" value="Add Image" /><br />
 
@@ -79,12 +79,13 @@ Add Bike Page
   <ul>
     <li ng-repeat="bullet in addBike.newBike.bulletPoints">{{bullet}}</li>
     <label>Bullet Point Highlight: <input type="string" ng-model="addBike.newBullet" name="bulletPoint" /></label>
-    <span ng-show="addBikeForm.$submitted || addBikeForm.bulletPoint.$touched">
+    <span ng-show="addBikeForm.$submitted">
         <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
       </span><input type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point" /><br />
 
   </ul>
   <!-- Description -->
   <input type="button" ng-click="reset(addBikeForm)" value="Reset" />
-  <input type="submit" ng-disabled="addBikeForm.$invalid" ng-click="addBike.addBike(addBike.newBike)" value="Add Bike" />
+  <input type="submit"  ng-click="addBike.addBike(addBikeForm.$valid)" value="Add Bike" />
+<!-- ng-disabled="addBikeForm.$invalid" -->
 </form>

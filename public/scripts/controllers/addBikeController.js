@@ -21,12 +21,15 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
   $scope.reset();
 
 //SUBMIT BUTTON FOR ADD BIKE FORM
-  _this.addBike = function(bike){
-    console.log(bike);
-    bikeService.addBike(bike).then(function(bikeList){
-      _this.bikeList = bikeList.data;
-      console.log(_this.bikeList);
-    });
+  _this.addBike = function(valid){
+    if(valid){
+      bike = _this.newBike;
+      console.log(bike);
+      bikeService.addBike(bike).then(function(bikeList){
+        _this.bikeList = bikeList.data;
+        console.log(_this.bikeList);
+      });
+    };
   };
 
 //ADD IMAGE URL TO ARRAY
