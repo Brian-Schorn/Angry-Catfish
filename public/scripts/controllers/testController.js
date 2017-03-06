@@ -157,12 +157,12 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
     }
   };
 
-  _this.addBike = function(item, model){
-    if(item.hasOwnProperty('isTag')) {
-      delete item.isTag;
-      _this.bikeList.push(item);
-    }
-  }
+  // _this.addBike = function(item, model){
+  //   if(item.hasOwnProperty('isTag')) {
+  //     delete item.isTag;
+  //     _this.bikeList.push(item);
+  //   }
+  // }
   //////////// end of angular ui search dropdown features
 
   //Test Bike Data
