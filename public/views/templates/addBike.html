@@ -1,62 +1,90 @@
 Add Bike Page
 <form name="addBikeForm" class="css-form" novalidate>
   <!-- Bike Cateogry -->
-  <label>Bike Category: <input type="text" ng-model="addBike.bikeCategory" name="bikeCategory" required=""  /></label>
+  <label>Bike Category: <input type="text" ng-model="addBike.newBike.bikeCategory" name="bikeCategory" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeCategory.$touched">
       <span ng-show="addBikeForm.bikeCategory.$error.required" class="error">Bike Category Required</span>
     </span><br />
 
   <!-- Bike Make -->
-  <label>Bike Make: <input type="text" ng-model="addBike.bikeMake" name="bikeMake" required=""  /></label>
+  <label>Bike Make: <input type="text" ng-model="addBike.newBike.bikeMake" name="bikeMake" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeMake.$touched">
       <span ng-show="addBikeForm.bikeMake.$error.required" class="error">Bike Make Required</span>
     </span><br />
 
   <!-- Bike Model -->
-  <label>Bike Model: <input type="text" ng-model="addBike.bikeModel" name="bikeModel" required=""  /></label>
+  <label>Bike Model: <input type="text" ng-model="addBike.newBike.bikeModel" name="bikeModel" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeModel.$touched">
       <span ng-show="addBikeForm.bikeModel.$error.required" class="error">Bike Model Required</span>
     </span><br />
 
   <!-- Bike Size -->
-  <label>Bike Size: <input type="text" ng-model="addBike.bikeSize" name="bikeSize" required=""  /></label>
+  <label>Bike Size: <input type="text" ng-model="addBike.newBike.bikeSize" name="bikeSize" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeSize.$touched">
       <span ng-show="addBikeForm.bikeSize.$error.required" class="error">Bike Size Required</span>
     </span><br />
 
   <!-- Bike Frame -->
-  <label>Bike Frame Material: <input type="text" ng-model="addBike.bikeFrame" name="bikeFrame" required=""  /></label>
+  <label>Bike Frame Material: <input type="text" ng-model="addBike.newBike.bikeFrame" name="bikeFrame" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeFrame.$touched">
       <span ng-show="addBikeForm.bikeFrame.$error.required" class="error">Bike Frame Material Required</span>
     </span><br />
 
   <!-- Bike Wheel Size -->
-  <label>Bike Wheel Size: <input type="text" ng-model="addBike.bikeWheelSize" name="bikeWheelSize" required=""  /></label>
+  <label>Bike Wheel Size: <input type="text" ng-model="addBike.newBike.bikeWheelSize" name="bikeWheelSize" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeWheelSize.$touched">
       <span ng-show="addBikeForm.bikeWheelSize.$error.required" class="error">Bike Wheel Size Required</span>
     </span><br />
 
   <!-- Bike Travel   -->
-  <label>Bike Travel (Front): <input type="text" ng-model="addBike.bikeTravelFront" name="bikeTravelFront" required=""  /></label>
+  <label>Bike Travel (Front) in mm: <input type="number" ng-model="addBike.newBike.bikeTravelFront" name="bikeTravelFront" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeTravelFront.$touched">
       <span ng-show="addBikeForm.bikeTravelFront.$error.required" class="error">Bike Travel (Front) Required</span>
     </span><br />
-  <label>Bike Travel (Rear): <input type="text" ng-model="addBike.bikeTravelRear" name="bikeTravelRear" required=""  /></label>
+  <label>Bike Travel (Rear) in mm: <input type="number" ng-model="addBike.newBike.bikeTravelRear" name="bikeTravelRear" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeTravelRear.$touched">
       <span ng-show="addBikeForm.bikeTravelRear.$error.required" class="error">Bike Travel (Rear) Required</span>
     </span><br />
-  <!-- SEARCH TAGS -->
-  <!-- IMAGE URLS -->
   <!-- Manufacturer's Website -->
-  <label>Manufacturer's Website: <input type="url" ng-model="addBike.manufacURL" name="manufacURL" required=""  /></label>
+  <label>Manufacturer's Website: <input type="url" ng-model="addBike.newBike.manufacURL" name="manufacURL" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.manufacURL.$touched">
       <span ng-show="addBikeForm.manufacURL.$error.required" class="error">Bike Manufactuer's Website Required</span>
       <span ng-show="addBikeForm.manufacURL.$error.url" class="error">Valid URL Required</span>
     </span><br />
+  <!-- SEARCH TAGS -->
+  Search Tags
+  <ul>
+    <li ng-repeat="tag in addBike.newBike.searchTags">{{tag}}</li>
+    <label>Search Tags: <input type="string" ng-model="addBike.newTag" name="searchTag" /></label>
+    <span ng-show="addBikeForm.$submitted || addBikeForm.searchTag.$touched">
+        <!-- <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
+      </span><input type="button" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag" /><br />
+
+  </ul>
+  <!-- IMAGE URLS -->
+  Image URLs:
+  <ul>
+    <li ng-repeat="image in addBike.newBike.imageUrls">{{image}}</li>
+    <label>Image URL: <input type="string" ng-model="addBike.newImage.newImage" name="imageURL" /></label>
+    <span ng-show="addBikeForm.$submitted || addBikeForm.imageURL.$touched">
+        <span ng-hide="addBike.newBike.imageUrls.length > 0" class="error">One Image Required</span>
+      </span><input type="button" ng-click="addBike.addImage(addBike.newImage.newImage)" value="Add Image" /><br />
+
+  </ul>
+
   <!-- Buy Price -->
   <!-- Rental Price -->
   <!-- Bullet Points -->
+  Bullet Points:
+  <ul>
+    <li ng-repeat="bullet in addBike.newBike.bulletPoints">{{bullet}}</li>
+    <label>Bullet Point Highlight: <input type="string" ng-model="addBike.newBullet" name="bulletPoint" /></label>
+    <span ng-show="addBikeForm.$submitted || addBikeForm.bulletPoint.$touched">
+        <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
+      </span><input type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point" /><br />
+
+  </ul>
   <!-- Description -->
   <input type="button" ng-click="reset(addBikeForm)" value="Reset" />
-  <input type="submit" ng-click="addBike.addBike(addBike)" value="Add Bike" />
+  <input type="submit" ng-disabled="addBikeForm.$invalid" ng-click="addBike.addBike(addBike.newBike)" value="Add Bike" />
 </form>
