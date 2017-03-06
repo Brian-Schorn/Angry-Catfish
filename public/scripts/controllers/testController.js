@@ -1,16 +1,14 @@
-//// filter for search box
+// search filter for angular ui bike search
 angryCatfishApp.filter('propsFilter', function() {
-  console.log("propsFilter hit!")
+  // console.log("propsFilter hit!")
   return function(items, props) {
     var out = [];
-    console.log("i's:", items);
+    // console.log("i's:", items);
     if (angular.isArray(items)) {
-      // console.log("items conditional hit, items:", items)
       var keys = Object.keys(props);
-    console.log("p's:", props);
+      // console.log("p's:", props);
       items.forEach(function(item) {
         var itemMatches = false;
-        // console.log("Filter!!!")
         for (var i = 0; i < keys.length; i++) {
           var prop = keys[i];
           var text = props[prop].toLowerCase();
@@ -20,46 +18,36 @@ angryCatfishApp.filter('propsFilter', function() {
           }
         }
         if (itemMatches) {
+          // console.log("Item:", item)
           out.push(item);
         }
       });
     } else {
-      // Let the output be the input untouched
-      out = items;
-    }
+      out = items; // Let the output be the input untouched
 
+    }
     return out;
   };
-}); // end of app.filter
+});// end of propsFilter
+
 
 // filter to remove duplicate items on ng repeat
-// here we define our unique filter
 angryCatfishApp.filter('unique', function() {
-   // we will return a function which will take in a collection
-   // and a keyname
-   return function(collection, keyname) {
-      // we define our output and keys array;
-      var output = [],
+   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+      var output = [], // we define our output and keys array;
           keys = [];
-
-      // we utilize angular's foreach function
-      // this takes in our original collection and an iterator function
-      angular.forEach(collection, function(item) {
-          // we check to see whether our object exists
-          var key = item[keyname];
-          // if it's not already part of our keys array
-          if(keys.indexOf(key) === -1) {
-              // add it to our keys array
-              keys.push(key);
-              // push this item to our final output array
-              output.push(item);
+      angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+          var key = item[keyname];// we check to see whether our object exists
+          if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+              keys.push(key); // add it to our keys array
+              output.push(item);// push this item to our final output array
           }
       });
-      // return our array which should be devoid of
-      // any duplicates
-      return output;
+      return output;// return our array which should be devoid of any duplicates
    };
-});
+}); // end of unique filter
+
+
 
 angryCatfishApp.controller('testController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
   console.log('loaded Test Controller');
@@ -67,116 +55,115 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
   var bikeService = BikeService;
   var reservationService = ReservationService;
   // var searchService = SearchService;
+//
 
+//
+// _this.filterBikes = function(categoryFilter){
+//   console.log('filter bike hit', categoryFilter)
+// };
+
+
+  //////// angular ui search dropdown features
   _this.clearSearch = function() {
-    console.log('Clear Search', _this.search)
-    _this.search = null;
-    // _this.getBikes()
+    console.log('Clear Search:')
+    // _this.bikeList = undefined;
+    _this.selected = null;
+    // _this.bikeMake.selected = undefined;
+    // _this.bikeModel.selected = undefined;
+    // _this.bikeSize.selected = undefined;
+    // _this.date.selected = undefined;
   };
 
-_this.filterBikes = function(categoryFilter){
-  console.log('filter bike hit', categoryFilter)
-};
+  _this.disabled = undefined;
+  _this.searchEnabled = undefined;
 
+  _this.setInputFocus = function (){
+    $scope.$broadcast('UiSelectDemo1');
+  };
 
+  _this.enable = function() {
+    _this.disabled = false;
+  };
 
+  _this.disable = function() {
+    _this.disabled = true;
+  };
 
-/// start of search box
+  _this.enableSearch = function() {
+    _this.searchEnabled = true;
+  };
 
-// _this.disabled = undefined;
-// _this.searchEnabled = undefined;
-//
-// _this.setInputFocus = function (){
-//   $scope.$broadcast('UiSelectDemo1');
-// };
-//
-// _this.enable = function() {
-//   _this.disabled = false;
-// };
-//
-// _this.disable = function() {
-//   _this.disabled = true;
-// };
-//
-// _this.enableSearch = function() {
-//   _this.searchEnabled = true;
-// };
-//
-// _this.disableSearch = function() {
-//   _this.searchEnabled = false;
-// };
-//
-// _this.clear = function() {
-//   _this.bike.selected = undefined;
-//   _this.address.selected = undefined;
-//   _this.country.selected = undefined;
-// };
-//
-// _this.firstLetterGroupFn = function (item){
-//     return item.name[0];
-// };
-//
-// _this.reverseOrderFilterFn = function(groups) {
-//   return groups.reverse();
-// };
-//
-// _this.peopleAsync = [];
-//
-// $timeout(function(){
-//  _this.bikeList1
-// },3000);
-//
-// _this.counter = 0;
-// _this.onSelectCallback = function (item, model){
-//   _this.counter++;
-//   _this.eventResult = {item: item, model: model};
-// };
-//
-// _this.removed = function (item, model) {
-//   _this.lastRemoved = {
-//       item: item,
-//       model: model
-//   };
-// };
-//
-// // _this.person.selectedValue = _this.peopleObj[3];
-// // _this.person.selectedSingle = 'Samantha';
-// // _this.person.selectedSingleKey = '5';
-// // _this.person.selected = _this.person.selectedValue;
-//
-//
-// _this.multipleDemo = {};
-// // _this.multipleDemo.selectedPeople = [_this.people[1], _this.people[0]];
-// _this.multipleDemo.selectedPeople2 = _this.multipleDemo.selectedPeople;
-// _this.multipleDemo.selectedPeopleSimple = [];
-// _this.multipleDemo.removeSelectIsFalse = [];
-// //
-// _this.appendToBodyDemo = {
-//   remainingToggleTime: 0,
-//   present: true,
-//   startToggleTimer: function() {
-//     var scope = _this.appendToBodyDemo;
-//     var promise = $interval(function() {
-//       if (scope.remainingTime < 1000) {
-//         $interval.cancel(promise);
-//         scope.present = !scope.present;
-//         scope.remainingTime = 0;
-//       } else {
-//         scope.remainingTime -= 1000;
-//       }
-//     }, 1000);
-//     scope.remainingTime = 3000;
-//   }
-// };
-// //
-// _this.addPerson = function(item, model){
-//   if(item.hasOwnProperty('isTag')) {
-//     delete item.isTag;
-//     _this.people.push(item);
-//   }
-// }
+  _this.disableSearch = function() {
+    _this.searchEnabled = false;
+  };
 
-///// end of search box
+  _this.someGroupFn = function (item){
+
+    if (item.name[0] >= 'A' && item.name[0] <= 'M')
+        return 'From A - M';
+
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+        return 'From N - Z';
+
+  };
+
+  _this.firstLetterGroupFn = function (item){
+      return item.name[0];
+  };
+
+  _this.reverseOrderFilterFn = function(groups) {
+    return groups.reverse();
+  };
+
+  $timeout(function(){
+   _this.bikeList
+  },3000);
+
+  _this.counter = 0;
+  _this.onSelectCallback = function (item, model){
+    vm.counter++;
+    vm.eventResult = {item: item, model: model};
+  };
+
+  _this.removed = function (item, model) {
+    vm.lastRemoved = {
+        item: item,
+        model: model
+    };
+  };
+
+  _this.tagTransform = function (newTag) {
+    var bike = {
+        bikeCategory: newTag,
+    };
+    return item;
+  };
+
+  _this.appendToBodyDemo = {
+    remainingToggleTime: 0,
+    present: true,
+    startToggleTimer: function() {
+      var scope = _this.appendToBodyDemo;
+      var promise = $interval(function() {
+        if (scope.remainingTime < 1000) {
+          $interval.cancel(promise);
+          scope.present = !scope.present;
+          scope.remainingTime = 0;
+        } else {
+          scope.remainingTime -= 1000;
+        }
+      }, 1000);
+      scope.remainingTime = 3000;
+    }
+  };
+
+  _this.addBike = function(item, model){
+    if(item.hasOwnProperty('isTag')) {
+      delete item.isTag;
+      _this.bikeList.push(item);
+    }
+  }
+  //////////// end of angular ui search dropdown features
 
   //Test Bike Data
 

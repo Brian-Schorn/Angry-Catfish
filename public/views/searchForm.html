@@ -1,0 +1,166 @@
+<hr>
+
+<h2>Basic search filters</h2>
+
+<form class="form" style="margin: 50px auto 50px;">
+
+  <div class="form-group col-sm-1 col-sm-offset-2" style="padding:0;">
+    <label>Category</label>
+    <select class="form-control" ng-model="search.bikeCategory" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeCategory'" >{{bike.bikeCategory}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Make</label>
+    <select class="form-control" ng-model="search.bikeMake" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeMake'" >{{bike.bikeMake}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Model</label>
+    <select class="form-control" ng-model="search.bikeModel">
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeModel'" >{{bike.bikeModel}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Size</label>
+    <select class="form-control" ng-model="search.bikeSize" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'bikeSize'" >{{bike.bikeSize}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Date</label>
+    <select class="form-control" ng-model="search.dates" >
+      <option value="">All</option>
+      <option ng-repeat="bike in test.bikeList | unique : 'dates'" >{{bike.dates}}</option>
+    </select>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Search</label>
+    <input class="form-control" ng-model="search.searchTags" ></input>
+  </div>
+
+  <div class="form-group col-sm-1" style="padding:0;">
+    <label>Clear</label>
+    <button type="button" class="btn btn-sm btn-danger form-control" ng-click="test.clearSearch()">Clear</button>
+  </div>
+
+</form>
+
+<hr>
+
+<table id="searchTextResults">
+  <tr>
+    <th>Category</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Size</th>
+    <th>Object</th>
+  </tr>
+  <tr ng-repeat="cycle in test.bikeList | filter:search">
+    <td>{{cycle.bikeCategory}}</td>
+    <td>{{cycle.bikeMake}}</td>
+    <td>{{cycle.bikeModel}}</td>
+    <td>{{cycle.bikeSize}}</td>
+    <td>{{cycle}}</td>
+  </tr>
+</table>
+
+
+ <hr>
+
+
+ <h2>Bike search with select/deselect tags</h2>
+ <form class="form">
+
+   <div class="form-group col-sm-2" style="padding:0;">
+     <label>Category</label>
+     <ui-select ng-model="test.selected.bikeCategory" theme="bootstrap">
+       <ui-select-match>{{$select.selected.bikeCategory}}</ui-select-match>
+       <ui-select-choices repeat="item in test.bikeList |unique : 'bikeCategory' | filter: {bikeCategory: $select.search}">
+         <div ng-bind-html="item.bikeCategory | highlight: $select.search"></div>
+       </ui-select-choices>
+     </ui-select>
+   </div>
+
+   <div class="form-group col-sm-2" style="padding:0;">
+     <label>Category</label>
+     <ui-select class="form-control" multiple ng-model="test.cycle.bikeCategory" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" title="Choose a Bike">
+       <ui-select-match placeholder="Category">{{$item.bikeCategory}}</ui-select-match>
+       <ui-select-choices repeat="bike.bikeCategory as bike in test.bikeList | propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search,}">
+         <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
+       </ui-select-choices>
+     </ui-select>
+     <p>Selected: {{test.cycle.bikeCategory}}</p>
+   </div>
+
+    <div class="form-group col-sm-2" style="padding:0;">
+      <label>Make</label>
+       <ui-select class="form-control" multiple ng-model="test.cycle.bikeMake" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" title="Choose a Bike" margin="50px">
+         <ui-select-match placeholder="Make">{{$item.bikeMake}}</ui-select-match>
+         <ui-select-choices repeat="bike.bikeMake as bike in test.bikeList">
+           <div ng-bind-html="bike.bikeMake | highlight: $select.search"></div>
+         </ui-select-choices>
+       </ui-select>
+       <p>Selected: {{test.cycle.bikeMake}}</p>
+    </div>
+
+    <div class="form-group col-sm-2" style="padding:0;">
+      <label>Model</label>
+       <ui-select class="form-control" multiple ng-model="test.cycle.bikeModel" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" title="Choose a Bike">
+         <ui-select-match placeholder="Model">{{$item.bikeModel}}</ui-select-match>
+         <ui-select-choices repeat="bike.bikeModel as bike in test.bikeList">
+           <div ng-bind-html="bike.bikeModel | highlight: $select.search"></div>
+         </ui-select-choices>
+       </ui-select>
+       <p>Selected: {{test.cycle.bikeModel}}</p>
+    </div>
+
+    <div class="form-group col-sm-2" style="padding:0;">
+      <label>Size</label>
+      <ui-select class="form-control" multiple ng-model="test.cycle.bikeSize" theme="bootstrap" ng-disabled="test.disabled" close-on-select="true" title="Choose a Bike">
+       <ui-select-match placeholder="Size">{{$item.bikeSize}}</ui-select-match>
+       <ui-select-choices repeat="bike.bikeSize as bike in test.bikeList">
+         <!-- | propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search} | unique : 'bikeCategory' -->
+         <div ng-bind-html="bike.bikeSize | highlight: $select.search"></div>
+       </ui-select-choices>
+     </ui-select>
+     <p>Selected: {{test.cycle.bikeSize}}</p>
+   </div>
+
+   <div class="form-group col-sm-1" style="padding:0;">
+     <label>Clear</label>
+     <button type="button" class="btn btn-sm btn-danger form-control" ng-click="test.clearSearch()">Clear</button>
+   </div>
+
+ </form>
+
+<hr>
+
+ <table id="searchTextResults">
+   <tr>
+     <th>Category</th>
+     <th>Make</th>
+     <th>Model</th>
+     <th>Size</th>
+     <th>Object</th>
+   </tr>
+   <tr ng-repeat="bk in test.bikeList | filter:$select.search">
+     <td>{{bk.bikeCategory}}</td>
+     <td>{{bk.bikeMake}}</td>
+     <td>{{bk.bikeModel}}</td>
+     <td>{{bk.bikeSize}}</td>
+     <td>{{bk}}</td>
+   </tr>
+ </table>
+
+ <hr>
