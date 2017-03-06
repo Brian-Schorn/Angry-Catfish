@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var Reservation = require('../models/reservation');
+var Counter = require('../models/counter');
 
 //Retrieve all reservations GET REQUEST
 router.get('/', function (req, res) {
@@ -87,6 +88,28 @@ router.get('/date', function (req, res) {
 //Add a new Reservation POST REQUEST
 router.post('/', function (req, res) {
   console.log("POST request, add new reservation:",req.body);
+
+  Counter.find({}, function (err, result){
+    if (err){
+      console.log("Error Getting Counter Info From The DB", err);
+      return;
+    }
+    console.log("Counter Check request:", result[0].seq);
+    var currentCounter = result[0].seq;
+    currentCounter++;
+    req.body.transactionID = currentCounter;
+    console.log("TransactionID", req.body.transactionID);
+    Counter.findOneAndUpdate({name: "userid"}, { $inc: { seq: 1}}, function(err){
+      if (err) {
+        console.log("Error Updating Counter: ", err);
+        return;
+      }
+      return;
+    });
+  }).then(function(){
+  // req.body.transactionID = ret.seq;
+  // console.log("transactionID ", req.body.transactionID);
+  // console.log("req.body", req.body);
   var newRes = new Reservation(req.body);
   newRes.save(function (err){
     if(err){
@@ -95,6 +118,7 @@ router.post('/', function (req, res) {
       return;
     }
     res.sendStatus(201);
+  })
   })
 })
 
