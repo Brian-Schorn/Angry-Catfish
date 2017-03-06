@@ -15,6 +15,21 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'AuthController',
       controllerAs: 'auth',
     })
+    .when('/bikeDetails', {
+      templateUrl: '/public/views/templates/bikeDetails.html',
+      controller: 'bikeController',
+      controllerAs: 'bike',
+    })
+    .when('/customerDetails', {
+      templateUrl: '/public/views/templates/customerDetails.html',
+      controller: 'custController',
+      controllerAs: 'cust',
+    })
+    .when('/addBike', {
+      templateUrl: '/public/views/templates/addBike.html',
+      controller: 'addBikeController',
+      controllerAs: 'addBike',
+    })
     .otherwise({
       redirectTo: 'login',
     });

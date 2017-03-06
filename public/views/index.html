@@ -16,6 +16,9 @@
     <script src="/public/scripts/controllers/navController.js"></script>
     <script src="/public/scripts/controllers/authController.js"></script>
     <script src="/public/scripts/controllers/testController.js"></script>
+    <script src="/public/scripts/controllers/bikeController.js"></script>
+    <script src="/public/scripts/controllers/addBikeController.js"></script>
+    <script src="/public/scripts/controllers/custController.js"></script>
     <link rel="stylesheet" type="text/css" href="/public/vendors/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/ui-bootstrap-csp.css" />
@@ -31,6 +34,11 @@
           <ul class="row">
             <li class="two columns"><a href="#home">Home</a></li>
             <li class="two columns"><a href="/testPage">Test Page</a></li>
+            <li class="two columns"><a href="/bikeDetails">Bike Details</a></li>
+            <li class="two columns"><a href="/customerDetails">Customer Details</a></li>
+            <li class="two columns"><a href="/addBike">Add Bike</a></li>
+
+
             <li class="six columns" ng-show="nav.displayLogout">Hi {{nav.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
           </ul>
         </nav>
