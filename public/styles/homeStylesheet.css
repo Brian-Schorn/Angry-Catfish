@@ -2,11 +2,16 @@
   text-align: center;
 }
 
-#bikeDisplay {
+#searchForm .input-group{
   display: inline-block;
+  width: 100px;
 }
 
-#searchForm .form-group {
+#searchForm .input-group-btn{
+  /*display: inline;*/
+}
+
+#bikeDisplay {
   display: inline-block;
 }
 
@@ -16,8 +21,13 @@
   height: 250px;
   width: 250px;
   border: 2px solid black;
-  /*transition: all 1s ease;
-  background-color: #9eb3c7;*/
+  transition: all 1s ease;
+  filter: grayscale(50%);
+}
+
+.bikeBox:hover {
+  transform:scale(1.1);
+  filter: none;
 }
 
 .bikeBox a {
@@ -28,13 +38,3 @@
   height: 200px;
   width: 220px;
 }
-
-#searchForm .form-group {
-  padding: 0px;
-}
-
-
-/*.bikeBox:hover {
-     transform:scale(1.1);
-     background-color: white;
-}*/
