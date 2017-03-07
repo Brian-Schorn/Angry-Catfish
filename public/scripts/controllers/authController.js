@@ -54,7 +54,7 @@ angryCatfishApp.filter('unique', function() {
 }); // end of unique filter
 
 
-angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService) {
+angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
   console.log('loaded Auth Controller');
 
   var _this = this;
@@ -83,4 +83,50 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     _this.sweetAlert = function (){
       swal("Hi", "SweetAlert", "success")
     };
+
+
+    // Instantiate the modal window
+var modalPopup = function () {
+  return $scope.modalInstance = $uibModal.open({
+    // templateUrl: 'blocks/modal/dialog.html',
+    templateUrl: 'bikeDetails.html',
+    scope: $scope
+  });
+};
+
+      // Modal window popup trigger
+      $scope.openModalPopup = function () {
+        modalPopup().result
+          .then(function (data) {
+            $scope.handleSuccess(data);
+          })
+          .then(null, function (reason) {
+            $scope.handleDismiss(reason);
+          });
+      };
+
+      // Close the modal if Yes button click
+      $scope.ok = function () {
+        $scope.modalInstance.close('Ok Button Clicked')
+      };
+
+      // Dismiss the modal if No button click
+      $scope.cancel = function () {
+        $scope.modalInstance.dismiss('Cancel Button Clicked')
+      };
+
+      // Log Success message
+      $scope.handleSuccess = function (data) {
+        $log.info('Modal closed: ' + data);
+      };
+
+      // Log Dismiss message
+      $scope.handleDismiss = function (reason) {
+        $log.info('Modal dismissed: ' + reason);
+      }
+
+
+
+
+
 });
