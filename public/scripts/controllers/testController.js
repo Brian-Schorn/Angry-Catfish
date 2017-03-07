@@ -48,7 +48,6 @@ angryCatfishApp.filter('unique', function() {
 }); // end of unique filter
 
 
-
 angryCatfishApp.controller('testController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
   console.log('loaded Test Controller');
   var _this = this;
@@ -64,16 +63,6 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
 
 
   //////// angular ui search dropdown features
-  _this.clearSearch = function() {
-    console.log('Clear Search:')
-    // _this.bikeList = undefined;
-    _this.selected = null;
-    // _this.bikeMake.selected = undefined;
-    // _this.bikeModel.selected = undefined;
-    // _this.bikeSize.selected = undefined;
-    // _this.date.selected = undefined;
-  };
-
   _this.disabled = undefined;
   _this.searchEnabled = undefined;
 
@@ -157,12 +146,12 @@ angryCatfishApp.controller('testController', function ($http, $scope, $timeout, 
     }
   };
 
-  _this.addBike = function(item, model){
-    if(item.hasOwnProperty('isTag')) {
-      delete item.isTag;
-      _this.bikeList.push(item);
-    }
-  }
+  // _this.addBike = function(item, model){
+  //   if(item.hasOwnProperty('isTag')) {
+  //     delete item.isTag;
+  //     _this.bikeList.push(item);
+  //   }
+  // }
   //////////// end of angular ui search dropdown features
 
   //Test Bike Data

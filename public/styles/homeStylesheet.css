@@ -1,0 +1,57 @@
+body {
+  font-family: 'Open Sans',Arial,Helvetica,sans-serif;
+  background: url(/public/assets/bg-main-tile.jpg) center 0 repeat;
+}
+
+.searchContainer {
+  /*background-color: #F23F1E ;*/
+  /*#F23F1E #3F2D24*/
+}
+
+#searchForm {
+  text-align: center;
+}
+
+#searchForm .input-group {
+  display: inline-block;
+  width: 100px;
+}
+
+#searchForm .searchClear {
+  width: 40px;
+}
+
+#searchForm .searchClear button{
+  background-color: #F23F1E;
+  outline: 0;
+
+}
+
+
+#bikeDisplay {
+  display: inline-block;
+}
+
+.bikeBox {
+  text-align: center;
+  margin: 25px;
+  height: auto;
+  width: auto;
+  border: .5px solid #F23F1E;
+  transition: all 1s ease;
+  filter: opacity(60%);
+}
+
+.bikeBox:hover {
+  transform:scale(1.1);
+  filter: none;
+}
+
+.bikeBox a {
+  text-decoration: none;
+}
+
+.bikeBox img {
+  max-height: 200px;
+  width: auto;
+}

@@ -9,6 +9,7 @@
     <script src="/public/vendors/angular-sanitize.min.js"></script>
     <script src="/public/vendors/ui-bootstrap-tpls.js"></script>
     <script src="/public/vendors/select.min.js"></script>
+    <script src="/public/vendors/sweetalert.min.js"></script>
     <script src="/public/scripts/app.js"></script>
     <script src="/public/scripts/services/authFactory.js"></script>
     <script src="/public/scripts/services/bikeService.js"></script>
@@ -23,6 +24,9 @@
     <link rel="stylesheet" type="text/css" href="/public/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/ui-bootstrap-csp.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/select.min.css" />
+    <link rel="stylesheet" type="text/css" href="/public/vendors/sweetalert.css" />
+    <link rel="stylesheet" type="text/css" href="/public/styles/homeStylesheet.css" />
+    <link rel="shortcut icon" href="public/assets/angryCatfishSmallLogo.jpg" type="image/x-icon">
   </head>
   <body>
     <!-- Bring in the Angular app -->
@@ -32,12 +36,21 @@
         <h1>Angry Catfish</h1>
         <nav>
           <ul class="row">
-            <li class="two columns"><a href="#home">Home</a></li>
+            <li class="two columns"><a href="/searchForm">Home</a></li>
             <li class="two columns"><a href="/testPage">Test Page</a></li>
             <li class="two columns"><a href="/bikeDetails">Bike Details</a></li>
             <li class="two columns"><a href="/customerDetails">Customer Details</a></li>
             <li class="two columns"><a href="/addBike">Add Bike</a></li>
-
+            <section ng-hide="auth.loggedIn">
+              <!-- I got this button image from Googles sign-in button brand guidelines page -->
+              <a href="/auth/google" target="_self"><img src="/public/assets/btn_google_signin_dark_normal_web.png" /></a>
+            </section>
+            <!-- Shown for users that are logged in -->
+            <section ng-show="auth.loggedIn">
+              <p>
+                You are logged in!
+              </p>
+            </section>
 
             <li class="six columns" ng-show="nav.displayLogout">Hi {{nav.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
           </ul>
@@ -49,6 +62,7 @@
       </header>
       <!-- Pull in views via ngRoutes here -->
       <ng-view></ng-view>
+
     </main>
   </body>
 </html>

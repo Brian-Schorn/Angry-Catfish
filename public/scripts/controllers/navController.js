@@ -1,6 +1,7 @@
 angryCatfishApp.controller('NavController', function (AuthFactory, $window) {
   var _this = this;
   var authFactory = AuthFactory;
+  _this.loggedIn = authFactory.checkLoggedIn();
   _this.displayLogout = false; // should we display the logout option on the DOM?
   _this.message = {
     text: false,
