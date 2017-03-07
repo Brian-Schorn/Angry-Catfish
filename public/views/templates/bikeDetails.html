@@ -1,27 +1,52 @@
 Bike Details Page
 
+<body name="bikeForm" class="css-form">
+    <!-- Bike Cateogry -->
+    <div ng-model="bikeService.bikeCategory" name="bikeCategory">Bike Category: {{bikeController.bikes[0].bikeCategory}} </div><br />
 
-Bike.make
+    <!-- Bike Make -->
+    <div ng-model="bikeService.bikeMake" name="bikeMake">Bike Make: {{bikeController.bikes[0].bikeMake}} </div><br />
 
-Bike.model
+    <!-- Bike Model -->
+    <div ng-model="bikeService.bikeModel" name="bikeModel">Bike Model: {{bikeController.bikes[0].bikeModel}} </div><br />
 
-Bike.size
+    <!-- Bike Size -->
+    <div ng-model="bikeService.bikeSize" name="bikeSize">Bike Sizes: {{bikeController.bikes[0].bikeSize}} </div><br />
 
-<body name="bikeForm">
- <label ng-model="bikeService.bikeCategory" name="bikeCategory">Bike Category: {{bikeController.bikes[0].bikeCategory}} </label><br />
- <label ng-model="bikeService.bikeMake" name="bikeMake">Bike Make: {{bikeController.bikes[0].bikeMake}} </label><br />
- <label ng-model="bikeService.bikeModel" name="bikeModel">Bike Model: {{bikeController.bikes[0].bikeModel}} </label><br />
- <label ng-model="bikeService.bikeSize" name="bikeSize">Bike Size: {{bikeController.bikes[0].bikeSize}} </label><br />
- <label ng-model="bikeService.bikeFrame" name="bikeFrame">Bike Frame Material: {{bikeController.bikes[0].bikeFrame}} </label><br />
- <label ng-model="bikeService.bikeWheelSize" name="bikeWheelSize">Bike Wheel Size: {{bikeController.bikes[0].bikeWheelSize}} </label><br />
- <label ng-model="bikeService.bikeTravelFront" name="bikeTravelFront">Bike Travel (Front): {{bikeController.bikes[0].bikeTravelFront}} </label><br />
- <label ng-model="bikeServicee.bikeTravelRear" name="bikeTravelRear">Bike Travel (Rear): {{bikeController.bikes[0].bikeTravelRear}} </label><br />
- <!-- SEARCH TAGS -->
- <!-- IMAGE URLS -->
- <label ng-model="bikeService.manufacURL" name="manufacURL">Manufacturer's Website: {{bikeController.bikes[0].bikemanufacURL}}</label><br />
- <!-- Buy Price -->
- <!-- Rental Price -->
- <!-- Bullet Points -->
- <!-- Description -->
- <input type="submit" ng-click="bikeService.addBike(addBike)" value="Select Bike" />
-</form>
+    <!-- Bike Frame -->
+    <div ng-model="bikeService.bikeFrame" name="bikeFrame">Bike Frame Material: {{bikeController.bikes[0].bikeFrame}} </div><br />
+
+    <!-- Bike Wheel Size -->
+    <div ng-model="bikeService.bikeWheelSize" name="bikeWheelSize">Bike Wheel Size: {{bikeController.bikes[0].bikeWheelSize}} </div><br />
+
+    <!-- Bike Travel   -->
+    <div ng-model="bikeService.bikeTravelFront" name="bikeTravelFront">Bike Travel (Front): {{bikeController.bikes[0].bikeTravelFront}} </div><br />
+    <div ng-model="bikeServicee.bikeTravelRear" name="bikeTravelRear">Bike Travel (Rear): {{bikeController.bikes[0].bikeTravelRear}} </div><br />
+    <!-- Manufacturer's Website -->
+
+    <div ng-model="bikeService.manufacURL" name="manufacURL">Manufacturer's Website:
+      <a ng-href="{{bikeController.bikes[0].bikemanufacURL}}">{{bikeController.bikes[0].bikemanufacURL}}</a></div><br />
+
+    <!-- IMAGE URLS -->
+    <ul>
+        <p>image of bike</p>
+
+    </ul>
+
+    <!-- Buy Price -->
+    <div ng-model="bikeService.bikeBuyPrice" name="bikeBuyPrice">Price: {{bikeController.bikes[0].bikeBuyPrice}} </div><br />
+    <!-- Rental Price -->
+    <div ng-model="bikeService.bikeRentPrice" name="bikeBuyPrice">Rent Price:
+      <ul>
+        <li>1 Day: $75</li>
+        <li>2-5 Days: $65</li>
+        <li>6+ Day: $55</li>
+      </ul>
+    </div><br />
+    <!-- Bullet Points -->
+    <ul>
+        <p>bullet points on bike here</p>
+    </ul>
+    <!-- Description -->
+    <input type="submit" ng-click="bikeService.addBikeToCart" value="Select Bike" />
+</body>
