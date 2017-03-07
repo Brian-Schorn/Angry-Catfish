@@ -88,8 +88,8 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     // Instantiate the modal window
 var modalPopup = function () {
   return $scope.modalInstance = $uibModal.open({
-    // templateUrl: 'blocks/modal/dialog.html',
-    templateUrl: 'bikeDetails.html',
+    templateUrl: '../../public/views/templates/bikeDetails.html',
+    // templateUrl: 'bike',
     scope: $scope
   });
 };
