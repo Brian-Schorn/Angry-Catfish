@@ -75,12 +75,14 @@
 <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected">
   <a href="/bikeDetails">
     <div class="bikeBox">
-      <div><img src={{cycle.imageUrls[0]}} alt="bike"/></div>
+      <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
       <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability</span></div>
     </div>
   </a>
 </div>
 
+
+<!-- <img src="public/assets/Transition Smuggler Black.jpg" /> -->
 <hr>
 
 

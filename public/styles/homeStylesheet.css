@@ -18,11 +18,11 @@
 .bikeBox {
   text-align: center;
   margin: 25px;
-  height: 250px;
-  width: 250px;
-  border: 2px solid black;
+  height: auto;
+  width: auto;
+  border: .1px solid gray;
   transition: all 1s ease;
-  filter: grayscale(50%);
+  filter: opacity(60%);
 }
 
 .bikeBox:hover {
@@ -35,6 +35,6 @@
 }
 
 .bikeBox img {
-  height: 200px;
-  width: 220px;
+  max-height: 200px;
+  width: auto;
 }
