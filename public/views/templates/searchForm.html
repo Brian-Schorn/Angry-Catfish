@@ -76,7 +76,7 @@
   <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected">
     <a href="/bikeDetails">
       <div class="bikeBox">
-        <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
+        <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div>
         <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability</span></div>
       </div>
     </a>

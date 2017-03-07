@@ -1,4 +1,4 @@
-angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
+angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService) {
   console.log('loaded Bike Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -6,5 +6,38 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
 
 
 
+  //Grabs all the bikes from the DB
+  _this.getBikes = function(){
+    bikeService.getBikes().then(function(bikeList){
+      _this.bikeList = bikeList.data;
+      console.log('bike list', _this.bikeList);
+        //Pulls bike ID from params
+        _this.bikeID = $routeParams.bikeID;
+        console.log(_this.bikeID);
 
+        //Finds matching Bike in bikeList
+        _this.bikeList.forEach(function(bike){
+          if (bike._id == _this.bikeID){
+            _this.selectedBike = bike;
+            console.log(_this.selectedBike);
+          }
+        })
+      });
+    };
+
+    _this.getBikes();
+
+  _this.submitBike = function() {
+    _this.helmetNeeded = false;
+    _this.pedalNeeded = false;
+    if(_this.helmetSize && _this.pedalType){
+      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize);
+    }
+    if (!_this.helmetSize){
+      _this.helmetNeeded = true;
+    }
+    if (!_this.pedalType){
+      _this.pedalNeeded = true;
+    }
+  }
 });
