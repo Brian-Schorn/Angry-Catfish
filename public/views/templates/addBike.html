@@ -85,7 +85,12 @@ Add Bike Page
 
   </ul>
   <!-- Description -->
-  <input type="button" ng-click="reset(addBikeForm)" value="Reset" />
+  <label>Description: <input type="text" ng-model="addBike.newBike.bikeDesc" name="bikeDesc" required=""  /></label>
+  <span ng-show="addBikeForm.$submitted || addBikeForm.bikeDesc.$touched">
+      <span ng-show="addBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
+    </span><br />
+
+  <input type="button" ng-click="addBike.reset(addBikeForm)" value="Reset" />
   <input type="submit"  ng-click="addBike.addBike(addBikeForm.$valid)" value="Add Bike" />
 <!-- ng-disabled="addBikeForm.$invalid" -->
 </form>

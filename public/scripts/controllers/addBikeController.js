@@ -3,22 +3,21 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
   var _this = this;
   var bikeService = BikeService;
   var reservationService = ReservationService;
-  _this.newBike = {};
-  _this.newBike.imageUrls = [];
-  _this.newBike.bulletPoints = [];
-  _this.newBike.searchTags = [];
 
 
 
 //RESET BUTTON FOR ADD BIKE FORM
-  $scope.reset = function(form) {
+  _this.reset = function(form) {
     if (form) {
       form.$setPristine();
       form.$setUntouched();
     }
-    $scope.addBike = null;
+    _this.newBike = {};
+    _this.newBike.imageUrls = [];
+    _this.newBike.bulletPoints = [];
+    _this.newBike.searchTags = [];
   }
-  $scope.reset();
+  _this.reset();
 
 //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.addBike = function(valid){

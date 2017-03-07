@@ -21,6 +21,9 @@ var passport = require('../auth/passport');
  * See {@link https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters}
  * for info on more authentication parameters that might be used here.
  */
+ // router.get('/', function (req, res) {
+ //   console.log("Route Fired");
+ // });
 router.get('/google', passport.authenticate('google',
   {
     scope: ['openid', 'email', 'https://www.googleapis.com/auth/calendar'],
