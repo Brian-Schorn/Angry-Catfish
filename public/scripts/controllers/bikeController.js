@@ -4,7 +4,6 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
-  _this.getBike
 
 
 
