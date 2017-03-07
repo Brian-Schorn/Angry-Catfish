@@ -10,8 +10,8 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'testController',
       controllerAs: 'test',
     })
-    .when('/login', {
-      templateUrl: '/public/views/templates/login.html',
+    .when('/searchForm', {
+      templateUrl: '/public/views/templates/searchForm.html',
       controller: 'AuthController',
       controllerAs: 'auth',
     })
@@ -31,7 +31,7 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controllerAs: 'addBike',
     })
     .otherwise({
-      redirectTo: 'login',
+      redirectTo: 'searchForm',
     });
     $locationProvider.html5Mode({
       enabled: true,
