@@ -7,13 +7,13 @@
 
 // search filter for angular ui bike search
 angryCatfishApp.filter('propsFilter', function() {
-  // console.log("propsFilter hit!")
+  console.log("propsFilter hit!")
   return function(items, props) {
     var out = [];
-    // console.log("i's:", items);
+    console.log("i's:", items);
     if (angular.isArray(items)) {
       var keys = Object.keys(props);
-      // console.log("p's:", props);
+      console.log("p's:", props);
       items.forEach(function(item) {
         var itemMatches = false;
         for (var i = 0; i < keys.length; i++) {
@@ -80,16 +80,15 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     };
     _this.getReservations();
 
-    _this.sweetAlert = function (){
-      swal("Hi", "SweetAlert", "success")
-    };
+    // _this.sweetAlert = function (){
+    //   swal("Hi", "SweetAlert", "success")
+    // };
 
 
     // Instantiate the modal window
 var modalPopup = function () {
   return $scope.modalInstance = $uibModal.open({
     templateUrl: '../../public/views/templates/bikeDetails.html',
-    // templateUrl: 'bike',
     scope: $scope
   });
 };
