@@ -64,6 +64,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+
     _this.getBikes = function(){
       bikeService.getBikes().then(function(bikeList){
         _this.bikeList = bikeList.data;

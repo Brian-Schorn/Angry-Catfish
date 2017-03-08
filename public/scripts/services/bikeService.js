@@ -3,9 +3,12 @@ angryCatfishApp.service('BikeService', function ($http) {
 
   // the public API
 
-    this.getBikes = function () {
-      return $http.get('/bike');
+  this.getBikes = function () {
+    return $http.get('/bike');
   };
+
+    //need function to add bike + date to reservation
+
 
   this.addBike = function (bike) {
     $http.post('/bike', bike);
