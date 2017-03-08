@@ -1,12 +1,32 @@
+<!-- <form name="myForm" ng-controller="ExampleController">
+  <label>Value1:
+    <input type="checkbox" ng-model="checkboxModel.value1">
+  </label><br/>
+  <label>Value2:
+    <input type="checkbox" ng-model="checkboxModel.value2"
+           ng-true-value="'YES'" ng-false-value="'NO'">
+   </label><br/>
+  <tt>value1 = {{checkboxModel.value1}}</tt><br/>
+  <tt>value2 = {{checkboxModel.value2}}</tt><br/>
+ </form> -->
+
+
 <strong>
 Angry Catfish Bicycle, LLC <br />
-DEMO/RENTAL WAIVER AND RELEASE AGREEMENT
+DEMO/RENTAL WAIVER AND RELEASE AGREEMENT <br />
+</strong>
+
+<strong>
+THIS IS A RELEASE OF LIABILITY – PLEASE READY CAREFULLY BEFORE SIGNING <br />
 </strong>
 
 
-THIS IS A RELEASE OF LIABILITY – PLEASE READY CAREFULLY BEFORE SIGNING
 
-<p>
+
+<label>
+  <input type="checkbox" ng-model="checkboxModel.value1"
+         ng-true-value="'YES'" ng-false-value="'NO'">
+ </label><p>
 I, (either for myself and/or my minor child), desiring to rent or use as a demonstrator bicycle (the “Activity”) owned and
 provided by Angry Catfish Bicycle, LLC (the “Company”), acknowledge that I am voluntarily participating in the Activity
 entirely at my own risk being aware that this activity may include, but not be limited to the risk of falling; collision with
@@ -27,7 +47,12 @@ the Activity, and I hereby release and discharge Company, its employees, manager
 representatives, successors, and assigns for any injuries I may suffer as a direct result of my participation in the Activity.
 </p>
 
-<p>
+
+
+<label>
+  <input type="checkbox" ng-model="checkboxModel.value2"
+         ng-true-value="'YES'" ng-false-value="'NO'">
+ </label><p>
 I assume full responsibility for all risk or bodily injury, death, or property damage while participating in the Activity due
 to the inherent risks associated with it or due to the ordinary negligence of Company in any way relating to the selection,
 maintenance, adjustment, design, manufacture, and/or use of the bicycle and the Activity or resulting from other causes. I
@@ -36,6 +61,10 @@ of action whatsoever, including by not limited to attorney’s fees and related 
 litigation be commenced by me or anyone else on my behalf.
 </p>
 
+<label>
+  <input type="checkbox" ng-model="checkboxModel.value3"
+         ng-true-value="'YES'" ng-false-value="'NO'">
+ </label>
 <p>
 I acknowledge that I have carefully read this Demo/Rental Waiver and Release Agreement and that I fully understand that it
 is a release of liability of Company, which makes no warranties, expressed or implied, with regard to the Activity or
