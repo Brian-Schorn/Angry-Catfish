@@ -1,0 +1,74 @@
+<div name="bikeForm" class="css-form">
+    <!-- Bike Cateogry -->
+    <div ng-model="bikeService.bikeCategory" name="bikeCategory">Bike Category: {{bike.selectedBike.bikeCategory}} </div><br />
+
+    <!-- Bike Make -->
+    <div ng-model="bikeService.bikeMake" name="bikeMake">Bike Make: {{bike.selectedBike.bikeMake}} </div><br />
+
+    <!-- Bike Model -->
+    <div ng-model="bikeService.bikeModel" name="bikeModel">Bike Model: {{bike.selectedBike.bikeModel}} </div><br />
+
+    <!-- Bike Size -->
+    <div ng-model="bikeService.bikeSize" name="bikeSize">Bike Sizes: {{bike.selectedBike.bikeSize}} </div><br />
+
+    <!-- Bike Frame -->
+    <div ng-model="bikeService.bikeFrame" name="bikeFrame">Bike Frame Material: {{bike.selectedBike.bikeFrame}} </div><br />
+
+    <!-- Bike Wheel Size -->
+    <div ng-model="bikeService.bikeWheelSize" name="bikeWheelSize">Bike Wheel Size: {{bike.selectedBike.bikeWheelSize}} </div><br />
+
+    <!-- Bike Travel   -->
+    <div ng-model="bikeService.bikeTravelFront" name="bikeTravelFront">Bike Travel (Front): {{bike.selectedBike.bikeTravelFront}} </div><br />
+    <div ng-model="bikeService.bikeTravelRear" name="bikeTravelRear">Bike Travel (Rear): {{bike.selectedBike.bikeTravelRear}} </div><br />
+    <!-- Manufacturer's Website -->
+
+    <div ng-model="bikeService.manufacURL" name="manufacURL">Manufacturer's Website:
+      <a ng-href="{{bike.selectedBike.bikemanufacURL}}">{{bike.selectedBike.manufacURL}}</a></div><br />
+
+    <!-- IMAGE URLS -->
+        Images:
+        <img ng-repeat="img in bike.selectedBike.imageUrls" ng-src="{{img}}" style="height:100px;width:100px;"></img>
+
+
+    <!-- Buy Price -->
+    <div ng-model="bikeService.bikeBuyPrice" name="bikeBuyPrice">Price: {{bike.selectedBike.bikeBuyPrice}} </div><br />
+    <!-- Rental Price -->
+    <div ng-model="bikeService.bikeRentPrice" name="bikeBuyPrice">Rent Price:
+      <ul>
+        <li>1 Day: $75</li>
+        <li>2-5 Days: $65</li>
+        <li>6+ Day: $55</li>
+      </ul>
+    </div><br />
+    <!-- Bullet Points -->
+    <ul>
+        <li ng-repeat="bullet in bike.selectedBike.bulletPoints">
+          {{bullet}}
+        </li>
+    </ul>
+    <!-- Description -->
+    <!-- Pedal Type -->
+  <div name="bikeDetailsForm" class="">
+    Pedal Type:
+    <select ng-model="bike.pedalType">
+      <option value="">Please select</option>
+      <option value="Two-Hole">Two-Hole</option>
+      <option value="Three-Hole">Three-Hole</option>
+    </select>
+    <span ng-show="bike.pedalNeeded">Pedal Type Required!</span>
+    <!-- Helmet Size -->
+    <br />
+    Helmet Size:
+    <select ng-model="bike.helmetSize">
+      <option value="">Please select</option>
+      <option value=true>Need</option>
+      <option value=false>Don't need</option>
+
+    </select>
+    <span ng-show="bike.helmetNeeded">Helmet Size Required!</span>
+
+    <br />
+    <input type="submit" value="Select Bike" ng-click="bike.submitBike()"/>
+  </div>
+
+</div>

@@ -1,8 +1,3 @@
-body {
-  font-family: 'Open Sans',Arial,Helvetica,sans-serif;
-  background: url(/public/assets/bg-main-tile.jpg) center 0 repeat;
-}
-
 .searchContainer {
   /*background-color: #F23F1E ;*/
   /*#F23F1E #3F2D24*/
@@ -40,6 +35,7 @@ body {
   border: .5px solid #F23F1E;
   transition: all 1s ease;
   filter: opacity(60%);
+  background-color: white;
 }
 
 .bikeBox:hover {

@@ -12,7 +12,7 @@
       <!-- <label>Category</label> -->
       <ui-select class="" ng-model="auth.selected.bikeCategory" theme="bootstrap">
         <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
-        <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | propsFilter: {bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search} ">
+        <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | unique : 'bikeCategory'">
           <!-- unique : 'bikeCategory' -->
           <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
         </ui-select-choices>
@@ -74,7 +74,7 @@
   <hr>
 
   <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected">
-      <div class="bikeBox" ng-click="openModalPopup(cycle._id)">{{cycle._id}}
+      <div class="bikeBox" ng-click="openModalPopup(cycle._id)">
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
         <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability</span></div>

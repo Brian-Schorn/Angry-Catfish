@@ -39,6 +39,7 @@ angryCatfishApp.filter('propsFilter', function() {
 
 // filter to remove duplicate items on ng repeat
 angryCatfishApp.filter('unique', function() {
+  console.log('Unique filter hit');
    return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
       var output = [], // we define our output and keys array;
           keys = [];
@@ -82,7 +83,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     _this.getReservations();
 
     _this.sweetAlert = function (){
-      swal("Hi", "SweetAlert", "success")
+      // swal("Hi", "SweetAlert", "success")
     };
 
     // Instantiate the modal window
@@ -144,7 +145,89 @@ var modalPopup = function (Id) {
         $log.info('Modal dismissed: ' + reason);
       }
 
+      //////// angular ui search dropdown features
+      _this.disabled = undefined;
+      _this.searchEnabled = undefined;
 
+      _this.setInputFocus = function (){
+        $scope.$broadcast('UiSelectDemo1');
+      };
+
+      _this.enable = function() {
+        _this.disabled = false;
+      };
+
+      _this.disable = function() {
+        _this.disabled = true;
+      };
+
+      _this.enableSearch = function() {
+        _this.searchEnabled = true;
+      };
+
+      _this.disableSearch = function() {
+        _this.searchEnabled = false;
+      };
+
+      _this.someGroupFn = function (item){
+
+        if (item.name[0] >= 'A' && item.name[0] <= 'M')
+            return 'From A - M';
+
+        if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+            return 'From N - Z';
+
+      };
+
+      _this.firstLetterGroupFn = function (item){
+          return item.name[0];
+      };
+
+      _this.reverseOrderFilterFn = function(groups) {
+        return groups.reverse();
+      };
+
+      $timeout(function(){
+       _this.bikeList
+      },3000);
+
+      _this.counter = 0;
+      _this.onSelectCallback = function (item, model){
+        vm.counter++;
+        vm.eventResult = {item: item, model: model};
+      };
+
+      _this.removed = function (item, model) {
+        vm.lastRemoved = {
+            item: item,
+            model: model
+        };
+      };
+
+      _this.tagTransform = function (newTag) {
+        var bike = {
+            bikeCategory: newTag,
+        };
+        return item;
+      };
+
+      _this.appendToBodyDemo = {
+        remainingToggleTime: 0,
+        present: true,
+        startToggleTimer: function() {
+          var scope = _this.appendToBodyDemo;
+          var promise = $interval(function() {
+            if (scope.remainingTime < 1000) {
+              $interval.cancel(promise);
+              scope.present = !scope.present;
+              scope.remainingTime = 0;
+            } else {
+              scope.remainingTime -= 1000;
+            }
+          }, 1000);
+          scope.remainingTime = 3000;
+        }
+      };
 
 
 
