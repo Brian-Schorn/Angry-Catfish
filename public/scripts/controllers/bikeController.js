@@ -1,8 +1,10 @@
-angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService) {
+angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService, editId) {
   console.log('loaded Bike Controller');
   var _this = this;
   var bikeService = BikeService;
   var reservationService = ReservationService;
+
+  _this.modalID = editId;
 
 
 
@@ -12,7 +14,7 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
       _this.bikeList = bikeList.data;
       console.log('bike list', _this.bikeList);
         //Pulls bike ID from params
-        _this.bikeID = $routeParams.bikeID;
+        _this.bikeID = _this.modalID;
         console.log(_this.bikeID);
 
         //Finds matching Bike in bikeList

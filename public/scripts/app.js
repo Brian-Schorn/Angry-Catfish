@@ -3,7 +3,6 @@ var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'n
 
 angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
 
-
   $routeProvider
     .when('/testPage', {
       templateUrl: '/public/views/templates/testPage.html',

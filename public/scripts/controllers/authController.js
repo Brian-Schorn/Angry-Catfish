@@ -85,18 +85,23 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     //   swal("Hi", "SweetAlert", "success")
     // };
 
-
     // Instantiate the modal window
-var modalPopup = function () {
+var modalPopup = function (Id) {
   return $scope.modalInstance = $uibModal.open({
     templateUrl: '../../public/views/templates/bikeDetails.html',
-    scope: $scope
+    controller: 'bikeController as bike',
+        resolve: {
+          editId: function() {
+            console.log("Modal Bike Id",Id);
+            return Id;
+          }
+        }
   });
 };
 
       // Modal window popup trigger
-      $scope.openModalPopup = function () {
-        modalPopup().result
+      $scope.openModalPopup = function (Id) {
+        modalPopup(Id).result
           .then(function (data) {
             $scope.handleSuccess(data);
           })
@@ -104,6 +109,20 @@ var modalPopup = function () {
             $scope.handleDismiss(reason);
           });
       };
+
+
+      // $scope.openModalPopup = function(Id) {
+      //   var modalInstance = $uibModal.open({
+      //     templateUrl:'../../public/views/teamplates/bikeDetails.html',
+      //     controller: 'bikeController',
+      //     resolve: {
+      //       editId: function() {
+      //         console.log(Id);
+      //         return Id;
+      //       }
+      //     }
+      //   });
+      // }
 
       // Close the modal if Yes button click
       $scope.ok = function () {
