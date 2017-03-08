@@ -54,7 +54,7 @@ Add Bike Page
   <!-- SEARCH TAGS -->
   Search Tags
   <ul>
-    <li ng-repeat="tag in addBike.newBike.searchTags">{{tag}}</li>
+    <li ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}</li>
     <label>Search Tags: <input type="string" ng-model="addBike.newTag" name="searchTag" /></label>
     <span ng-show="addBikeForm.$submitted">
         <!-- <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
@@ -64,7 +64,7 @@ Add Bike Page
   <!-- IMAGE URLS -->
   Image URLs:
   <ul>
-    <li ng-repeat="image in addBike.newBike.imageUrls">{{image}}</li>
+    <li ng-repeat="image in addBike.newBike.imageUrls track by $index">{{image}}</li>
     <label>Image URL: <input type="string" ng-model="addBike.newImage.newImage" name="imageURL" /></label>
     <span ng-show="addBikeForm.$submitted">
         <span ng-hide="addBike.newBike.imageUrls.length > 0" class="error">One Image Required</span>
@@ -77,7 +77,7 @@ Add Bike Page
   <!-- Bullet Points -->
   Bullet Points:
   <ul>
-    <li ng-repeat="bullet in addBike.newBike.bulletPoints">{{bullet}}</li>
+    <li ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}</li>
     <label>Bullet Point Highlight: <input type="string" ng-model="addBike.newBullet" name="bulletPoint" /></label>
     <span ng-show="addBikeForm.$submitted">
         <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>

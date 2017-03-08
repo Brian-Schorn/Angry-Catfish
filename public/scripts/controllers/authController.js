@@ -39,18 +39,18 @@ angryCatfishApp.filter('propsFilter', function() {
 
 // filter to remove duplicate items on ng repeat
 angryCatfishApp.filter('unique', function() {
-   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
-      var output = [], // we define our output and keys array;
-          keys = [];
-      angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
-          var key = item[keyname];// we check to see whether our object exists
-          if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
-              keys.push(key); // add it to our keys array
-              output.push(item);// push this item to our final output array
-          }
-      });
-      return output;// return our array which should be devoid of any duplicates
-   };
+  return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+    var output = [], // we define our output and keys array;
+    keys = [];
+    angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+      var key = item[keyname];// we check to see whether our object exists
+      if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+      keys.push(key); // add it to our keys array
+      output.push(item);// push this item to our final output array
+    }
+  });
+  return output;// return our array which should be devoid of any duplicates
+};
 }); // end of unique filter
 
 
@@ -65,84 +65,124 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var reservationService = ReservationService;
 
 
-    _this.getBikes = function(){
-      bikeService.getBikes().then(function(bikeList){
-        _this.bikeList = bikeList.data;
-        console.log('bike list', _this.bikeList);
-      });
-    };
-    _this.getBikes();
+  _this.getBikes = function(){
+    bikeService.getBikes().then(function(bikeList){
+      _this.bikeList = bikeList.data;
+      console.log('bike list', _this.bikeList);
+    });
+  };
+  _this.getBikes();
 
-    _this.getReservations = function(){
-      reservationService.getReservations().then(function(resList){
-        _this.resList = resList.data;
-        console.log("reservation list", _this.resList);
-      });
-    };
-    _this.getReservations();
+  _this.getReservations = function(){
+    reservationService.getReservations().then(function(resList){
+      _this.resList = resList.data;
+      console.log("reservation list", _this.resList);
+    });
+  };
+  _this.getReservations();
 
-    _this.sweetAlert = function (){
-      swal("Hi", "SweetAlert", "success")
-    };
+  _this.sweetAlert = function (){
+    swal("Hi", "SweetAlert", "success")
+  };
 
-    // Instantiate the modal window
-var modalPopup = function (Id) {
-  return $scope.modalInstance = $uibModal.open({
-    templateUrl: '../../public/views/templates/bikeDetails.html',
-    controller: 'bikeController as bike',
-        resolve: {
-          editId: function() {
-            console.log("Modal Bike Id",Id);
-            return Id;
-          }
+  // Instantiate the modal window
+  var modalPopup = function (Id) {
+    return $scope.modalInstance = $uibModal.open({
+      templateUrl: '../../public/views/templates/bikeDetails.html',
+      controller: 'bikeController as bike',
+      resolve: {
+        editId: function() {
+          console.log("Modal Bike Id",Id);
+          return Id;
         }
-  });
-};
-
-      // Modal window popup trigger
-      $scope.openModalPopup = function (Id) {
-        modalPopup(Id).result
-          .then(function (data) {
-            $scope.handleSuccess(data);
-          })
-          .then(null, function (reason) {
-            $scope.handleDismiss(reason);
-          });
-      };
-
-
-      // $scope.openModalPopup = function(Id) {
-      //   var modalInstance = $uibModal.open({
-      //     templateUrl:'../../public/views/teamplates/bikeDetails.html',
-      //     controller: 'bikeController',
-      //     resolve: {
-      //       editId: function() {
-      //         console.log(Id);
-      //         return Id;
-      //       }
-      //     }
-      //   });
-      // }
-
-      // Close the modal if Yes button click
-      $scope.ok = function () {
-        $scope.modalInstance.close('Ok Button Clicked')
-      };
-
-      // Dismiss the modal if No button click
-      $scope.cancel = function () {
-        $scope.modalInstance.dismiss('Cancel Button Clicked')
-      };
-
-      // Log Success message
-      $scope.handleSuccess = function (data) {
-        $log.info('Modal closed: ' + data);
-      };
-
-      // Log Dismiss message
-      $scope.handleDismiss = function (reason) {
-        $log.info('Modal dismissed: ' + reason);
       }
+    });
+  };
+
+  var modalEditPopup = function (Id) {
+    return $scope.modalInstance = $uibModal.open({
+      templateUrl: '../../public/views/templates/bikeEditDetails.html',
+      controller: 'bikeEditController as bikeEdit',
+      resolve: {
+        editId: function() {
+          console.log("Modal EditBike Id",Id);
+          return Id;
+        }
+      }
+    });
+  };
+
+  // Modal window popup trigger
+  $scope.openModalPopup = function (Id) {
+    modalPopup(Id).result
+    .then(function (data) {
+      $scope.handleSuccess(data);
+    })
+    .then(null, function (reason) {
+      $scope.handleDismiss(reason);
+    });
+  };
+
+  $scope.openEditModalPopup = function (Id) {
+    modalEditPopup(Id).result
+    .then(function (data) {
+      $scope.handleSuccess(data);
+    })
+    .then(null, function (reason) {
+      $scope.handleDismiss(reason);
+    });
+  };
+
+
+  $scope.confirmDelete = function(Id) {
+    swal({
+      title: "Are you sure?",
+      text: "You will not be able to recover this bike!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, delete it!",
+      closeOnConfirm: true
+    },
+    function(){
+      console.log("Deleting",Id);
+      bikeService.deleteBike(Id).then(function(bikeList){
+        _this.getBikes();
+      });
+    });
+  }
+  // $scope.openModalPopup = function(Id) {
+  //   var modalInstance = $uibModal.open({
+  //     templateUrl:'../../public/views/teamplates/bikeDetails.html',
+  //     controller: 'bikeController',
+  //     resolve: {
+  //       editId: function() {
+  //         console.log(Id);
+  //         return Id;
+  //       }
+  //     }
+  //   });
+  // }
+
+  // Close the modal if Yes button click
+  $scope.ok = function () {
+    $scope.modalInstance.close('Ok Button Clicked')
+  };
+
+  // Dismiss the modal if No button click
+  $scope.cancel = function () {
+    $scope.modalInstance.dismiss('Cancel Button Clicked')
+  };
+
+  // Log Success message
+  $scope.handleSuccess = function (data) {
+    $log.info('Modal closed: ' + data);
+  };
+
+  // Log Dismiss message
+  $scope.handleDismiss = function (reason) {
+    $log.info('Modal dismissed: ' + reason);
+  }
 
 
 

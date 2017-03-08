@@ -72,13 +72,18 @@
   </form>
 
   <hr>
-
-  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected">
+  <div>Bikes Matching Filters: {{results.length}}</div>
+  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected as results">
       <div class="bikeBox" ng-click="openModalPopup(cycle._id)">{{cycle._id}}
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
         <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability</span></div>
       </div>
+      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" />
+      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
+
+      <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
+
 
   </div>
 
