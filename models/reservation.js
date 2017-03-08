@@ -16,7 +16,18 @@ var reservationSchema = mongoose.Schema({
   pedalType: String,
   needHelmet: Boolean,
   waiverSigned: Boolean,
-  totalPrice: Number
+  totalPrice: Number,
+  custLicenseNum: String,
+  custPhoneNum: String,
+  custParentOrGuardianName: String,
+  custEmergencyContactName: String,
+  custEmergencyContactPhoneNum: String,
+  custEmergencyContactRelationshipInfo: String,
+  custBikeDescription: String,
+  custWaiverAcceptDate: Date,
+  custParentGuardianWaiverAcceptDate: Date,
+  custSignature: String,
+  custParentGuardianSignature: String
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);
