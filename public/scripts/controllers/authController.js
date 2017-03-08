@@ -81,9 +81,9 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     };
     _this.getReservations();
 
-    // _this.sweetAlert = function (){
-    //   swal("Hi", "SweetAlert", "success")
-    // };
+    _this.sweetAlert = function (){
+      swal("Hi", "SweetAlert", "success")
+    };
 
     // Instantiate the modal window
 var modalPopup = function (Id) {

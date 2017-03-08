@@ -1,4 +1,4 @@
-angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService, editId) {
+angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, BikeService, ReservationService, editId) {
   console.log('loaded Bike Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -32,14 +32,34 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
   _this.submitBike = function() {
     _this.helmetNeeded = false;
     _this.pedalNeeded = false;
-    if(_this.helmetSize && _this.pedalType){
-      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize);
-    }
     if (!_this.helmetSize){
       _this.helmetNeeded = true;
     }
     if (!_this.pedalType){
       _this.pedalNeeded = true;
     }
+    if(_this.helmetSize && _this.pedalType){
+    swal({
+  title: "Success! Bike Added to Cart",
+  text: "Would you like to proceed to Checkout or add another Bike?",
+  type: "info",
+  showCancelButton: true,
+  confirmButtonColor: "#DD6B55",
+  confirmButtonText: "Checkout",
+  cancelButtonText: "Add Another Bike",
+  closeOnConfirm: true,
+  closeOnCancel: false
+},
+function(isConfirm){
+  if (isConfirm) {
+    console.log("Confirmed");
+      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize);
+      $uibModalStack.dismissAll();
+  } else {
+    swal("Cancelled", "Your imaginary file is safe :)", "error");
+  }
+});
+
+}
   }
 });
