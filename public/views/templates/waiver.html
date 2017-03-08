@@ -74,41 +74,72 @@ invalid, the balance of this Agreement shall continue in full force and effect.
 </p>
 
 <form name="waiverForm" class="css-form" novalidate>
-  <label>Name: <input type="text" ng-model="waiver..custName" name="customerName" required=""  /></label>
-  <span ng-show="addBikeForm.$submitted || addBikeForm.bikeCategory.$touched">
-      <span ng-show="addBikeForm.bikeCategory.$error.required" class="error">Name required</span>
+    <label>Name: <input type="text" ng-model="cust." name="customerName" required=""  /></label>
+    <!-- <span ng-show=".$submitted || .$touched">
+      <span ng-show=".$error.required" class="error">Required</span> -->
     </span><br />
-  </form>
+
+<label>Driver's License: <input type="text" ng-model="cust." name="driversLicense" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+      <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Address <input type="text" ng-model="cust." name="customerAddress" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+        <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Phone Number: <input type="tel" ng-model="cust." name="customerPhoneNumber" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Name of Parent/Guardian of Participants under 18 years of age: <input type="text" ng-model="cust." name="custParentGuardianName" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<p>Emergency Contact Person</p>
+
+<label>Name: <input type="text" ng-model="cust." name="emergencyContactName" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Phone Number: <input type="tel" ng-model="cust." name="emergencyContactName" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Relationship to you: <input type="text" ng-model="cust." name="emergencyContactRelationship" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+
+<label>Bike(s) Description: <input type="text" ng-model="cust." name="bikesDescription" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
 
 
-Column 1
-Name:
-Drive's Liscense #:
-address
-
-Column 2
-Phone:
-Name of Parent/Guardian of participants under 18 years of age:
-Emergency Contact Person
-  Name
-  phone
-  relationship to you:
-
-Across whole page
-  Bike description: (form field)
-
-  In consideration for participation in the Activity and having carefully read this Agreement, I acknowledge that I fully
-  understand it and agree and consent to its terms without reservation.
-
-Column 1
-Date:
-
-date:
-
-
-Column 2
-(Participant Signature)  ----- under form field
-(Signature of Parent/Guardian, if applicable) ---- under form field
-
-
-Submit button
+<p>In consideration for participation in the Activity and having carefully read this Agreement, I acknowledge that I fully
+understand it and agree and consent to its terms without reservation.</p>
+<label>Date: <input type="date" ng-model="cust." name="custWaiverSignDate" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+<label><input type="text" ng-model="cust." name="custWaiverSignDate" required=""  /><br /> (Participant's Signature)  </label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+<label>Date: <input type="date" ng-model="cust." name="custParentGuardianWaiverSignDate" required=""  /></label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+<label><input type="text" ng-model="cust." name="custParentGuardianWaiverSignDate" required=""  /><br /> (Signature of Parent/Guardian, if applicable)  </label>
+<!-- <span ng-show=".$submitted || .$touched">
+          <span ng-show=".$error.required" class="error">Required</span> -->
+</span><br />
+<button type="button" class="btn btn-info pull-center">Skip For Now</button>
+<button type="submit" class="btn btn-success pull-center" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Accept and Submit</button>
+</form>
