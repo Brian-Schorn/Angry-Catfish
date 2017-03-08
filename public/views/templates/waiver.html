@@ -122,8 +122,12 @@ invalid, the balance of this Agreement shall continue in full force and effect.
 </span><br />
 
 
-<p>In consideration for participation in the Activity and having carefully read this Agreement, I acknowledge that I fully
+<label>
+  <input type="checkbox" ng-model="checkboxModel.value4"
+         ng-true-value="'YES'" ng-false-value="'NO'">
+ </label><p>In consideration for participation in the Activity and having carefully read this Agreement, I acknowledge that I fully
 understand it and agree and consent to its terms without reservation.</p>
+
 <label>Date: <input type="date" ng-model="cust." name="custWaiverSignDate" required=""  /></label>
 <!-- <span ng-show=".$submitted || .$touched">
           <span ng-show=".$error.required" class="error">Required</span> -->
@@ -140,6 +144,6 @@ understand it and agree and consent to its terms without reservation.</p>
 <!-- <span ng-show=".$submitted || .$touched">
           <span ng-show=".$error.required" class="error">Required</span> -->
 </span><br />
-<button type="button" class="btn btn-info pull-center">Skip For Now</button>
-<button type="submit" class="btn btn-success pull-center" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Accept and Submit</button>
+<button type="button" class="btn btn-info pull-right">Skip For Now</button>
+<button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Accept and Submit</button>
 </form>
