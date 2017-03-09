@@ -113,7 +113,7 @@
 
   <div>Bikes Matching Filters: {{results.length}}</div>
   <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected as results">
-      <div class="bikeBox" ng-click="openModalPopup(cycle._id)">
+      <div class="bikeBox" ng-click="openModalPopup(cycle._id, auth.dt.start, auth.dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->

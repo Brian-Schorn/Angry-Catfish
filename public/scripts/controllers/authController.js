@@ -67,14 +67,22 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
 
   // Instantiate the modal window
-  var modalPopup = function (Id) {
+  var modalPopup = function (Id, startDate, endDate) {
     return $scope.modalInstance = $uibModal.open({
       templateUrl: '../../public/views/templates/bikeDetails.html',
       controller: 'bikeController as bike',
       resolve: {
         editId: function() {
-          console.log("Modal Bike Id",Id);
-          return Id;
+          console.log("Modal Bike Id", Id);
+          console.log("Start Date", startDate);
+          console.log("End Date", endDate);
+          var resInfo = {
+            Id: Id,
+            Start: startDate,
+            End: endDate
+          }
+
+          return resInfo;
         }
       }
     });
@@ -94,8 +102,8 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
 
   // Modal window popup trigger
-  $scope.openModalPopup = function (Id) {
-    modalPopup(Id).result
+  $scope.openModalPopup = function (Id, startDate, endDate) {
+    modalPopup(Id, startDate, endDate).result
     .then(function (data) {
       $scope.handleSuccess(data);
     })

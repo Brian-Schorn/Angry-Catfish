@@ -4,7 +4,12 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
-  _this.modalID = editId;
+  _this.bikeInfo = editId;
+  console.log("BikeInfo", _this.bikeInfo);
+  _this.modalID = _this.bikeInfo.Id;
+  _this.startDate = _this.bikeInfo.Start;
+  _this.endDate = _this.bikeInfo.End;
+
 
 
 
@@ -53,7 +58,7 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
 function(isConfirm){
   if (isConfirm) {
     console.log("Confirmed");
-      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize);
+      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize + '/start/' + _this.startDate.getTime() + '/end/' + _this.endDate.getTime());
       $uibModalStack.dismissAll();
   } else {
     swal("Cancelled", "Your imaginary file is safe :)", "error");

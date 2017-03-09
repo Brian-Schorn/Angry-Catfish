@@ -19,7 +19,7 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'bikeController',
       controllerAs: 'bike',
     })
-    .when('/customerDetails/:bikeID/pedalType/:pedalType/helmetSize/:helmetSize', {
+    .when('/customerDetails/:bikeID/pedalType/:pedalType/helmetSize/:helmetSize/start/:startDate/end/:endDate', {
       templateUrl: '/public/views/templates/customerDetails.html',
       controller: 'custController',
       controllerAs: 'cust',

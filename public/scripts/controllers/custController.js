@@ -5,6 +5,10 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+  _this.start = new Date(Number($routeParams.startDate));
+  _this.end = new Date(Number($routeParams.endDate));
+  console.log(_this.start);
+
   //Grabs all the bikes from the DB
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
@@ -36,18 +40,18 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
 
   _this.addRes = function(){
     _this.addResStatus = true;
-    // _this.dates = [];
-    // _this.dt.start.setHours(0,0,0,0);
-    // _this.dt.end.setHours(0,0,0,0);
-    // while (_this.dt.start <= _this.dt.end){
-    //   _this.dates.push(new Date(_this.dt.start));
-    //   _this.dt.start.setTime(_this.dt.start.getTime() + 86400000);
-    // }
+    _this.dates = [];
+    _this.start.setHours(0,0,0,0);
+    _this.end.setHours(0,0,0,0);
+    while (_this.start <= _this.end){
+      _this.dates.push(new Date(_this.start));
+      _this.start.setTime(_this.start.getTime() + 86400000);
+    }
     _this.bikes = [];
     _this.bikes.push(_this.selectedBike._id);
     _this.reservationObj = {
       "bikeID" : _this.bikes,
-      // "resDate" : _this.dates,
+      "resDate" : _this.dates,
       "custName" : _this.custName,
       "custEmail" : _this.email,
       "custPhone" : _this.phone,
