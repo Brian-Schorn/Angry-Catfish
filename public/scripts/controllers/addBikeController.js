@@ -36,7 +36,6 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
     console.log(imgURL);
     _this.newBike.imageUrls.push(imgURL);
     _this.newImage.newImage = null;
-
   }
 
 //ADD BULLET POINT TO ARRAY
@@ -44,7 +43,6 @@ _this.addBullet = function(bullet){
   console.log(bullet);
   _this.newBike.bulletPoints.push(bullet);
   _this.newBullet= null;
-
 }
 
 //ADD BULLET POINT TO ARRAY
@@ -52,7 +50,6 @@ _this.addTag = function(tag){
   console.log(tag);
   _this.newBike.searchTags.push(tag);
   _this.newTag= null;
-
 }
 
 

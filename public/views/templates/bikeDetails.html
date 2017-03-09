@@ -1,17 +1,17 @@
 <div class="bikeModal">
 
   <div class="modal-header">
+
     <div class="modal-title">
       <div class="row">
-        <span ng-model="bikeService.bikeCategory" name="bikeCategory">{{bike.selectedBike.bikeCategory}}: </span>
-        <span ng-model="bikeService.bikeMake" name="bikeMake">{{bike.selectedBike.bikeMake}} </span>
-        <span ng-model="bikeService.bikeModel" name="bikeModel">{{bike.selectedBike.bikeModel}} </span>
+        <span name="bikeCategory">{{bike.selectedBike.bikeCategory}}: </span>
+        <span name="bikeMake">{{bike.selectedBike.bikeMake}} </span>
+        <span name="bikeModel">{{bike.selectedBike.bikeModel}} </span>
       </div>
     </div>
   </div>
 
   <div class="modal-body" id="" >
-
     <div class="row">
       <div class="col-xs-12"><img class="img-responsive" ng-repeat="img in bike.selectedBike.imageUrls" ng-src="{{img}}"></img></div>
     </div>
@@ -28,23 +28,23 @@
 
     <div class="row">
       <div class=col-xs-6>
-        <div ng-model="bikeService.bikeFrame" name="bikeFrame">Frame Material: {{bike.selectedBike.bikeFrame}} </div>
-        <div ng-model="bikeService.bikeWheelSize" name="bikeWheelSize">Wheel Size: {{bike.selectedBike.bikeWheelSize}} </div>
+        <div name="bikeFrame">Frame Material: {{bike.selectedBike.bikeFrame}} </div>
+        <div name="bikeWheelSize">Wheel Size: {{bike.selectedBike.bikeWheelSize}} </div>
       </div>
       <div class=col-xs-6>
-        <div ng-model="bikeService.bikeTravelFront" name="bikeTravelFront">Bike Travel (Front): {{bike.selectedBike.bikeTravelFront}} </div>
-        <div ng-model="bikeService.bikeTravelRear" name="bikeTravelRear">Bike Travel (Rear): {{bike.selectedBike.bikeTravelRear}} </div>
+        <div name="bikeTravelFront">Bike Travel (Front): {{bike.selectedBike.bikeTravelFront}} </div>
+        <div name="bikeTravelRear">Bike Travel (Rear): {{bike.selectedBike.bikeTravelRear}} </div>
       </div>
     </div>
 
     <div class="row">
-      <div class="col-xs-8" ng-model="bikeService.manufacURL" name="manufacURL">Manufacturer's Website:
-        <a ng-href="{{bike.selectedBike.bikemanufacURL}}">{{bike.selectedBike.manufacURL}}</a>
+      <div class="col-xs-8" name="manufacURL">Manufacturer's Website:
+        <a ng-href="{{bike.selectedBike.manufacURL}}" target="_blank">Go to website</a><
       </div>
 
       <div class="col-xs-4">
-        <div ng-model="bikeService.bikeBuyPrice" name="bikeBuyPrice">Price: {{bike.selectedBike.bikeBuyPrice}} </div>
-        <div ng-model="bikeService.bikeRentPrice" name="bikeBuyPrice">Rent Price:
+        <div name="bikeBuyPrice">Price: {{bike.selectedBike.bikeBuyPrice}} </div>
+        <div name="bikeBuyPrice">Rent Price:
           <ul>
             <li>1 Day: $75</li>
             <li>2-5 Days: $65</li>
@@ -57,6 +57,7 @@
   </div>
 
   <div class="modal-footer">
+
     <div class="row">
 
       <div class="col-xs-4">
@@ -85,4 +86,5 @@
     </div>
   </div>
 
+  </div>
 </div>
