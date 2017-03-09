@@ -4,7 +4,7 @@
   <div id="calenderSearchZone">
     <h4>Reservation Dates</h4>
     <div class="row">
-      <div class="col-sm-3 col-sm-offset-2">
+      <div class="col-sm-4 col-sm-offset-2">
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
           <span class="input-group-btn">
@@ -13,7 +13,7 @@
         </p>
       </div>
 
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
@@ -21,9 +21,9 @@
           </span>
         </p>
       </div>
-      <div class="col-sm-2">
+      <!-- <div class="col-sm-2">
         <input type="button" class="btn" ng-click="auth.checkDates()" value="Update Dates" />
-      </div>
+      </div> -->
     </div>
   </div>
 

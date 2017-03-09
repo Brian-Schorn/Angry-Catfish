@@ -1,9 +1,4 @@
-// angryCatfishApp.controller('AuthController', function (AuthFactory) {
-//   var _this = this;
-//   var authFactory = AuthFactory;
-//   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
-//
-// });
+
 angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
   console.log('loaded Auth Controller');
 
@@ -186,21 +181,6 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
   _this.today();
 
-  // _this.clear = function() {
-  //   console.log('clear')
-  //   dt = null;
-  // };
-
-  // _this.submitDates = function(dt) {
-  //   console.log('Dates:', dt)
-  //   // check dates
-  //   _this.clear();
-  //   // .then(function(response){
-  //   // }).catch(function(err){
-  //   //   console.log('error checking dates', err)
-  //   // });
-  // };
-
   $scope.inlineOptions = {
     customClass: getDayClass,
     minDate: new Date(),
@@ -271,21 +251,6 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   $scope.popup2 = {
     opened: false
   };
-
-  // var tomorrow = new Date();
-  // tomorrow.setDate(tomorrow.getDate() + 1);
-  // var afterTomorrow = new Date();
-  // afterTomorrow.setDate(tomorrow.getDate() + 1);
-  // $scope.events = [
-  //   {
-  //     date: tomorrow,
-  //     status: 'full'
-  //   },
-  //   {
-  //     date: afterTomorrow,
-  //     status: 'partially'
-  //   }
-  // ];
 
   function getDayClass(data) {
     var date = data.date,
