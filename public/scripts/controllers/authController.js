@@ -14,6 +14,8 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+  _this.pageLoad = false;
+
 
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
@@ -58,6 +60,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
       _this.resList = resList.data;
       console.log("reservation list", _this.resList);
       _this.checkDates();
+      _this.pageLoad = true;
     });
   };
   _this.getReservations();
@@ -241,6 +244,9 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
       console.log('conflict');
       $scope.dt.end = $scope.dt.start;
     }
+    if(_this.pageLoad == true){
+    _this.checkDates();
+  }
   });
   $scope.$watch('dt.end', function (newValue) {
     console.log("NewValue", newValue);
@@ -248,6 +254,9 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
       console.log('conflict');
       $scope.dt.start = $scope.dt.end;
     }
+    if(_this.pageLoad == true){
+    _this.checkDates();
+  }
   });
 
 
