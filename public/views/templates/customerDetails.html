@@ -27,11 +27,11 @@ Customer Details Page
 </div>
   <!-- <div ng-repeat="tbd"></div> -->
 
-  <p align="right">Ibis-$75</p>
-  <p align="right">Surly-$75</p>
+  <p align="right">Daily Price: ${{cust.priceRate}}.00/Day</p>
+  <p align="right">Days Reserved: {{cust.numberofDays}}</p>
   <p align="right">Subtotal = $150</p>
   <hr align="right" width="10%"/>
-  <p align="right">Total = $150</p>
+  <p align="right">Total: ${{cust.totalPrice}}</p>
   <button type="button" class="btn btn-danger pull-right">Cancel</button>
   <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Checkout</button>
 
