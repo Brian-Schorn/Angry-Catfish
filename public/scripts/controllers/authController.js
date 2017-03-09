@@ -69,7 +69,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   // Instantiate the modal window
   var modalPopup = function (Id, startDate, endDate) {
     return $scope.modalInstance = $uibModal.open({
-      templateUrl: '../../public/views/templates/bikeDetails.html',
+      templateUrl: '/public/views/templates/bikeDetails.html',
       controller: 'bikeController as bike',
       resolve: {
         editId: function() {
