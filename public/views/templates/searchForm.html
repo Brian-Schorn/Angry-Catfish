@@ -12,44 +12,57 @@
       <!-- <label>Category</label> -->
       <ui-select class="" ng-model="auth.selected.bikeCategory" theme="bootstrap">
         <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
-        <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | unique : 'bikeCategory'">
+        <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
           <!-- unique : 'bikeCategory' -->
           <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
         </ui-select-choices>
       </ui-select>
     </div>
-    <!-- <div class="input-group searchClear">
-      <label>Clear</label>
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined"><span class="glyphicon glyphicon-trash"></span></button>
-    </div> -->
+    <div class="input-group searchClear">
+      <!-- <label>Clear</label> -->
+      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+    </div>
 
      <div class="input-group">
        <!-- <label>Make</label> -->
         <ui-select class="" ng-model="auth.selected.bikeMake" theme="bootstrap">
           <ui-select-match placeholder="Make">{{$select.selected.bikeMake}}</ui-select-match>
-          <ui-select-choices repeat="bike.bikeMake as bike in auth.bikeList | unique : 'bikeMake'">
+          <ui-select-choices repeat="bike.bikeMake as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeMake' ">
             <div ng-bind-html="bike.bikeMake | highlight: $select.selected"></div>
           </ui-select-choices>
         </ui-select>
      </div>
+     <div class="input-group searchClear">
+       <!-- <label>Clear</label> -->
+       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+     </div>
+
 
      <div class="input-group">
        <!-- <label>Model</label> -->
         <ui-select class="" ng-model="auth.selected.bikeModel" theme="bootstrap">
           <ui-select-match placeholder="Model">{{$select.selected.bikeModel}}</ui-select-match>
-          <ui-select-choices repeat="bike.bikeModel as bike in auth.bikeList | unique : 'bikeModel'">
+          <ui-select-choices repeat="bike.bikeModel as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeSize | unique : 'bikeModel' ">
             <div ng-bind-html="bike.bikeModel | highlight: $select.selected"></div>
           </ui-select-choices>
         </ui-select>
      </div>
+     <div class="input-group searchClear">
+       <!-- <label>Clear</label> -->
+       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+     </div>
+
 
      <div class="input-group">
        <!-- <label>Size</label> -->
        <ui-select class="" ng-model="auth.selected.bikeSize" theme="bootstrap">
         <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
-        <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | unique : 'bikeSize'">{{bike.bikeSize}}</ui-select-choices>
+        <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
       </ui-select>
-
+    </div>
+    <div class="input-group searchClear">
+      <!-- <label>Clear</label> -->
+      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
     </div>
 
     <div class="input-group">

@@ -4,57 +4,6 @@
 //   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
 //
 // });
-
-// search filter for angular ui bike search
-angryCatfishApp.filter('propsFilter', function() {
-  console.log("propsFilter hit!")
-  return function(items, props) {
-    var out = [];
-    console.log("i's:", items);
-    if (angular.isArray(items)) {
-      var keys = Object.keys(props);
-      console.log("p's:", props);
-      items.forEach(function(item) {
-        var itemMatches = false;
-        for (var i = 0; i < keys.length; i++) {
-          var prop = keys[i];
-          var text = props[prop].toLowerCase();
-          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-            itemMatches = true;
-            break;
-          }
-        }
-        if (itemMatches) {
-          // console.log("Item:", item)
-          out.push(item);
-        }
-      });
-    } else {
-      out = items; // Let the output be the input untouched
-
-    }
-    return out;
-  };
-});// end of propsFilter
-
-// filter to remove duplicate items on ng repeat
-angryCatfishApp.filter('unique', function() {
-  console.log('Unique filter hit');
-   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
-      var output = [], // we define our output and keys array;
-          keys = [];
-      angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
-          var key = item[keyname];// we check to see whether our object exists
-          if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
-              keys.push(key); // add it to our keys array
-              output.push(item);// push this item to our final output array
-          }
-      });
-      return output;// return our array which should be devoid of any duplicates
-   };
-}); // end of unique filter
-
-
 angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
   console.log('loaded Auth Controller');
 
@@ -229,6 +178,21 @@ var modalPopup = function (Id) {
         }
       };
 
-
-
 });
+
+// filter to remove duplicate items on ng repeat
+angryCatfishApp.filter('unique', function() {
+  console.log('Unique filter hit');
+   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+      var output = [], // we define our output and keys array;
+          keys = [];
+      angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+          var key = item[keyname];// we check to see whether our object exists
+          if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+              keys.push(key); // add it to our keys array
+              output.push(item);// push this item to our final output array
+          }
+      });
+      return output;// return our array which should be devoid of any duplicates
+   };
+}); // end of unique filter

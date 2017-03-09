@@ -1,37 +1,37 @@
-// search filter for angular ui bike search
-angryCatfishApp.filter('propsFilter', function() {
-  // console.log("propsFilter hit!")
-  return function(items, props) {
-    var out = [];
-    // console.log("i's:", items);
-    if (angular.isArray(items)) {
-      var keys = Object.keys(props);
-      // console.log("p's:", props);
-      items.forEach(function(item) {
-        var itemMatches = false;
-        for (var i = 0; i < keys.length; i++) {
-          var prop = keys[i];
-          var text = props[prop].toLowerCase();
-          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-            itemMatches = true;
-            break;
-          }
-        }
-        if (itemMatches) {
-          // console.log("Item:", item)
-          out.push(item);
-        }
-      });
-    } else {
-      out = items; // Let the output be the input untouched
+// // search filter for angular ui bike search
+// angryCatfishApp.filter('propsFilter', function() {
+//   // console.log("propsFilter hit!")
+//   return function(items, props) {
+//     var out = [];
+//     // console.log("i's:", items);
+//     if (angular.isArray(items)) {
+//       var keys = Object.keys(props);
+//       // console.log("p's:", props);
+//       items.forEach(function(item) {
+//         var itemMatches = false;
+//         for (var i = 0; i < keys.length; i++) {
+//           var prop = keys[i];
+//           var text = props[prop].toLowerCase();
+//           if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+//             itemMatches = true;
+//             break;
+//           }
+//         }
+//         if (itemMatches) {
+//           // console.log("Item:", item)
+//           out.push(item);
+//         }
+//       });
+//     } else {
+//       out = items; // Let the output be the input untouched
+//
+//     }
+//     return out;
+//   };
+// });// end of propsFilter
 
-    }
-    return out;
-  };
-});// end of propsFilter
 
-
-// filter to remove duplicate items on ng repeat
+// filter to remove duplicate properties on ng repeat
 angryCatfishApp.filter('unique', function() {
    return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
       var output = [], // we define our output and keys array;
