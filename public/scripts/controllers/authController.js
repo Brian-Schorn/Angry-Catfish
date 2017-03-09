@@ -4,7 +4,6 @@
 //   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
 //
 // });
-
 angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
   console.log('loaded Auth Controller');
 
@@ -24,6 +23,36 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
   _this.getBikes();
 
+  //Calender Filtering Stuff
+  // _this.availability = ["58bf0cff7970320d37d3e2b1"];
+  _this.availability = [];
+
+  _this.checkDates = function() {
+    _this.availability = [];
+    _this.dt.start.setHours(0,0,0,0);
+    _this.dt.end.setHours(23,59,59,999);
+    _this.filter = {};
+    _this.filter.start = _this.dt.start.getTime();
+    _this.filter.end = _this.dt.end.getTime();
+
+    console.log(_this.filter.start);
+    console.log(_this.filter.end);
+    console.log("Reservation List",_this.resList);
+    _this.resList.forEach(function(res){
+      _this.filter.resBikeId = res.bikeID[0];
+      console.log("BikeId",_this.filter.resBikeId);
+      res.resDate.forEach(function(resDate){
+        _this.filter.query = new Date(resDate).getTime();
+        console.log("resDate",_this.filter.query);
+        if((_this.filter.query >= _this.filter.start) && (_this.filter.query < _this.filter.end)){
+          console.log("Conflict!", _this.filter.resBikeId);
+          _this.availability.push(_this.filter.resBikeId);
+        }
+      })
+    })
+    console.log("Availability Conflicts", _this.availability);
+  };
+
   _this.getReservations = function(){
     reservationService.getReservations().then(function(resList){
       _this.resList = resList.data;
@@ -34,7 +63,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   _this.getReservations();
 
   _this.sweetAlert = function (){
-    swal("Hi", "SweetAlert", "success")
+    // swal("Hi", "SweetAlert", "success")
   };
 
   // Instantiate the modal window
@@ -46,7 +75,6 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
         editId: function() {
           console.log("Modal Bike Id",Id);
           return Id;
-
         }
       }
     });
@@ -198,6 +226,8 @@ $scope.open2 = function() {
   $scope.popup2.opened = true;
 };
 
+
+
 $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
 $scope.format = $scope.formats[0];
 $scope.altInputFormats = ['M!/d!/yyyy'];
@@ -240,35 +270,6 @@ $scope.popup2 = {
         }
       }
 
-  //Calender Filtering Stuff
-  // _this.availability = ["58bf0cff7970320d37d3e2b1"];
-  _this.availability = [];
-
-  _this.checkDates = function() {
-    _this.availability = [];
-    _this.dt.start.setHours(0,0,0,0);
-    _this.dt.end.setHours(23,59,59,999);
-    _this.filter = {};
-    _this.filter.start = _this.dt.start.getTime();
-    _this.filter.end = _this.dt.end.getTime();
-
-    console.log(_this.filter.start);
-    console.log(_this.filter.end);
-    console.log("Reservation List",_this.resList);
-    _this.resList.forEach(function(res){
-      _this.filter.resBikeId = res.bikeID[0];
-      console.log("BikeId",_this.filter.resBikeId);
-      res.resDate.forEach(function(resDate){
-        _this.filter.query = new Date(resDate).getTime();
-        console.log("resDate",_this.filter.query);
-        if((_this.filter.query >= _this.filter.start) && (_this.filter.query < _this.filter.end)){
-          console.log("Conflict!", _this.filter.resBikeId);
-          _this.availability.push(_this.filter.resBikeId);
-        }
-      })
-    })
-    console.log("Availability Conflicts", _this.availability);
-  }
 
 
 
@@ -300,6 +301,7 @@ $scope.popup2 = {
 
         if (item.name[0] >= 'A' && item.name[0] <= 'M')
             return 'From A - M';
+
       return '';
     }
 
