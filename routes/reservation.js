@@ -8,9 +8,12 @@ var router = express.Router();
 var path = require('path');
 var Reservation = require('../models/reservation');
 var Counter = require('../models/counter');
+// mailgun API
 var api_key = 'key-7710c00df84e028e10e70a19a3b8f614';
 var domain = 'sandbox13bae3c486b44c6dadae74eff2a6c9e1.mailgun.org';
 var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+var Bike = require('../models/bike');
+
 
 //Retrieve all reservations GET REQUEST
 router.get('/', function (req, res) {
@@ -87,19 +90,45 @@ router.get('/date', function (req, res) {
 //Add a new Reservation POST REQUEST
 router.post('/', function (req, res) {
   console.log("POST request, add new reservation:",req.body);
+  var name = req.body.custName;
+  var dates = req.body.resDate;
+  var price = req.body.totalPrice;
+  var bikeID = req.body.bikeID;
+  var email = req.body.custEmail;
+  var bikeInfo = '';
 
 
 // mailgun email message
+Bike.findById(bikeID, function (err, result) {
+  if (err){
+    console.log("Error Getting Info From The DB", err);
+    res.sendStatus(500);
+    return;
+  }
+  console.log("Bike GET request:",result);
+  bikeInfo = result;
+  // var bikeResDetails = bikeInfo.bikeMake;
+  console.log("resBikeInfo:", bikeInfo.bikeMake);
+
+}).then(function(){
+  console.log("Then Fired:", bikeInfo.bikeMake);
+  var emailTemplate = 'Hi ' + name + ',\n Thank you for your reservation. We have ' + bikeInfo + ' reserved for you on ' + dates + '. The cost of your rental is ' + price + ' If you have any questions or would like to change your reservation, please call us at 555-5555.'
   var data = {
     from: 'Angry Catfish <tjherman32@gmail.com>',
-    to: req.body.custEmail,
+    to: email,
     subject: 'Angry Catfish Reservation Confirmation',
-    text: 'Hi ' + req.body.custName + ',\n Thank you for your reservation. We have ' + req.body.bikeId + ' reserved for you on ' + req.body.resDate + '. If you have any questions or would like to change your reservation, please call us at 555-5555.'
-  };
+    // text: 'Hi ' + name + ',\n Thank you for your reservation. We have ' + bikeInfo + ' reserved for you on ' + dates + '. The cost of your rental is ' + price + ' If you have any questions or would like to change your reservation, please call us at 555-5555.'
+    html: emailTemplate
+    };
 
   mailgun.messages().send(data, function (error, body) {
-    console.log('mailgun!!!!!', body);
+    if (error) {
+      console.log('Email error:', error)
+    } else {
+      console.log('Mailgun e-mail sent:', body);
+    }
   });
+})
   //////////////////
 
   Counter.find({}, function (err, result){
@@ -160,5 +189,6 @@ router.put('/:id', function(req, res){
     res.send(204)
   });
 });
+
 
 module.exports = router;
