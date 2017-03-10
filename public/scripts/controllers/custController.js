@@ -14,7 +14,8 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
     _this.dates.push(new Date(_this.start));
     _this.start.setTime(_this.start.getTime() + 86400000);
   }
-  console.log("dates",_this.dates.length);
+  console.log("dates",_this.dates.length)
+  console.log(_this.dates);
   _this.priceRate = 75;
   _this.numberofDays = _this.dates.length;
   if(_this.dates.length > 2){
@@ -57,13 +58,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
 
   _this.addRes = function(){
     _this.addResStatus = true;
-    _this.dates = [];
-    _this.start.setHours(0,0,0,0);
-    _this.end.setHours(0,0,0,0);
-    while (_this.start <= _this.end){
-      _this.dates.push(new Date(_this.start));
-      _this.start.setTime(_this.start.getTime() + 86400000);
-    }
+    console.log("Dates",_this.dates);
     _this.bikes = [];
     _this.bikes.push(_this.selectedBike._id);
     _this.reservationObj = {
