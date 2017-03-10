@@ -78,7 +78,6 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       console.log("reservation Added");
       _this.addResStatus = false;
     });
-
   };
 
 

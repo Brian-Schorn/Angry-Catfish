@@ -8,6 +8,9 @@ var router = express.Router();
 var path = require('path');
 var Reservation = require('../models/reservation');
 var Counter = require('../models/counter');
+var api_key = 'key-7710c00df84e028e10e70a19a3b8f614';
+var domain = 'sandbox13bae3c486b44c6dadae74eff2a6c9e1.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
 
 //Retrieve all reservations GET REQUEST
 router.get('/', function (req, res) {
@@ -81,13 +84,23 @@ router.get('/date', function (req, res) {
   });
 });
 
-
-
-
-
 //Add a new Reservation POST REQUEST
 router.post('/', function (req, res) {
   console.log("POST request, add new reservation:",req.body);
+
+
+// mailgun email message
+  var data = {
+    from: 'Angry Catfish <tjherman32@gmail.com>',
+    to: req.body.custEmail,
+    subject: 'Angry Catfish Reservation Confirmation',
+    text: 'Hi ' + req.body.custName + ',\n Thank you for your reservation. We have ' + req.body.bikeId + ' reserved for you on ' + req.body.resDate + '. If you have any questions or would like to change your reservation, please call us at 555-5555.'
+  };
+
+  mailgun.messages().send(data, function (error, body) {
+    console.log('mailgun!!!!!', body);
+  });
+  //////////////////
 
   Counter.find({}, function (err, result){
     if (err){
