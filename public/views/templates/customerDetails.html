@@ -32,7 +32,7 @@ Customer Details Page
   <p align="right">Subtotal = $150</p>
   <hr align="right" width="10%"/>
   <p align="right">Total: ${{cust.totalPrice}}</p>
-  <button type="button" class="btn btn-danger pull-right">Cancel</button>
-  <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Checkout</button>
+  <button type="button" class="btn btn-danger pull-right" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Cancel</button>
+  <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Book Reservation</button>
 
 </form>

@@ -92,11 +92,11 @@ _this.checkDates = function() {
       }else {
     swal({
   title: "Success! Bike Added to Cart",
-  text: "Would you like to proceed to Checkout or add another Bike?",
+  text: "Would you like to proceed to Booking or add another Bike?",
   type: "info",
   showCancelButton: true,
   confirmButtonColor: "#DD6B55",
-  confirmButtonText: "Checkout",
+  confirmButtonText: "Book Reservation",
   cancelButtonText: "Add Another Bike",
   closeOnConfirm: true,
   closeOnCancel: false
