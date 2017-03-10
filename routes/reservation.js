@@ -149,9 +149,6 @@ Bike.findById(bikeID, function (err, result) {
       return;
     });
   }).then(function(){
-  // req.body.transactionID = ret.seq;
-  // console.log("transactionID ", req.body.transactionID);
-  // console.log("req.body", req.body);
   var newRes = new Reservation(req.body);
   newRes.save(function (err){
     if(err){

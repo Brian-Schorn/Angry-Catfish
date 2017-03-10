@@ -1,4 +1,4 @@
-angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, BikeService, ReservationService) {
+angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService) {
   console.log('loaded Cust Controller');
   var _this = this;
 
@@ -79,6 +79,36 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       _this.addResStatus = false;
     });
   };
+
+  _this.cancelRes = function(){
+    _this.addResStatus = true;
+
+    swal({
+    title: "Are You Sure?",
+    text: "You will lose all information entered",
+    type: "info",
+    showCancelButton: true,
+    confirmButtonColor: "#DD6B55",
+    confirmButtonText: "Cancel",
+    cancelButtonText: "Continue Booking",
+    closeOnConfirm: true,
+    closeOnCancel: true
+    },
+    function(isConfirm){
+    if (isConfirm) {
+      $timeout(function(){
+        _this.addResStatus = false;
+        console.log("Booking Cancelled");
+        $location.url('/searchForm/')
+      });
+
+  }else{
+    console.log("Booking Continued");
+    $timeout(function(){_this.addResStatus = false;});
+    }
+    });
+  };
+
 
 
 

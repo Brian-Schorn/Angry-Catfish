@@ -21,6 +21,9 @@
     <script src="/public/scripts/controllers/bikeEditController.js"></script>
     <script src="/public/scripts/controllers/addBikeController.js"></script>
     <script src="/public/scripts/controllers/custController.js"></script>
+    <script src="/public/scripts/controllers/viewResController.js"></script>
+    <script src="/public/scripts/controllers/resDetailsController.js"></script>
+
     <link rel="stylesheet" type="text/css" href="/public/vendors/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/public/vendors/ui-bootstrap-csp.css" />
@@ -45,6 +48,8 @@
             <li class="two columns"><a href="/bikeDetails">Bike Details</a></li>
             <li class="two columns"><a href="/customerDetails">Customer Details</a></li>
             <li class="two columns"><a href="/addBike">Add Bike</a></li>
+            <li class="two columns"><a href="/viewRes">View Reservations</a></li>
+
             <section ng-hide="auth.loggedIn">
               <!-- I got this button image from Googles sign-in button brand guidelines page -->
               <a href="/auth/google" target="_self"><img src="/public/assets/btn_google_signin_dark_normal_web.png" /></a>
