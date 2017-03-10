@@ -29,6 +29,11 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'addBikeController',
       controllerAs: 'addBike',
     })
+    .when('/viewRes', {
+      templateUrl: '/public/views/templates/viewRes.html',
+      controller: 'viewResController',
+      controllerAs: 'viewRes',
+    })
     .otherwise({
       redirectTo: 'searchForm',
     });
