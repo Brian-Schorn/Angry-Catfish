@@ -87,7 +87,7 @@ _this.checkDates = function() {
     }
 
     if(_this.helmetSize && _this.pedalType){
-      if (_this.availability.length > 1){
+      if (_this.availability.length > 0){
         swal("Apologies! This bike is already booked for some or all of the dates selected")
       }else {
     swal({
