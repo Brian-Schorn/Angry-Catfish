@@ -4,26 +4,26 @@
   <div id="calenderSearchZone">
     <h4>Reservation Dates</h4>
     <div class="row">
-      <div class="col-sm-3 col-sm-offset-2">
+      <div class="col-sm-4 col-sm-offset-2">
         <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="auth.dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
         </p>
       </div>
 
-      <div class="col-sm-3">
+      <div class="col-sm-4">
         <p class="input-group">
-          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="auth.dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+          <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
         </p>
       </div>
-      <div class="col-sm-2">
+      <!-- <div class="col-sm-2">
         <input type="button" class="btn" ng-click="auth.checkDates()" value="Update Dates" />
-      </div>
+      </div> -->
     </div>
   </div>
 
@@ -115,7 +115,7 @@
 
   <div>Bikes Matching Filters: {{results.length}}</div>
   <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected as results">
-      <div class="bikeBox" ng-click="openModalPopup(cycle._id)">
+      <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->

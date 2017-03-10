@@ -5,6 +5,27 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+  _this.start = new Date(Number($routeParams.startDate));
+  _this.end = new Date(Number($routeParams.endDate));
+  _this.dates = [];
+  _this.start.setHours(0,0,0,0);
+  _this.end.setHours(0,0,0,0);
+  while (_this.start <= _this.end){
+    _this.dates.push(new Date(_this.start));
+    _this.start.setTime(_this.start.getTime() + 86400000);
+  }
+  console.log("dates",_this.dates.length);
+  _this.priceRate = 75;
+  _this.numberofDays = _this.dates.length;
+  if(_this.dates.length > 2){
+    _this.priceRate = 65;
+  }
+  if(_this.dates.length > 5){
+    _this.priceRate = 55;
+  }
+  _this.totalPrice = _this.priceRate * _this.dates.length;
+  console.log("totalPrice", _this.totalPrice);
+
   //Grabs all the bikes from the DB
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
@@ -36,18 +57,18 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
 
   _this.addRes = function(){
     _this.addResStatus = true;
-    // _this.dates = [];
-    // _this.dt.start.setHours(0,0,0,0);
-    // _this.dt.end.setHours(0,0,0,0);
-    // while (_this.dt.start <= _this.dt.end){
-    //   _this.dates.push(new Date(_this.dt.start));
-    //   _this.dt.start.setTime(_this.dt.start.getTime() + 86400000);
-    // }
+    _this.dates = [];
+    _this.start.setHours(0,0,0,0);
+    _this.end.setHours(0,0,0,0);
+    while (_this.start <= _this.end){
+      _this.dates.push(new Date(_this.start));
+      _this.start.setTime(_this.start.getTime() + 86400000);
+    }
     _this.bikes = [];
     _this.bikes.push(_this.selectedBike._id);
     _this.reservationObj = {
       "bikeID" : _this.bikes,
-      // "resDate" : _this.dates,
+      "resDate" : _this.dates,
       "custName" : _this.custName,
       "custEmail" : _this.email,
       "custPhone" : _this.phone,
@@ -55,7 +76,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       "pedalType" : _this.pedal,
       "needHelmet" : _this.helmet,
       "waiverSigned" : true,
-      "totalPrice" : 75
+      "totalPrice" : _this.totalPrice
     };
     console.log(_this.reservationObj);
     reservationService.addReservation(_this.reservationObj).then(function(){

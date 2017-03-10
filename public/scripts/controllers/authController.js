@@ -1,9 +1,4 @@
-// angryCatfishApp.controller('AuthController', function (AuthFactory) {
-//   var _this = this;
-//   var authFactory = AuthFactory;
-//   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
-//
-// });
+
 angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
   console.log('loaded Auth Controller');
 
@@ -13,6 +8,8 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   var bikeService = BikeService;
   var reservationService = ReservationService;
+
+  _this.pageLoad = false;
 
 
   _this.getBikes = function(){
@@ -29,11 +26,11 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   _this.checkDates = function() {
     _this.availability = [];
-    _this.dt.start.setHours(0,0,0,0);
-    _this.dt.end.setHours(23,59,59,999);
+    $scope.dt.start.setHours(0,0,0,0);
+    $scope.dt.end.setHours(23,59,59,999);
     _this.filter = {};
-    _this.filter.start = _this.dt.start.getTime();
-    _this.filter.end = _this.dt.end.getTime();
+    _this.filter.start = $scope.dt.start.getTime();
+    _this.filter.end = $scope.dt.end.getTime();
 
     console.log(_this.filter.start);
     console.log(_this.filter.end);
@@ -58,6 +55,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
       _this.resList = resList.data;
       console.log("reservation list", _this.resList);
       _this.checkDates();
+      _this.pageLoad = true;
     });
   };
   _this.getReservations();
@@ -67,14 +65,22 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
 
   // Instantiate the modal window
-  var modalPopup = function (Id) {
+  var modalPopup = function (Id, startDate, endDate) {
     return $scope.modalInstance = $uibModal.open({
-      templateUrl: '../../public/views/templates/bikeDetails.html',
+      templateUrl: '/public/views/templates/bikeDetails.html',
       controller: 'bikeController as bike',
       resolve: {
         editId: function() {
-          console.log("Modal Bike Id",Id);
-          return Id;
+          console.log("Modal Bike Id", Id);
+          console.log("Start Date", startDate);
+          console.log("End Date", endDate);
+          var resInfo = {
+            Id: Id,
+            Start: startDate,
+            End: endDate
+          }
+
+          return resInfo;
         }
       }
     });
@@ -82,7 +88,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   var modalEditPopup = function (Id) {
     return $scope.modalInstance = $uibModal.open({
-      templateUrl: '../../public/views/templates/bikeEditDetails.html',
+      templateUrl: '/public/views/templates/bikeEditDetails.html',
       controller: 'bikeEditController as bikeEdit',
       resolve: {
         editId: function() {
@@ -94,8 +100,8 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   };
 
   // Modal window popup trigger
-  $scope.openModalPopup = function (Id) {
-    modalPopup(Id).result
+  $scope.openModalPopup = function (Id, startDate, endDate) {
+    modalPopup(Id, startDate, endDate).result
     .then(function (data) {
       $scope.handleSuccess(data);
     })
@@ -168,213 +174,204 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   //---------Calendar Stuff---------------
   _this.today = function() {
     console.log('today')
-    _this.dt = {};
-  _this.dt.start = new Date();
-  _this.dt.end = new Date();
+    $scope.dt = {};
+    $scope.dt.start = new Date();
+    $scope.dt.end = new Date();
 
-};
-_this.today();
+  };
+  _this.today();
 
-// _this.clear = function() {
-//   console.log('clear')
-//   _this.dt = null;
-// };
+  $scope.inlineOptions = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
 
-// _this.submitDates = function(dt) {
-//   console.log('Dates:', dt)
-//   // check dates
-//   _this.clear();
-//   // .then(function(response){
-//   // }).catch(function(err){
-//   //   console.log('error checking dates', err)
-//   // });
-// };
+  $scope.dateOptions = {
+    // dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
 
-$scope.inlineOptions = {
-  customClass: getDayClass,
-  minDate: new Date(),
-  showWeeks: true
-};
+  // Disable weekend selection
+  // function disabled(data) {
+  //   var date = data.date,
+  //     mode = data.mode;
+  //   return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  // }
 
-$scope.dateOptions = {
-  // dateDisabled: disabled,
-  formatYear: 'yy',
-  maxDate: new Date(2020, 5, 22),
-  minDate: new Date(),
-  startingDay: 1
-};
+  // $scope.toggleMin = function() {
+  //   $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+  //   $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+  // };
+  //
+  // $scope.toggleMin();
 
-// Disable weekend selection
-// function disabled(data) {
-//   var date = data.date,
-//     mode = data.mode;
-//   return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-// }
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
 
-// $scope.toggleMin = function() {
-//   $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-//   $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-// };
-//
-// $scope.toggleMin();
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
 
-$scope.open1 = function() {
-  $scope.popup1.opened = true;
-};
+  //Changes other date if first conflicts
+  $scope.$watch('dt.start', function (newValue) {
+    console.log("NewValue", newValue);
+    if($scope.dt.end.getTime()<$scope.dt.start.getTime()){
+      console.log('conflict');
+      $scope.dt.end = $scope.dt.start;
+    }
+    if(_this.pageLoad == true){
+    _this.checkDates();
+  }
+  });
+  $scope.$watch('dt.end', function (newValue) {
+    console.log("NewValue", newValue);
+    if($scope.dt.end.getTime() < $scope.dt.start.getTime()){
+      console.log('conflict');
+      $scope.dt.start = $scope.dt.end;
+    }
+    if(_this.pageLoad == true){
+    _this.checkDates();
+  }
+  });
 
-$scope.open2 = function() {
-  $scope.popup2.opened = true;
-};
 
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
 
+  $scope.popup1 = {
+    opened: false
+  };
 
-$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-$scope.format = $scope.formats[0];
-$scope.altInputFormats = ['M!/d!/yyyy'];
+  $scope.popup2 = {
+    opened: false
+  };
 
-$scope.popup1 = {
-  opened: false
-};
+  function getDayClass(data) {
+    var date = data.date,
+    mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
 
-$scope.popup2 = {
-  opened: false
-};
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
 
-// var tomorrow = new Date();
-// tomorrow.setDate(tomorrow.getDate() + 1);
-// var afterTomorrow = new Date();
-// afterTomorrow.setDate(tomorrow.getDate() + 1);
-// $scope.events = [
-//   {
-//     date: tomorrow,
-//     status: 'full'
-//   },
-//   {
-//     date: afterTomorrow,
-//     status: 'partially'
-//   }
-// ];
-
-    function getDayClass(data) {
-      var date = data.date,
-        mode = data.mode;
-      if (mode === 'day') {
-        var dayToCheck = new Date(date).setHours(0,0,0,0);
-
-        for (var i = 0; i < $scope.events.length; i++) {
-          var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-
-          if (dayToCheck === currentDay) {
-            return $scope.events[i].status;
-          }
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
         }
       }
+    }
 
 
 
 
-      //////// angular ui search dropdown features
-      _this.disabled = undefined;
-      _this.searchEnabled = undefined;
+    //////// angular ui search dropdown features
+    _this.disabled = undefined;
+    _this.searchEnabled = undefined;
 
-      _this.setInputFocus = function (){
-        $scope.$broadcast('UiSelectDemo1');
-      };
+    _this.setInputFocus = function (){
+      $scope.$broadcast('UiSelectDemo1');
+    };
 
-      _this.enable = function() {
-        _this.disabled = false;
-      };
+    _this.enable = function() {
+      _this.disabled = false;
+    };
 
-      _this.disable = function() {
-        _this.disabled = true;
-      };
+    _this.disable = function() {
+      _this.disabled = true;
+    };
 
-      _this.enableSearch = function() {
-        _this.searchEnabled = true;
-      };
+    _this.enableSearch = function() {
+      _this.searchEnabled = true;
+    };
 
-      _this.disableSearch = function() {
-        _this.searchEnabled = false;
-      };
+    _this.disableSearch = function() {
+      _this.searchEnabled = false;
+    };
 
-      _this.someGroupFn = function (item){
+    _this.someGroupFn = function (item){
 
-        if (item.name[0] >= 'A' && item.name[0] <= 'M')
-            return 'From A - M';
+      if (item.name[0] >= 'A' && item.name[0] <= 'M')
+      return 'From A - M';
 
       return '';
     }
 
-        if (item.name[0] >= 'N' && item.name[0] <= 'Z')
-            return 'From N - Z';
+    if (item.name[0] >= 'N' && item.name[0] <= 'Z')
+    return 'From N - Z';
 
-      };
+  };
 
-      _this.firstLetterGroupFn = function (item){
-          return item.name[0];
-      };
+  _this.firstLetterGroupFn = function (item){
+    return item.name[0];
+  };
 
-      _this.reverseOrderFilterFn = function(groups) {
-        return groups.reverse();
-      };
+  _this.reverseOrderFilterFn = function(groups) {
+    return groups.reverse();
+  };
 
-      $timeout(function(){
-       _this.bikeList
-      },3000);
+  $timeout(function(){
+    _this.bikeList
+  },3000);
 
-      _this.counter = 0;
-      _this.onSelectCallback = function (item, model){
-        vm.counter++;
-        vm.eventResult = {item: item, model: model};
-      };
+  _this.counter = 0;
+  _this.onSelectCallback = function (item, model){
+    vm.counter++;
+    vm.eventResult = {item: item, model: model};
+  };
 
-      _this.removed = function (item, model) {
-        vm.lastRemoved = {
-            item: item,
-            model: model
-        };
-      };
+  _this.removed = function (item, model) {
+    vm.lastRemoved = {
+      item: item,
+      model: model
+    };
+  };
 
-      _this.tagTransform = function (newTag) {
-        var bike = {
-            bikeCategory: newTag,
-        };
-        return item;
-      };
+  _this.tagTransform = function (newTag) {
+    var bike = {
+      bikeCategory: newTag,
+    };
+    return item;
+  };
 
-      _this.appendToBodyDemo = {
-        remainingToggleTime: 0,
-        present: true,
-        startToggleTimer: function() {
-          var scope = _this.appendToBodyDemo;
-          var promise = $interval(function() {
-            if (scope.remainingTime < 1000) {
-              $interval.cancel(promise);
-              scope.present = !scope.present;
-              scope.remainingTime = 0;
-            } else {
-              scope.remainingTime -= 1000;
-            }
-          }, 1000);
-          scope.remainingTime = 3000;
+  _this.appendToBodyDemo = {
+    remainingToggleTime: 0,
+    present: true,
+    startToggleTimer: function() {
+      var scope = _this.appendToBodyDemo;
+      var promise = $interval(function() {
+        if (scope.remainingTime < 1000) {
+          $interval.cancel(promise);
+          scope.present = !scope.present;
+          scope.remainingTime = 0;
+        } else {
+          scope.remainingTime -= 1000;
         }
-      };
+      }, 1000);
+      scope.remainingTime = 3000;
+    }
+  };
 
 });
 
 // filter to remove duplicate items on ng repeat
 angryCatfishApp.filter('unique', function() {
   console.log('Unique filter hit');
-   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
-      var output = [], // we define our output and keys array;
-          keys = [];
-      angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
-          var key = item[keyname];// we check to see whether our object exists
-          if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
-              keys.push(key); // add it to our keys array
-              output.push(item);// push this item to our final output array
-          }
-      });
-      return output;// return our array which should be devoid of any duplicates
-   };
+  return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+    var output = [], // we define our output and keys array;
+    keys = [];
+    angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+      var key = item[keyname];// we check to see whether our object exists
+      if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+      keys.push(key); // add it to our keys array
+      output.push(item);// push this item to our final output array
+    }
+  });
+  return output;// return our array which should be devoid of any duplicates
+};
 }); // end of unique filter
