@@ -12,15 +12,26 @@
   width: 100px;
 }
 
-#searchForm .searchClear {
-  width: 40px;
+#searchForm .input-group.search {
+  margin-left: 20px;
+}
+
+#searchForm .input-group.searchClear {
+  width: 20px;
+  margin-left: 0;
+  padding: 0;
 }
 
 #searchForm .searchClear button{
+  background-color: darkgray;
+  outline: 0;
+  padding: 0;
+}
+
+#searchForm .searchClearAll button{
   background-color: #F23F1E;
   outline: 0;
 }
-
 
 #bikeDisplay {
   display: inline-block;

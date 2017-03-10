@@ -33,22 +33,21 @@
       <!-- sample code from angular-ui that has not worked yet but may be used in place of unique filter  -->
       <!-- propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search} | -->
 
-    <div class="input-group">
+    <div class="input-group search">
       <!-- <label>Category</label> -->
       <ui-select class="" ng-model="auth.selected.bikeCategory" theme="bootstrap">
         <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
         <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
-          <!-- unique : 'bikeCategory' -->
-          <div ng-bind-html="bike.bikeCategory | highlight: $select.search"></div>
+          <div ng-bind-html="bike.bikeCategory | highlight: auth.selected"></div>
         </ui-select-choices>
       </ui-select>
     </div>
     <div class="input-group searchClear">
       <!-- <label>Clear</label> -->
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
     </div>
 
-     <div class="input-group">
+     <div class="input-group search">
        <!-- <label>Make</label> -->
         <ui-select class="" ng-model="auth.selected.bikeMake" theme="bootstrap">
           <ui-select-match placeholder="Make">{{$select.selected.bikeMake}}</ui-select-match>
@@ -59,11 +58,11 @@
      </div>
      <div class="input-group searchClear">
        <!-- <label>Clear</label> -->
-       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
      </div>
 
 
-     <div class="input-group">
+     <div class="input-group search">
        <!-- <label>Model</label> -->
         <ui-select class="" ng-model="auth.selected.bikeModel" theme="bootstrap">
           <ui-select-match placeholder="Model">{{$select.selected.bikeModel}}</ui-select-match>
@@ -74,11 +73,11 @@
      </div>
      <div class="input-group searchClear">
        <!-- <label>Clear</label> -->
-       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
      </div>
 
 
-     <div class="input-group">
+     <div class="input-group search">
        <!-- <label>Size</label> -->
        <ui-select class="" ng-model="auth.selected.bikeSize" theme="bootstrap">
         <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
@@ -87,10 +86,10 @@
     </div>
     <div class="input-group searchClear">
       <!-- <label>Clear</label> -->
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
     </div>
 
-    <div class="input-group">
+    <div class="input-group search">
       <!-- <label>Search</label> -->
       <!-- <input type="text" ng-model="customPopupSelected" placeholder="Search" uib-typeahead="bike as bike.searchTags for bike in auth.bikeList | filter:{searchTags:$viewValue}" typeahead-popup-template-url="customPopupTemplate.html" class="form-control"> -->
       <input class="form-control" placeholder="Search" ng-model="auth.selected.searchTags" theme="bootstrap"></input>
@@ -98,9 +97,12 @@
 
     <div class="input-group searchClear">
       <!-- <label>Clear</label> -->
+      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.searchTags = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+    </div>
+    <div class="input-group searchClearAll">
+      <!-- <label>Clear</label> -->
       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
     </div>
-
     <!-- <span class="input-group-btn">
         <button type="button" ng-click="search.bikeCategory = undefined" class="btn btn-default">
         <span class="glyphicon glyphicon-trash"></span>
