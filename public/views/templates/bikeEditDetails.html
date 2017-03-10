@@ -1,13 +1,15 @@
 <div class="bikeModal">
   <div class="modal-header">
     <h3 class="modal-title">Edit Bike Details</h3>
+    <h4> If you click outside of the modal, changes will not be saved!</h4>
+    <button class="btn btn-warning" type="button" ng-click="bikeEdit.closeModal()">Close</button>
+
   </div>
   <!-- <div class="modal-body" id="" > -->
 
   </div>
   <div class="modal-footer">
-    <!-- <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
-    <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button> -->
+    <!-- <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button> -->
   </div>
 </div>
 
@@ -102,7 +104,7 @@
       <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
     </span><br />
 
-  <input type="button" ng-click="bikeEdit.reset(editBikeForm)" value="Reset" />
-  <input type="submit"  ng-click="bikeEdit.bikeEdit(editBikeForm.$valid)" value="Add Bike" />
+  <input type="button" ng-click="bikeEdit.reset(editBikeForm)" value="Undo Changes" />
+  <input type="submit"  ng-click="bikeEdit.bikeEdit(editBikeForm.$valid)" value="Save Changes" />
 <!-- ng-disabled="editBikeForm.$invalid" -->
 </form>

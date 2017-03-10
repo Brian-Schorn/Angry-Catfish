@@ -357,6 +357,10 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     }
   };
 
+  $scope.orderByFunction = function(bike){
+    return _this.availability.indexOf(bike._id);
+  }
+
 });
 
 // filter to remove duplicate items on ng repeat

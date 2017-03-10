@@ -5,6 +5,7 @@
     <h4>Reservation Dates</h4>
     <div class="row">
       <div class="col-sm-4 col-sm-offset-2">
+        Checkout Date:
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
           <span class="input-group-btn">
@@ -14,6 +15,7 @@
       </div>
 
       <div class="col-sm-4">
+        Checkin Date:
         <p class="input-group">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
           <span class="input-group-btn">
@@ -114,7 +116,7 @@
   <hr>
 
   <div>Bikes Matching Filters: {{results.length}}</div>
-  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected as results">
+  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
       <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>

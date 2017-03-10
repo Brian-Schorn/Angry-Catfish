@@ -114,4 +114,9 @@ function(isConfirm){
 }
 }
   }
+
+  //Close Modal
+  _this.closeModal = function(){
+    $uibModalStack.dismissAll();
+  }
 });

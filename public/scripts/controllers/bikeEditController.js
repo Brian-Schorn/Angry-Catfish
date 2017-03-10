@@ -71,4 +71,9 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
     _this.newTag= null;
   }
 
+  //Close Modal
+  _this.closeModal = function(){
+    $uibModalStack.dismissAll();
+  }
+
 });
