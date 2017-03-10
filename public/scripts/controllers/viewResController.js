@@ -11,7 +11,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
 
   _this.pageLoad = false;
 
-
+//Get all Bikes
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList.data;
@@ -20,36 +20,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   };
   _this.getBikes();
 
-  //Calender Filtering Stuff
-  // _this.availability = ["58bf0cff7970320d37d3e2b1"];
-  _this.availability = [];
-
-  _this.checkDates = function() {
-    _this.availability = [];
-    $scope.dt.start.setHours(0,0,0,0);
-    $scope.dt.end.setHours(23,59,59,999);
-    _this.filter = {};
-    _this.filter.start = $scope.dt.start.getTime();
-    _this.filter.end = $scope.dt.end.getTime();
-
-    console.log(_this.filter.start);
-    console.log(_this.filter.end);
-    console.log("Reservation List",_this.resList);
-    _this.resList.forEach(function(res){
-      _this.filter.resBikeId = res.bikeID[0];
-      console.log("BikeId",_this.filter.resBikeId);
-      res.resDate.forEach(function(resDate){
-        _this.filter.query = new Date(resDate).getTime();
-        console.log("resDate",_this.filter.query);
-        if((_this.filter.query >= _this.filter.start) && (_this.filter.query < _this.filter.end)){
-          console.log("Conflict!", _this.filter.resBikeId);
-          _this.availability.push(_this.filter.resBikeId);
-        }
-      })
-    })
-    console.log("Availability Conflicts", _this.availability);
-  };
-
+  //Get all Reservations
   _this.getReservations = function(){
     reservationService.getReservations().then(function(resList){
       _this.resList = resList.data;
@@ -64,25 +35,68 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
     // swal("Hi", "SweetAlert", "success")
   };
 
-  // Instantiate the modal window
-  var modalPopup = function (Id, startDate, endDate) {
+
+  //Build Query Dates array
+  _this.checkDates = function() {
+    $scope.dt.start.setHours(0,0,0,0);
+    $scope.dt.end.setHours(23,59,59,999);
+    _this.start = new Date(Number($scope.dt.start));
+    _this.end = new Date(Number($scope.dt.end));
+    _this.dates = [];
+    _this.start.setHours(0,0,0,0);
+    _this.end.setHours(0,0,0,0);
+    while (_this.start <= _this.end){
+      _this.dates.push(new Date(_this.start).getTime());
+      _this.start.setTime(_this.start.getTime() + 86400000);
+    }
+    console.log("selected dates", _this.dates);
+  };
+
+  //Date Filtering for Reservation Results
+  _this.dateMatch =  function (haystack, arr) {
+    console.log("haystack",haystack);
+    console.log("arr",arr);
+
+    return arr.some(function (v) {
+      console.log(new Date(v).getTime());
+        return haystack.indexOf(new Date(v).getTime()) >= 0;
+    });
+};
+  //VIEW MODAL
+  $scope.openModalResPopup = function (Id) {
+    modalResPopup(Id).result
+    .then(function (data) {
+      $scope.handleSuccess(data);
+    })
+    .then(null, function (reason) {
+      $scope.handleDismiss(reason);
+    });
+  };
+
+  var modalResPopup = function (Id) {
     return $scope.modalInstance = $uibModal.open({
-      templateUrl: '/public/views/templates/bikeDetails.html',
-      controller: 'bikeController as bike',
+      templateUrl: '/public/views/templates/resDetails.html',
+      controller: 'resDetailsController as resDetails',
       resolve: {
         editId: function() {
-          console.log("Modal Bike Id", Id);
-          console.log("Start Date", startDate);
-          console.log("End Date", endDate);
+          console.log("Modal Reservation ID", Id);
           var resInfo = {
             Id: Id,
-            Start: startDate,
-            End: endDate
           }
-
           return resInfo;
         }
       }
+    });
+  };
+
+  //EDIT MODAL
+  $scope.openEditModalPopup = function (Id) {
+    modalEditPopup(Id).result
+    .then(function (data) {
+      $scope.handleSuccess(data);
+    })
+    .then(null, function (reason) {
+      $scope.handleDismiss(reason);
     });
   };
 
@@ -96,27 +110,6 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
           return Id;
         }
       }
-    });
-  };
-
-  // Modal window popup trigger
-  $scope.openModalPopup = function (Id, startDate, endDate) {
-    modalPopup(Id, startDate, endDate).result
-    .then(function (data) {
-      $scope.handleSuccess(data);
-    })
-    .then(null, function (reason) {
-      $scope.handleDismiss(reason);
-    });
-  };
-
-  $scope.openEditModalPopup = function (Id) {
-    modalEditPopup(Id).result
-    .then(function (data) {
-      $scope.handleSuccess(data);
-    })
-    .then(null, function (reason) {
-      $scope.handleDismiss(reason);
     });
   };
 
@@ -374,4 +367,68 @@ angryCatfishApp.filter('unique', function() {
   });
   return output;// return our array which should be devoid of any duplicates
 };
-}); // end of unique filter
+});
+
+angryCatfishApp.filter('unique', function() {
+  console.log('Unique filter hit');
+  return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+    var output = [], // we define our output and keys array;
+    keys = [];
+    angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+      var key = item[keyname];// we check to see whether our object exists
+      if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+      keys.push(key); // add it to our keys array
+      output.push(item);// push this item to our final output array
+    }
+  });
+  return output;// return our array which should be devoid of any duplicates
+};
+});  // end of unique filter
+
+
+angryCatfishApp.filter('dateMatch', function() {
+
+
+  return function(item, dates) {
+      console.log("DateMatch", item);
+      var output = [];
+      angular.forEach(item, function (item){
+        item.resDate.some(function (v) {
+            if(dates.indexOf(new Date(v).getTime()) >= 0){
+              output.push(item)
+            }
+        });
+      });
+    return output;
+  };
+});  // end of dateMatch
+
+angryCatfishApp.filter('bikeMatch', function() {
+
+  return function(item, query, bikeList) {
+    console.log("bikeMatch query", query);
+    var output = [];
+    var selectedBike;
+    angular.forEach(item, function(item){
+      //Finds matching Bike in bikeList
+      bikeList.forEach(function(bike){
+        if (bike._id == item.bikeID[0]){
+          selectedBike = bike;
+          console.log(selectedBike);
+        }
+      })// Ends of bikeList.forEach
+      if(!query){
+        output.push(item);
+      } else{
+      if((query.bikeCategory == undefined || (query.bikeCategory && selectedBike.bikeCategory == query.bikeCategory)) &&
+      (query.bikeMake == undefined || (query.bikeMake && selectedBike.bikeMake == query.bikeMake)) &&
+      (query.bikeModel == undefined || (query.bikeModel && selectedBike.bikeModel == query.bikeModel)) &&
+      (query.bikeSize == undefined || (query.bikeSize && selectedBike.bikeSize == query.bikeSize))){
+        output.push(item);
+      }
+
+    }
+    })// Ends angular.forEach
+    return output;
+  };
+}); //End of BikeMatch
