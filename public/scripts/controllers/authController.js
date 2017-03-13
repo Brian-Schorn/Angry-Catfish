@@ -5,7 +5,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var _this = this;
   var authFactory = AuthFactory;
   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
-
+  console.log("Are you logged in? ", _this.loggedIn);
   var bikeService = BikeService;
   var reservationService = ReservationService;
 

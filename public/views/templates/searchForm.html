@@ -120,7 +120,7 @@
   <div>Bikes Matching Filters: {{results.length}}</div>
 
   <!-- Add Bike -->
-  <div class="bikeBox addBikeBox" ng-click="openModalAddPopup()">
+  <div class="bikeBox addBikeBox" ng-click="openModalAddPopup()" ng-show="auth.loggedIn">
     <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
   </div>
 

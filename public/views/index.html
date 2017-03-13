@@ -42,28 +42,22 @@
     <main class="container" ng-app="angryCatfish">
       <!-- NavController is on every page -->
       <header ng-controller="NavController as nav">
-        <h1>Angry Catfish</h1>
+        <a href="/searchForm"><h1>Angry Catfish</h1></a>
         <nav>
-          <ul class="row">
-            <li class="two columns"><a href="/searchForm">Home</a></li>
-            <li class="two columns"><a href="/testPage">Test Page</a></li>
-            <li class="two columns"><a href="/bikeDetails">Bike Details</a></li>
-            <li class="two columns"><a href="/customerDetails">Customer Details</a></li>
-            <li class="two columns"><a href="/addBike">Add Bike</a></li>
-            <li class="two columns"><a href="/viewRes">View Reservations</a></li>
 
-            <section ng-hide="auth.loggedIn">
-              <!-- I got this button image from Googles sign-in button brand guidelines page -->
-              <a href="/auth/google" target="_self"><img src="/public/assets/btn_google_signin_dark_normal_web.png" /></a>
-            </section>
+          <ul class="row">
+
+
+            <li class="two columns" ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
+
             <!-- Shown for users that are logged in -->
-            <section ng-show="auth.loggedIn">
+            <section ng-show="nav.loggedIn">
               <p>
-                You are logged in!
+                You are logged in as an Admin!
               </p>
             </section>
 
-            <li class="six columns" ng-show="nav.displayLogout">Hi {{nav.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
+            <li class="six columns" ng-show="nav.displayLogout">Hi {{auth.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
           </ul>
         </nav>
         <!-- Show a helpful message when needed -->
