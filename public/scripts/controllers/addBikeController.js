@@ -1,4 +1,4 @@
-angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
+angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, $uibModalStack, BikeService, ReservationService) {
   console.log('loaded Add Bike Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -27,8 +27,22 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
       bikeService.addBike(bike).then(function(bikeList){
         _this.bikeList = bikeList.data;
         console.log(_this.bikeList);
+        swal({
+          title: "Bike Added!",
+          text: "Your new rental bike has been added to the database",
+          type: "success",
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Awesome!",
+          closeOnConfirm: true
+        },
+        function(isConfirm){
+          if (isConfirm){
+            $uibModalStack.dismissAll();
+          }
+        });
       });
     };
+
   };
 
 //ADD IMAGE URL TO ARRAY
