@@ -123,9 +123,17 @@
   </form>
 
   <hr>
+  <div id='bikeDisplay'>
+
 
   <div>Bikes Matching Filters: {{results.length}}</div>
+  <!-- Add Bike -->
+  <div class="bikeBox addBikeBox" ng-click="openModalAddPopup()" ng-show="auth.loggedIn">
+    <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
+  </div>
+
   <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
+
       <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
@@ -133,10 +141,12 @@
         <div class="text-center">{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}
           <div class="pull-right"><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
         </div>
-        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" />
-        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
+
       </div>
+      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-show="auth.loggedIn" />
+      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-show="auth.loggedIn" />
       <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
+  </div>
   </div>
 
 <!-- <script type="text/ng-template" id="../../public/views/templates/bikeDetails.html">

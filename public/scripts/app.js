@@ -34,6 +34,11 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'viewResController',
       controllerAs: 'viewRes',
     })
+    .when('/admin', {
+      templateUrl: '/public/views/templates/admin.html',
+      controller: 'adminController',
+      controllerAs: 'admin',
+    })
     .otherwise({
       redirectTo: 'searchForm',
     });

@@ -1,4 +1,4 @@
-angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, BikeService, ReservationService) {
+angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, $uibModalStack, BikeService, ReservationService) {
   console.log('loaded Add Bike Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -22,34 +22,75 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
 //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.addBike = function(valid){
     if(valid){
+      _this.newBike.searchTags.push(_this.newBike.bikeCategory);
+      _this.newBike.searchTags.push(_this.newBike.bikeMake);
+      _this.newBike.searchTags.push(_this.newBike.bikeModel);
+      _this.newBike.searchTags.push(_this.newBike.bikeSize);
+      _this.newBike.searchTags.push(_this.newBike.bikeFrame);
+      _this.newBike.searchTags.push(_this.newBike.bikeWheelSize);
+      _this.newBike.bulletPoints.forEach(function(bullet){
+        _this.newBike.searchTags.push(bullet);
+      });
       bike = _this.newBike;
       console.log(bike);
       bikeService.addBike(bike).then(function(bikeList){
         _this.bikeList = bikeList.data;
         console.log(_this.bikeList);
+        swal({
+          title: "Bike Added!",
+          text: "Your new rental bike has been added to the database",
+          type: "success",
+          confirmButtonColor: "#DD6B55",
+          confirmButtonText: "Awesome!",
+          closeOnConfirm: true
+        },
+        function(isConfirm){
+          if (isConfirm){
+            $uibModalStack.dismissAll();
+          }
+        });
       });
     };
+
   };
 
 //ADD IMAGE URL TO ARRAY
   _this.addImage = function(imgURL){
     console.log(imgURL);
+    if(imgURL != "" && imgURL != undefined){
     _this.newBike.imageUrls.push(imgURL);
     _this.newImage.newImage = null;
+  }
+  }
+
+  _this.deleteImage = function(index){
+    _this.newBike.imageUrls.splice(index, 1);
   }
 
 //ADD BULLET POINT TO ARRAY
 _this.addBullet = function(bullet){
   console.log(bullet);
+  if(bullet != "" && bullet != undefined){
   _this.newBike.bulletPoints.push(bullet);
   _this.newBullet= null;
+}
+}
+
+_this.deleteBullet = function(index){
+  _this.newBike.bulletPoints.splice(index, 1);
 }
 
 //ADD BULLET POINT TO ARRAY
 _this.addTag = function(tag){
   console.log(tag);
+  if(tag != "" && tag != undefined){
   _this.newBike.searchTags.push(tag);
   _this.newTag= null;
+}
+}
+
+_this.deleteTag = function(index){
+  _this.newBike.searchTags.splice(index, 1);
 }
 
 
