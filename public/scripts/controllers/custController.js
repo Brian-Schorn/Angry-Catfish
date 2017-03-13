@@ -1,4 +1,4 @@
-angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, $location, BikeService, ReservationService) {
+angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, BikeService, ReservationService) {
   console.log('loaded Cust Controller');
   var _this = this;
 
@@ -77,6 +77,24 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
     reservationService.addReservation(_this.reservationObj).then(function(){
       console.log("reservation Added");
       _this.addResStatus = false;
+    }).then(function(){
+      swal({
+        title: "Reservation Added!",
+        text: "Your reservation was succesful, you will recieve an email with further details",
+        type: "success",
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Awesome!",
+        closeOnConfirm: true
+      },
+      function(isConfirm){
+        if (isConfirm){
+          $uibModalStack.dismissAll();
+          $timeout(function(){
+            console.log("Booking Successful");
+            $location.url('/searchForm/')
+          });
+        }
+      });
     });
   };
 
