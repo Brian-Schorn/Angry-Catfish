@@ -99,6 +99,13 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     });
   };
 
+  var modalAddPopup = function () {
+    return $scope.modalInstance = $uibModal.open({
+      templateUrl: '/public/views/templates/addBike.html',
+      controller: 'addBikeController as addBike'
+    });
+  };
+
   // Modal window popup trigger
   $scope.openModalPopup = function (Id, startDate, endDate) {
     modalPopup(Id, startDate, endDate).result
@@ -112,6 +119,16 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   $scope.openEditModalPopup = function (Id) {
     modalEditPopup(Id).result
+    .then(function (data) {
+      $scope.handleSuccess(data);
+    })
+    .then(null, function (reason) {
+      $scope.handleDismiss(reason);
+    });
+  };
+
+  $scope.openModalAddPopup = function () {
+    modalAddPopup().result
     .then(function (data) {
       $scope.handleSuccess(data);
     })

@@ -114,9 +114,17 @@
   </form>
 
   <hr>
+  <div id='bikeDisplay'>
+
 
   <div>Bikes Matching Filters: {{results.length}}</div>
-  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
+
+  <!-- Add Bike -->
+  <div class="bikeBox addBikeBox" ng-click="openModalAddPopup()">
+    <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
+  </div>
+
+  <div class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
       <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
@@ -127,6 +135,7 @@
       <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
 
       <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
+  </div>
   </div>
 
 <!-- <script type="text/ng-template" id="../../public/views/templates/bikeDetails.html">
