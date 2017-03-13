@@ -32,32 +32,3 @@
   background-color: #F23F1E;
   outline: 0;
 }
-
-#bikeDisplay {
-  display: inline-block;
-}
-
-.bikeBox {
-  text-align: center;
-  margin: 25px;
-  height: auto;
-  width: auto;
-  border: .5px solid #F23F1E;
-  transition: all 1s ease;
-  filter: opacity(60%);
-  background-color: white;
-}
-
-.bikeBox:hover {
-  transform:scale(1.1);
-  filter: none;
-}
-
-.bikeBox a {
-  text-decoration: none;
-}
-
-.bikeBox img {
-  max-height: 200px;
-  width: auto;
-}

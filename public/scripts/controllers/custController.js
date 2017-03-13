@@ -57,6 +57,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   _this.addResStatus = false;
 
   _this.addRes = function(){
+    swal("Great", "A bike is reserved for you. An email confirmation will be sent shortly.", "success")
     _this.addResStatus = true;
     console.log("Dates",_this.dates);
     _this.bikes = [];

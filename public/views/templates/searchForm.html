@@ -34,73 +34,82 @@
     <!-- NOTE to add select tags in search fields: add multiple to ui-select and replace $select.selected with $item in ui-select match-->
       <!-- sample code from angular-ui that has not worked yet but may be used in place of unique filter  -->
       <!-- propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search} | -->
-
-    <div class="input-group search">
-      <!-- <label>Category</label> -->
-      <ui-select class="" ng-model="auth.selected.bikeCategory" theme="bootstrap">
-        <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
-        <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
-          <div ng-bind-html="bike.bikeCategory | highlight: auth.selected"></div>
-        </ui-select-choices>
-      </ui-select>
-    </div>
-    <div class="input-group searchClear">
-      <!-- <label>Clear</label> -->
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
-    </div>
-
-     <div class="input-group search">
-       <!-- <label>Make</label> -->
-        <ui-select class="" ng-model="auth.selected.bikeMake" theme="bootstrap">
-          <ui-select-match placeholder="Make">{{$select.selected.bikeMake}}</ui-select-match>
-          <ui-select-choices repeat="bike.bikeMake as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeMake' ">
-            <div ng-bind-html="bike.bikeMake | highlight: $select.selected"></div>
+    <!-- <div class="col-md-2 col-md-offset-1"> -->
+      <div class="input-group search">
+        <!-- <label>Category</label> -->
+        <ui-select class="" ng-model="auth.selected.bikeCategory" theme="bootstrap">
+          <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
+          <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
+            <div ng-bind-html="bike.bikeCategory | highlight: auth.selected"></div>
           </ui-select-choices>
         </ui-select>
+      </div>
+      <div class="input-group searchClear">
+        <!-- <label>Clear</label> -->
+        <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+      </div>
+    <!-- </div> -->
+
+    <!-- <div class="col-md-2"> -->
+      <div class="input-group search">
+        <!-- <label>Make</label> -->
+         <ui-select class="" ng-model="auth.selected.bikeMake" theme="bootstrap">
+           <ui-select-match placeholder="Make">{{$select.selected.bikeMake}}</ui-select-match>
+           <ui-select-choices repeat="bike.bikeMake as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeMake' ">
+             <div ng-bind-html="bike.bikeMake | highlight: $select.selected"></div>
+           </ui-select-choices>
+         </ui-select>
+      </div>
+      <div class="input-group searchClear">
+        <!-- <label>Clear</label> -->
+        <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+      </div>
+    <!-- </div> -->
+
+
+    <!-- <div class="col-md-2"> -->
+      <div class="input-group search">
+        <!-- <label>Model</label> -->
+         <ui-select class="" ng-model="auth.selected.bikeModel" theme="bootstrap">
+           <ui-select-match placeholder="Model">{{$select.selected.bikeModel}}</ui-select-match>
+           <ui-select-choices repeat="bike.bikeModel as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeSize | unique : 'bikeModel' ">
+             <div ng-bind-html="bike.bikeModel | highlight: $select.selected"></div>
+           </ui-select-choices>
+         </ui-select>
+      </div>
+      <div class="input-group searchClear">
+        <!-- <label>Clear</label> -->
+        <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+      </div>
+    <!-- </div> -->
+
+
+    <!-- <div class="col-md-2"> -->
+      <div class="input-group search">
+        <!-- <label>Size</label> -->
+        <ui-select class="" ng-model="auth.selected.bikeSize" theme="bootstrap">
+         <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
+         <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
+       </ui-select>
      </div>
      <div class="input-group searchClear">
        <!-- <label>Clear</label> -->
-       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
      </div>
+    <!-- </div> -->
 
+    <!-- <div class="col-md-2"> -->
+      <div class="input-group search">
+        <!-- <label>Search</label> -->
+        <!-- <input type="text" ng-model="customPopupSelected" placeholder="Search" uib-typeahead="bike as bike.searchTags for bike in auth.bikeList | filter:{searchTags:$viewValue}" typeahead-popup-template-url="customPopupTemplate.html" class="form-control"> -->
+        <input class="form-control" placeholder="Search" ng-model="auth.selected.searchTags" theme="bootstrap"></input>
+      </div>
+      <div class="input-group searchClear">
+        <!-- <label>Clear</label> -->
+        <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.searchTags = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+      </div>
+    <!-- </div> -->
 
-     <div class="input-group search">
-       <!-- <label>Model</label> -->
-        <ui-select class="" ng-model="auth.selected.bikeModel" theme="bootstrap">
-          <ui-select-match placeholder="Model">{{$select.selected.bikeModel}}</ui-select-match>
-          <ui-select-choices repeat="bike.bikeModel as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeSize | unique : 'bikeModel' ">
-            <div ng-bind-html="bike.bikeModel | highlight: $select.selected"></div>
-          </ui-select-choices>
-        </ui-select>
-     </div>
-     <div class="input-group searchClear">
-       <!-- <label>Clear</label> -->
-       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
-     </div>
-
-
-     <div class="input-group search">
-       <!-- <label>Size</label> -->
-       <ui-select class="" ng-model="auth.selected.bikeSize" theme="bootstrap">
-        <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
-        <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
-      </ui-select>
-    </div>
-    <div class="input-group searchClear">
-      <!-- <label>Clear</label> -->
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
-    </div>
-
-    <div class="input-group search">
-      <!-- <label>Search</label> -->
-      <!-- <input type="text" ng-model="customPopupSelected" placeholder="Search" uib-typeahead="bike as bike.searchTags for bike in auth.bikeList | filter:{searchTags:$viewValue}" typeahead-popup-template-url="customPopupTemplate.html" class="form-control"> -->
-      <input class="form-control" placeholder="Search" ng-model="auth.selected.searchTags" theme="bootstrap"></input>
-    </div>
-
-    <div class="input-group searchClear">
-      <!-- <label>Clear</label> -->
-      <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected.searchTags = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
-    </div>
     <div class="input-group searchClearAll">
       <!-- <label>Clear</label> -->
       <button type="button" class="btn btn-sm btn-warning form-control" ng-click="auth.selected = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
@@ -116,16 +125,17 @@
   <hr>
 
   <div>Bikes Matching Filters: {{results.length}}</div>
-  <div id="bikeDisplay" class="row" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
+  <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
       <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
 
         <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
-        <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability:</span><span ng-show="auth.availability.indexOf(cycle._id)==-1">Available!</span><span ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable!</span></div>
+        <div class="text-center">{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}
+          <div class="pull-right"><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
+        </div>
+        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" />
+        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
       </div>
-      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" />
-      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
-
       <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
   </div>
 
