@@ -30,10 +30,7 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
       _this.newBike.searchTags.push(_this.newBike.bikeWheelSize);
       _this.newBike.bulletPoints.forEach(function(bullet){
         _this.newBike.searchTags.push(bullet);
-      })
-
-
-
+      });
       bike = _this.newBike;
       console.log(bike);
       bikeService.addBike(bike).then(function(bikeList){
