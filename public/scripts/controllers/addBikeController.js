@@ -48,22 +48,40 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
 //ADD IMAGE URL TO ARRAY
   _this.addImage = function(imgURL){
     console.log(imgURL);
+    if(imgURL != "" && imgURL != undefined){
     _this.newBike.imageUrls.push(imgURL);
     _this.newImage.newImage = null;
+  }
+  }
+
+  _this.deleteImage = function(index){
+    _this.newBike.imageUrls.splice(index, 1);
   }
 
 //ADD BULLET POINT TO ARRAY
 _this.addBullet = function(bullet){
   console.log(bullet);
+  if(bullet != "" && bullet != undefined){
   _this.newBike.bulletPoints.push(bullet);
   _this.newBullet= null;
+}
+}
+
+_this.deleteBullet = function(index){
+  _this.newBike.bulletPoints.splice(index, 1);
 }
 
 //ADD BULLET POINT TO ARRAY
 _this.addTag = function(tag){
   console.log(tag);
+  if(tag != "" && tag != undefined){
   _this.newBike.searchTags.push(tag);
   _this.newTag= null;
+}
+}
+
+_this.deleteTag = function(index){
+  _this.newBike.searchTags.splice(index, 1);
 }
 
 

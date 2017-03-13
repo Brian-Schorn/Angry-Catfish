@@ -131,8 +131,8 @@
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
         <div>{{cycle.bikeMake}}  {{cycle.bikeModel}} <span>Availability:</span><span ng-show="auth.availability.indexOf(cycle._id)==-1">Available!</span><span ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable!</span></div>
       </div>
-      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" />
-      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" />
+      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-show="auth.loggedIn" />
+      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-show="auth.loggedIn" />
 
       <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
   </div>

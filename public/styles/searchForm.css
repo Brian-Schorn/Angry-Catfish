@@ -37,6 +37,15 @@
   display: inline-block;
 }
 
+.repeatList img {
+  display: inline-block;
+
+}
+.trashIcon {
+  height: 15px;
+  width: 15px;
+}
+
 .bikeBox {
   text-align: center;
   margin: 25px;
