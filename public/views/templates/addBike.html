@@ -46,7 +46,7 @@ Add Bike Page
       <span ng-show="addBikeForm.bikeTravelRear.$error.required" class="error">Bike Travel (Rear) Required</span>
     </span><br />
   <!-- Manufacturer's Website -->
-  <label>Manufacturer's Website: <input type="url" ng-model="addBike.newBike.manufacURL" name="manufacURL" required=""  /></label>
+  <label>Manufacturer's Website: <input type="url" ng-model="addBike.newBike.manufacURL" ng-init="addBike.newBike.manufacURL = 'http://'" name="manufacURL" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.manufacURL.$touched">
       <span ng-show="addBikeForm.manufacURL.$error.required" class="error">Bike Manufactuer's Website Required</span>
       <span ng-show="addBikeForm.manufacURL.$error.url" class="error">Valid URL Required</span>
