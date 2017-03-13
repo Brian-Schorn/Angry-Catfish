@@ -57,6 +57,10 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
       _this.newImage.newImage = null;
     }
 
+    _this.deleteImage = function(index){
+      _this.selectedBike.imageUrls.splice(index, 1);
+    }
+
   //ADD BULLET POINT TO ARRAY
   _this.addBullet = function(bullet){
     console.log(bullet);
@@ -64,11 +68,19 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
     _this.newBullet= null;
   }
 
+  _this.deleteBullet = function(index){
+    _this.selectedBike.bulletPoints.splice(index, 1);
+  }
+
   //ADD BULLET POINT TO ARRAY
   _this.addTag = function(tag){
     console.log(tag);
     _this.selectedBike.searchTags.push(tag);
     _this.newTag= null;
+  }
+
+  _this.deleteTag = function(index){
+    _this.selectedBike.searchTags.splice(index, 1);
   }
 
   //Close Modal
