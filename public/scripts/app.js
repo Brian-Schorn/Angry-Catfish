@@ -3,6 +3,11 @@ var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'n
 
 angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
 
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+
   $routeProvider
     .when('/testPage', {
       templateUrl: '/public/views/templates/testPage.html',
@@ -33,6 +38,7 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       templateUrl: '/public/views/templates/viewRes.html',
       controller: 'viewResController',
       controllerAs: 'viewRes',
+      authRequired: true
     })
     .when('/admin', {
       templateUrl: '/public/views/templates/admin.html',
@@ -42,12 +48,16 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
     .otherwise({
       redirectTo: 'searchForm',
     });
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
+  }])
+    .run(function($rootScope, $location, $route, UserService){
+      $rootScope.$on("$routeChangeStart", function(event, next, current){
+        UserService.getCurrentUser().then(function(res) {
+         user=res.data.user;
+         if(next.authRequired && user.admin != true){
+           console.log("ROUTE ERROR");
+           $location.path("/login");
+           $route.reload();
+         }
+        });
+      });
     });
-
-
-
-},
-]);
