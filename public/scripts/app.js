@@ -55,7 +55,7 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
          user=res.data.user;
          if(next.authRequired && user.admin != true){
            console.log("ROUTE ERROR");
-           $location.path("/login");
+           $location.path("/searchForm");
            $route.reload();
          }
         });
