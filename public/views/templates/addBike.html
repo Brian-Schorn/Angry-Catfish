@@ -75,7 +75,8 @@ Add Bike Page
   <img class="previewImage" ng-src="{{picture.file.location}}"/>
   <div>
   {{picture.comment}}
-  <img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="deletePic(picture._id)" />
+  <!-- <img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="deletePic(picture._id)" /> -->
+  <button class="btn btn-warning" ng-click="deletePic(picture._id)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
   </div>
   </div>
 

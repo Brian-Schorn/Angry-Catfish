@@ -23,6 +23,7 @@
   width: 300px;
   transition: all 1s ease;
   background-color: white;
+  border: 2px solid brown;
   /*position: relative;*/
   /*position: absolute;*/
   /*bottom: 6%;*/

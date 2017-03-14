@@ -114,13 +114,11 @@
 
   <hr>
 
-  <div id='bikeDisplay'>
+  <div>
     <div class="text-center">Search Results: {{results.length}} Bikes</div>
 
     <!-- Add Bike -->
-    <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-if="auth.admin">
-      <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
-    </div>
+
 
     <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
 
@@ -134,9 +132,13 @@
 
         </div>
 
-        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-if="auth.admin" />
-        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-if="auth.admin" />
+        <button class="btn btn-info" ng-click="openEditModalPopup(cycle._id)"  ng-if="auth.admin"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></button>
+        <button class="btn btn-warning" ng-click="confirmDelete(cycle._id)"  ng-if="auth.admin"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
         <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
+    </div>
+    <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-if="auth.admin">
+      <!-- <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div> -->
+      <i class="glyphicon glyphicon-plus" aria-hidden="true"></i>
     </div>
   </div>
 
