@@ -118,7 +118,7 @@
     <div class="text-center">Search Results: {{results.length}} Bikes</div>
 
     <!-- Add Bike -->
-    <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-show="auth.loggedIn">
+    <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-if="auth.admin">
       <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
     </div>
 
@@ -134,8 +134,8 @@
 
         </div>
 
-        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-show="auth.loggedIn" />
-        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-show="auth.loggedIn" />
+        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-if="auth.admin" />
+        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-if="auth.admin" />
         <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
     </div>
   </div>

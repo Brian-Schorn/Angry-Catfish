@@ -1,5 +1,5 @@
 
-angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document, ngCart) {
+angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, UserService, $uibModal, $log, $document, ngCart) {
   console.log('loaded Auth Controller');
 
   var _this = this;
@@ -9,9 +9,22 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   console.log("Are you logged in? ", _this.loggedIn);
   var bikeService = BikeService;
   var reservationService = ReservationService;
+  var userService = UserService;
 
   _this.pageLoad = false;
 
+  _this.checkAdminStatus = function() {
+        userService.getCurrentUser().then(function(res) {
+         user=res.data.user;
+         if(user.admin == true){
+           _this.admin = true;
+         }else{
+           _this.admin = false;
+         }
+        });
+      };
+
+  _this.checkAdminStatus();
 
 //NG Cart Stuff
 _this.getTotalItems = function(){
@@ -204,6 +217,7 @@ _this.clearCart = function(){
   // Log Dismiss message
   $scope.handleDismiss = function (reason) {
     $log.info('Modal dismissed: ' + reason);
+    _this.getBikes();
   }
 
   //---------Calendar Stuff---------------

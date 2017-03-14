@@ -1,4 +1,4 @@
-angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $window) {
+angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $window, UserService) {
   var _this = this;
   var authFactory = AuthFactory;
 
@@ -29,6 +29,23 @@ angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $wind
     _this.message.type = 'error';
   });
 
+  var userService = UserService;
+
+  _this.pageLoad = false;
+
+  _this.checkAdminStatus = function() {
+        userService.getCurrentUser().then(function(res) {
+         user=res.data.user;
+         if(user.admin == true){
+           _this.admin = true;
+         }else{
+           _this.admin = false;
+         }
+        });
+      };
+
+  _this.checkAdminStatus();
+  
   _this.logout = function () {
     authFactory.logout()
       .then(function (response) { // success

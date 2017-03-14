@@ -15,7 +15,7 @@ var private = require('./routes/private/index');
 var database = require('./utils/database');
 var bike = require('./routes/bike');
 var reservation = require('./routes/reservation');
-
+var users = require('./routes/users');
 var uploads = require('./routes/uploads');
 
 /** ---------- EXPRESS APP CONFIG ---------- **/
@@ -53,6 +53,7 @@ app.use('/uploads', uploads);
 app.use('/private', isLoggedIn, private);
 app.use('/bike', bike);
 app.use('/reservation', reservation);
+app.use('/users', users);
 app.use('/*', index);
 /** ---------- SERVER START ---------- **/
 app.listen(3000, function () {

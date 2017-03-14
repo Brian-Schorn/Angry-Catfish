@@ -17,6 +17,7 @@
   <script src="/public/scripts/services/authFactory.js"></script>
   <script src="/public/scripts/services/bikeService.js"></script>
   <script src="/public/scripts/services/reservationService.js"></script>
+  <script src="/public/scripts/services/userService.js"></script>
   <script src="/public/scripts/controllers/navController.js"></script>
   <script src="/public/scripts/controllers/authController.js"></script>
   <script src="/public/scripts/controllers/testController.js"></script>
@@ -76,9 +77,9 @@
 
       <nav>
         <ul class="row">
-          <li ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
+          <li ng-if="nav.admin"><a href="/viewRes">View Reservations</a></li>
           <!-- Shown for users that are logged in -->
-          <section ng-show="nav.loggedIn">
+          <section ng-if="nav.admin">
             <p>You are logged in as an Admin!</p>
           </section>
 
