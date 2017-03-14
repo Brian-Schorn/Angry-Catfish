@@ -3,6 +3,10 @@
   /*#F23F1E #3F2D24*/
 }
 
+#searchForm {
+  margin-bottom: 100px;
+}
+
 #searchForm input:focus, #searchForm input:active {
   border: none !important;
   outline: none !important;

@@ -8,6 +8,12 @@
   font-size: 1.4em;
 }
 
+#modalClose {
+  background-color: #FFFCF7;
+}
+
+
+
 /* bike display on search*/
 .bikeBox {
   text-align: center;
@@ -16,8 +22,22 @@
   height: 240px;
   width: 300px;
   transition: all 1s ease;
-  /*filter: opacity(60%);*/
   background-color: white;
+  /*position: relative;*/
+  /*position: absolute;*/
+  /*bottom: 6%;*/
+}
+
+
+.bikeBoxText {
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+  /*justify-content: center;
+  align-items: center;*/
+  /*display: flex;*/
+  /*position: absolute;*/
+  /*bottom: 0;*/
 }
 
 .bikeBox:hover {

@@ -1,16 +1,18 @@
+
+
 <div class="container searchContainer">
-  <a href="http://connorpracticesite.com/"><img class="center-block img-responsive" src="public/assets/angryCatfishLogo.png" /></a>
-  <span class="">{{ auth.getTotalItems() }}
-    <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
-    <br />
-    <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">clear cart</a>
-    <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">Checkout</a>
 
-
-  </span>
+  <div id="cart" class="pull-right">
+    <i class="fa fa-shopping-cart fa-lg"></i>
+    <span>{{ auth.getTotalItems() }}
+      <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+      <br />
+      <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
+      <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">Checkout</a>
+    </span>
+  </div>
 
   <div id="calenderSearchZone">
-    <h4>Reservation Dates</h4>
     <div class="row">
       <div class="col-sm-4 col-sm-offset-2">
         Checkout Date:
@@ -48,7 +50,7 @@
           </ui-select-choices>
         </ui-select>
         <div class="input-group-btn searchClear">
-          <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeCategory = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+          <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeCategory = undefined"><span class="fa fa-times"></span></button>
         </div>
       </div>
     </div>
@@ -62,7 +64,7 @@
            </ui-select-choices>
          </ui-select>
          <div class="input-group-btn searchClear">
-           <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeMake = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+           <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeMake = undefined"><span class="fa fa-times"></span></button>
         </div>
       </div>
     </div>
@@ -77,7 +79,7 @@
            </ui-select-choices>
          </ui-select>
          <div class="input-group-btn searchClear">
-           <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeModel = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+           <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeModel = undefined"><span class="fa fa-times"></span></button>
          </div>
       </div>
     </div>
@@ -89,7 +91,7 @@
          <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
        </ui-select>
        <div class="input-group-btn searchClear">
-         <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeSize = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+         <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeSize = undefined"><span class="fa fa-times"></span></button>
        </div>
      </div>
     </div>
@@ -98,13 +100,13 @@
       <div class="input-group search">
         <input class="form-control" placeholder="Search" ng-model="auth.selected.searchTags" theme="bootstrap"></input>
         <div class="input-group-btn searchClear">
-          <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.searchTags = undefined; auth.sweetAlert()"><span class="fa fa-times"></span></button>
+          <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.searchTags = undefined"><span class="fa fa-times"></span></button>
         </div>
       </div>
     </div>
     <div class="col-sm-1" >
       <div class="input-group searchClearAll">
-        <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected = undefined; auth.sweetAlert()"><span class="glyphicon glyphicon-refresh"></span></button>
+        <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected = undefined"><span class="glyphicon glyphicon-refresh"></span></button>
       </div>
     </div>
 
@@ -113,27 +115,29 @@
   <hr>
 
   <div id='bikeDisplay'>
-  <div>Bikes Matching Filters: {{results.length}}</div>
-  <!-- Add Bike -->
-  <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-show="auth.loggedIn">
-    <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
-  </div>
+    <div class="text-center">Search Results: {{results.length}} Bikes</div>
 
-  <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
+    <!-- Add Bike -->
+    <div class="bikeBox addBikeBox col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-click="openModalAddPopup()" ng-show="auth.loggedIn">
+      <div><img class="img-responsive" src="public/assets/PlusBike.png" alt="Add A Bike"/></div>
+    </div>
 
-      <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
+    <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
 
-        <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
-        <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
-        <div class="text-center">{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}
-          <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
+        <div class="bikeBox" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
+          <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
+          <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
+          <div class="bikeBoxText">
+            <span>{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}</span>
+            <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
+          </div>
+
         </div>
 
-      </div>
-      <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-show="auth.loggedIn" />
-      <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-show="auth.loggedIn" />
-      <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
-  </div>
+        <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Edit" ng-show="auth.loggedIn" />
+        <input type="button" ng-click="confirmDelete(cycle._id)" value="Delete" ng-show="auth.loggedIn" />
+        <!-- <input type="button" ng-click="openEditModalPopup(cycle._id)" value="Delete" /> -->
+    </div>
   </div>
 
 </div>

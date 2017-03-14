@@ -69,22 +69,18 @@
   <main class="container" ng-app="angryCatfish">
     <!-- NavController is on every page -->
     <header ng-controller="NavController as nav">
-      <a href="/searchForm"><h1>Angry Catfish</h1></a>
+
+      <div id="acLogo"><a href="/searchForm"><img class="center-block img-responsive" src="public/assets/angryCatfishLogo.png" /></a></div>
+
       <nav>
-
         <ul class="row">
-
-          <li class="two columns" ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
-
-
+          <li ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
           <!-- Shown for users that are logged in -->
           <section ng-show="nav.loggedIn">
-            <p>
-              You are logged in as an Admin!
-            </p>
+            <p>You are logged in as an Admin!</p>
           </section>
 
-          <li class="six columns" ng-show="nav.displayLogout">Hi {{auth.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
+          <li ng-show="nav.displayLogout">Hi {{auth.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
         </ul>
       </nav>
       <!-- Show a helpful message when needed -->

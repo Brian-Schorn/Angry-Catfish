@@ -41,5 +41,4 @@ angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $wind
         _this.message.type = 'error';
       });
   };
-
 });
