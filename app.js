@@ -1,6 +1,9 @@
+require('dotenv').load();
+
 /** ---------- REQUIRE NODE MODULES ---------- **/
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 var session = require('express-session');
 /** ---------- REQUIRE CUSTOM APP MODULES ---------- **/
 var passport = require('./auth/passport');
@@ -12,6 +15,8 @@ var private = require('./routes/private/index');
 var database = require('./utils/database');
 var bike = require('./routes/bike');
 var reservation = require('./routes/reservation');
+
+var uploads = require('./routes/uploads');
 
 /** ---------- EXPRESS APP CONFIG ---------- **/
 var app = express();
@@ -44,6 +49,7 @@ app.use(passport.initialize()); // kickstart passport
 app.use(passport.session());
 /** ---------- ROUTES ---------- **/
 app.use('/auth', auth);
+app.use('/uploads', uploads);
 app.use('/private', isLoggedIn, private);
 app.use('/bike', bike);
 app.use('/reservation', reservation);

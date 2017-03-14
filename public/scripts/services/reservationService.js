@@ -29,10 +29,18 @@ angryCatfishApp.service('ReservationService', function ($http, $location) {
 
   //Add a reservation to DB
   this.addReservation = function (reservation) {
-    
+
     return $http.post('/reservation', reservation).then(function (data) {
       console.log("data back from DB after post", data);
     });
 
   };
+
+  this.deleteReservation = function (id) {
+    $http.delete('/reservation/' + id);
+    return $http.get('/reservation');
+  };
+
+
+
 });

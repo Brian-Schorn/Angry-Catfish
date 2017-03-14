@@ -31,7 +31,7 @@ _this.clearCart = function(){
   };
   _this.getBikes();
 
-  //Calender Filtering Stuff
+  //Calender Filtering Stuffnpm
   // _this.availability = ["58bf0cff7970320d37d3e2b1"];
   _this.availability = [];
 

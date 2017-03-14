@@ -55,6 +55,10 @@
   /*width: auto;*/
 }
 
+.previewImage {
+  height: 100px;
+  width: auto;
+}
 #available {
   color: #F23F1E;
 }

@@ -22,17 +22,23 @@
     "angular-route": "^1.6.2",
     "angular-sanitize": "^1.6.2",
     "angular-ui-bootstrap": "^2.5.0",
+    "aws-sdk": "^2.28.0",
     "body-parser": "^1.15.0",
     "bootstrap": "^3.3.7",
+    "dotenv": "^4.0.0",
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "font-awesome": "^4.7.0",
     "mailgun-js": "^0.8.2",
     "mongoose": "^4.4.7",
+    "multer": "^1.3.0",
+    "multer-s3": "^2.5.0",
+    "ng-file-upload": "^12.2.13",
     "passport": "^0.3.2",
     "passport-google": "^0.3.0",
     "passport-google-oauth": "^1.0.0",
     "passport-google-oauth2": "^0.1.6",
+    "path": "^0.12.7",
     "sweetalert": "^1.1.3"
   }
 }

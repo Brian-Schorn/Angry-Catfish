@@ -76,14 +76,37 @@
 
   </ul>
   <!-- IMAGE URLS -->
-  Image URLs:
+  Saved Images:
   <ul>
     <li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="bikeEdit.deleteImage($index)" /> </li>
-    <label>Image URL: <input type="string" ng-model="bikeEdit.newImage.newImage" name="imageURL" /></label>
+    <!-- <label>Image URL: <input type="string" ng-model="bikeEdit.newImage.newImage" name="imageURL" /></label> -->
     <span ng-show="editBikeForm.$submitted">
         <span ng-hide="bikeEdit.selectedBike.imageUrls.length > 0" class="error">One Image Required</span>
-      </span><input type="button" ng-click="bikeEdit.addImage(bikeEdit.newImage.newImage)" value="Add Image" /><br />
+      </span>
+      <!-- <input type="button" ng-click="bikeEdit.addImage(bikeEdit.newImage.newImage)" value="Add Image" /><br /> -->
 
+  </ul>
+
+  New Images:
+  <ul>
+    <div ng-repeat="picture in uploads | orderBy: 'created' : true ">
+    <img class="previewImage" ng-src="{{picture.file.location}}"/>
+    <div>
+    {{picture.comment}}
+    <img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="deletePic(picture._id)" />
+    </div>
+    </div>
+
+    <div>
+
+         <span ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}">
+             <button>Select Picture</button> <span> {{file.$ngfName}} </span>
+             </span>
+             <!-- <img ngf-thumbnail="file || '/images/upload.svg'"></div> -->
+         <input type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
+
+         <input type="button" ng-click="submitPic()" value="Upload" />
+  </div>
   </ul>
 
   <!-- Buy Price -->

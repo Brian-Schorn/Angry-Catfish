@@ -1,5 +1,5 @@
 
-var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize','ui.select', 'ui.bootstrap', 'ngCart']);
+var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize','ui.select', 'ui.bootstrap', 'ngCart', 'ngFileUpload']);
 
 angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
 
