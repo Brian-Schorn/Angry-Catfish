@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('ngCart', ['ngCart.directives'])
 
     .config([function () {
@@ -147,16 +146,16 @@ angular.module('ngCart', ['ngCart.directives'])
         };
 
         this.empty = function () {
-            
+
             $rootScope.$broadcast('ngCart:change', {});
             this.$cart.items = [];
             localStorage.removeItem('cart');
         };
-        
+
         this.isEmpty = function () {
-            
+
             return (this.$cart.items.length > 0 ? false : true);
-            
+
         };
 
         this.toObject = function() {
@@ -353,7 +352,7 @@ angular.module('ngCart.directives', ['ngCart.fulfilment'])
                 price:'@',
                 data:'='
             },
-            transclude: true,
+            transclude: 'element',
             templateUrl: function(element, attrs) {
                 if ( typeof attrs.templateUrl == 'undefined' ) {
                     return 'template/ngCart/addtocart.html';

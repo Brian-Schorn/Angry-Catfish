@@ -1,4 +1,4 @@
-angryCatfishApp.controller('NavController', function (AuthFactory, $window) {
+angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $window) {
   var _this = this;
   var authFactory = AuthFactory;
 

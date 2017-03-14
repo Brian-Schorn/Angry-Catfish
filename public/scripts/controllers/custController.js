@@ -1,12 +1,16 @@
-angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, BikeService, ReservationService) {
+angryCatfishApp.controller('custController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, ngCart, BikeService, ReservationService) {
   console.log('loaded Cust Controller');
   var _this = this;
 
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
-  _this.start = new Date(Number($routeParams.startDate));
-  _this.end = new Date(Number($routeParams.endDate));
+  console.log("cart:",ngCart.getTotalItems());
+  _this.cart = ngCart.getItems();
+  console.log("cart items:", _this.cart);
+
+  _this.start = new Date(Number(_this.cart[0]._data.start));
+  _this.end = new Date(Number(_this.cart[0]._data.end));
   _this.dates = [];
   _this.start.setHours(0,0,0,0);
   _this.end.setHours(0,0,0,0);
@@ -18,13 +22,13 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   console.log(_this.dates);
   _this.priceRate = 75;
   _this.numberofDays = _this.dates.length;
-  if(_this.dates.length > 2){
+  if(_this.dates.length > 1){
     _this.priceRate = 65;
   }
   if(_this.dates.length > 5){
     _this.priceRate = 55;
   }
-  _this.totalPrice = _this.priceRate * _this.dates.length;
+  _this.totalPrice = _this.priceRate * _this.dates.length * _this.cart.length;
   console.log("totalPrice", _this.totalPrice);
 
   //Grabs all the bikes from the DB
@@ -33,24 +37,33 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       _this.bikeList = bikeList.data;
       console.log('bike list', _this.bikeList);
       //Pulls bike ID from params
-      _this.bikeID = $routeParams.bikeID;
-      console.log(_this.bikeID);
+      _this.bikeID = [];
+      _this.cart.forEach(function(bike){
+        _this.bikeID.push(bike._id)
+      });
+      console.log("Bikes IDs in Cart",_this.bikeID);
 
       //Finds matching Bike in bikeList
-      _this.bikeList.forEach(function(bike){
-        if (bike._id == _this.bikeID){
-          _this.selectedBike = bike;
-          console.log(_this.selectedBike);
-        }
+      _this.selectedBike = [];
+      _this.bikeID.forEach(function(test){
+        _this.bikeList.forEach(function(bike){
+          if (test == bike._id){
+            _this.selectedBike.push(bike);
+          }
+        })
       })
     });
   };
 
   _this.getBikes();
 
-  //Pull the Pedal and Helmet info from Params
-  _this.pedal = $routeParams.pedalType;
-  _this.helmet = $routeParams.helmetSize;
+  //Pull the Pedal and Helmet info from Cart
+  _this.pedal = [];
+  _this.helmet = [];
+  _this.cart.forEach(function(item){
+    _this.pedal.push(item._data.pedal);
+    _this.helmet.push(item._data.helmet);
+  })
   console.log("Pedal Type:",_this.pedal);
   console.log("Helmet Size:",_this.helmet);
 
@@ -59,8 +72,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   _this.addRes = function(){
     _this.addResStatus = true;
     console.log("Dates",_this.dates);
-    _this.bikes = [];
-    _this.bikes.push(_this.selectedBike._id);
+    _this.bikes = _this.selectedBike;
     _this.reservationObj = {
       "bikeID" : _this.bikes,
       "resDate" : _this.dates,
@@ -78,6 +90,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       console.log("reservation Added");
       _this.addResStatus = false;
     }).then(function(){
+      ngCart.empty();
       swal({
         title: "Reservation Added!",
         text: "Your reservation was succesful, you will recieve an email with further details",
@@ -88,6 +101,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
       },
       function(isConfirm){
         if (isConfirm){
+
           $uibModalStack.dismissAll();
           $timeout(function(){
             console.log("Booking Successful");

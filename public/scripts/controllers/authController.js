@@ -1,9 +1,10 @@
 
-angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document) {
+angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scope, $timeout, $interval, BikeService, ReservationService, $uibModal, $log, $document, ngCart) {
   console.log('loaded Auth Controller');
 
   var _this = this;
   var authFactory = AuthFactory;
+
   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
   console.log("Are you logged in? ", _this.loggedIn);
   var bikeService = BikeService;
@@ -11,6 +12,16 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   _this.pageLoad = false;
 
+
+//NG Cart Stuff
+_this.getTotalItems = function(){
+  return ngCart.getTotalItems();
+}
+
+_this.clearCart = function(){
+  ngCart.empty();
+}
+// console.log("Total Items",_this.ngCart.getTotalItems);
 
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
@@ -29,6 +40,7 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     $scope.dt.start.setHours(0,0,0,0);
     $scope.dt.end.setHours(23,59,59,999);
     _this.filter = {};
+    _this.filter.resBikeId = [];
     _this.filter.start = $scope.dt.start.getTime();
     _this.filter.end = $scope.dt.end.getTime();
 
@@ -36,14 +48,20 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
     console.log(_this.filter.end);
     console.log("Reservation List",_this.resList);
     _this.resList.forEach(function(res){
-      _this.filter.resBikeId = res.bikeID[0];
+      res.bikeID.forEach(function(id){
+        _this.filter.resBikeId.push(id);
+      })
+      // _this.filter.resBikeId = res.bikeID[0];
       console.log("BikeId",_this.filter.resBikeId);
       res.resDate.forEach(function(resDate){
         _this.filter.query = new Date(resDate).getTime();
         console.log("resDate",_this.filter.query);
         if((_this.filter.query >= _this.filter.start) && (_this.filter.query < _this.filter.end)){
           console.log("Conflict!", _this.filter.resBikeId);
-          _this.availability.push(_this.filter.resBikeId);
+          _this.filter.resBikeId.forEach(function(id){
+                      _this.availability.push(id);
+          })
+
         }
       })
     })
