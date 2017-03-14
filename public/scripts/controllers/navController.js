@@ -10,6 +10,7 @@ angryCatfishApp.controller('NavController', function (AuthFactory, ngCart, $wind
 
   authFactory.isLoggedIn()
   .then(function (response) {
+    console.log("Response.data for logged in", response.data);
     if (response.data.status) {
       _this.displayLogout = true;
       authFactory.setLoggedIn(true);
