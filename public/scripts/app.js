@@ -1,5 +1,5 @@
 
-var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize','ui.select', 'ui.bootstrap']);
+var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize','ui.select', 'ui.bootstrap', 'ngCart']);
 
 angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
 
@@ -19,7 +19,7 @@ angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routePr
       controller: 'bikeController',
       controllerAs: 'bike',
     })
-    .when('/customerDetails/:bikeID/pedalType/:pedalType/helmetSize/:helmetSize/start/:startDate/end/:endDate', {
+    .when('/customerDetails', {
       templateUrl: '/public/views/templates/customerDetails.html',
       controller: 'custController',
       controllerAs: 'cust',

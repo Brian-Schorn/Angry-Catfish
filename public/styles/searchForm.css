@@ -3,38 +3,30 @@
   /*#F23F1E #3F2D24*/
 }
 
-#searchForm {
-  text-align: center;
+#searchForm input:focus, #searchForm input:active {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-#searchForm .input-group {
-  display: inline-block;
-  width: 100px;
-}
-
-#searchForm .input-group.search {
-  margin-left: 20px;
-}
-
-#searchForm .input-group.searchClear {
-  width: 20px;
-  margin-left: 0;
-  padding: 0;
+.ui-select-match-text {
+    overflow: auto;
+    text-overflow: ellipsis;
+    position: absolute;
 }
 
 #searchForm .searchClear button{
-  background-color: darkgray;
+  height: 34px;
+  width: 20px;
+  background-color: lightgray;
   outline: 0;
   padding: 0;
 }
 
 #searchForm .searchClearAll button{
+  height: 34px;
   background-color: #F23F1E;
   outline: 0;
-}
-
-#bikeDisplay {
-  display: inline-block;
 }
 
 .repeatList img {
@@ -44,29 +36,4 @@
 .trashIcon {
   height: 15px;
   width: 15px;
-}
-
-.bikeBox {
-  text-align: center;
-  margin: 25px;
-  height: auto;
-  width: auto;
-  border: .5px solid #F23F1E;
-  transition: all 1s ease;
-  filter: opacity(60%);
-  background-color: white;
-}
-
-.bikeBox:hover {
-  transform:scale(1.1);
-  filter: none;
-}
-
-.bikeBox a {
-  text-decoration: none;
-}
-
-.bikeBox img {
-  max-height: 200px;
-  width: auto;
 }
