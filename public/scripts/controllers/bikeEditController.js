@@ -1,4 +1,4 @@
-angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, BikeService, ReservationService, editId) {
+angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, Upload, BikeService, ReservationService, editId) {
   console.log('loaded Bike Edit Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -29,12 +29,78 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
 
   _this.getBikes();
 
+
+
+//New Image Upload
+$scope.file='';
+$scope.uploads=[];
+$scope.comment='';
+
+//loads any already uploaded images
+
+
+//loads images already uploaded
+ function getImages() {
+     $http.get('/uploads')
+         .then(function(response) {
+             $scope.uploads = response.data;
+             console.log('GET /uploads ', response.data);
+         });
+ }
+
+ //file uploading functions
+ $scope.deletePic = function(id) {
+   $http.delete('/uploads/' + id).then(function(){
+     getImages();
+   });
+ };
+
+ $scope.submitPic = function() {
+
+     if ($scope.editBikeForm.file.$valid && $scope.file) {
+         $scope.upload($scope.file);
+         console.log('file', $scope.file);
+     }
+
+ };
+
+
+
+ $scope.upload = function(file) {
+
+     Upload.upload({
+         url: '/uploads',
+         data: {
+             file: file,
+             //can add more variables to data to store in DB
+             'comment': $scope.comment
+             //'var2': $scope.var2
+         }
+     }).then(function(resp) {
+         console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
+         $scope.file='';
+         $scope.comment='';
+         getImages();
+        //  _this.newBike.imageUrls.push(resp.data)
+     }, function(resp) {
+         console.log('Error status: ' + resp.status);
+     }, function(evt) {
+         var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+         console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+
+     });
+ };
+
+
   //RESET BUTTON FOR EDIT BIKE FORM
   _this.reset = function(form) {
     if (form) {
       form.$setPristine();
       form.$setUntouched();
     }
+    $http.delete('uploads').then(function(){
+      getImages();
+    });
     _this.getBikes();
   }
   _this.reset();
@@ -42,12 +108,33 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
   //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.bikeEdit = function(valid){
     if(valid){
+      if(_this.selectedBike.imageUrls.length > 0 || $scope.uploads.length > 0){
+      $scope.uploads.forEach(function(img){
+        _this.selectedBike.imageUrls.push(img.file.location)
+      });
+      $http.delete('uploads').then(function(){
+        getImages();
+      });
       bike = _this.selectedBike;
       console.log(bike);
       bikeService.updateBike(_this.bikeID, bike).then(function(bikeList){
         _this.getBikes();
       });
+      swal({
+        title: "Bike Updated!",
+        text: "Your rental bike has been updated in the database",
+        type: "success",
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Awesome!",
+        closeOnConfirm: true
+      },
+      function(isConfirm){
+        if (isConfirm){
+          // $uibModalStack.dismissAll();
+        }
+      });
     };
+  };
   };
 
   //ADD IMAGE URL TO ARRAY

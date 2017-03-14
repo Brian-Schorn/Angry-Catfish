@@ -1,9 +1,67 @@
-angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, $uibModalStack, BikeService, ReservationService) {
+angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeout, $interval, $uibModalStack, Upload, BikeService, ReservationService) {
   console.log('loaded Add Bike Controller');
   var _this = this;
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+  $scope.file='';
+  $scope.uploads=[];
+  $scope.comment='';
+
+  //loads any already uploaded images
+
+
+//loads images already uploaded
+   function getImages() {
+       $http.get('/uploads')
+           .then(function(response) {
+               $scope.uploads = response.data;
+               console.log('GET /uploads ', response.data);
+           });
+   }
+
+   //file uploading functions
+   $scope.deletePic = function(id) {
+     $http.delete('/uploads/' + id).then(function(){
+       getImages();
+     });
+   };
+
+   $scope.submitPic = function() {
+
+       if ($scope.addBikeForm.file.$valid && $scope.file) {
+           $scope.upload($scope.file);
+           console.log('file', $scope.file);
+       }
+
+   };
+
+
+
+   $scope.upload = function(file) {
+
+       Upload.upload({
+           url: '/uploads',
+           data: {
+               file: file,
+               //can add more variables to data to store in DB
+               'comment': $scope.comment
+               //'var2': $scope.var2
+           }
+       }).then(function(resp) {
+           console.log('Success ' + resp.config.data.file.name + ' uploaded. Response: ' + resp.data);
+           $scope.file='';
+           $scope.comment='';
+           getImages();
+          //  _this.newBike.imageUrls.push(resp.data)
+       }, function(resp) {
+           console.log('Error status: ' + resp.status);
+       }, function(evt) {
+           var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+           console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+
+       });
+   };
 
 
 //RESET BUTTON FOR ADD BIKE FORM
@@ -12,6 +70,9 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
       form.$setPristine();
       form.$setUntouched();
     }
+    $http.delete('uploads').then(function(){
+      getImages();
+    });
     _this.newBike = {};
     _this.newBike.imageUrls = [];
     _this.newBike.bulletPoints = [];
@@ -28,6 +89,10 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
       _this.newBike.searchTags.push(_this.newBike.bikeSize);
       _this.newBike.searchTags.push(_this.newBike.bikeFrame);
       _this.newBike.searchTags.push(_this.newBike.bikeWheelSize);
+      $scope.uploads.forEach(function(img){
+        _this.newBike.imageUrls.push(img.file.location)
+      });
+      $http.delete('uploads');
       _this.newBike.bulletPoints.forEach(function(bullet){
         _this.newBike.searchTags.push(bullet);
       });
