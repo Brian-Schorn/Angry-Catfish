@@ -66,8 +66,12 @@
         <label>Pedal:</label>
         <select ng-model="bike.pedalType">
           <option value="">Please select</option>
-          <option value="Two-Hole">Two-Hole</option>
-          <option value="Three-Hole">Three-Hole</option>
+          <option value="Flat">Flat Pedal</option>
+          <option value="Shimano">Shimano SPD</option>
+          <option value="Time">Time</option>
+          <option value="Crank Brothers">Crank Brothers</option>
+          <option value="None">None (I will bring my own)</option>
+
         </select>
         <span ng-show="bike.pedalNeeded">Pedal Type Required!</span>
       </div>
@@ -83,7 +87,7 @@
       </div>
 
       <div class="col-xs-4">
-        
+
         <button type="submit" class="btn btn-primary" ng-click="bike.submitBike()">Select Bike</button>
       </div>
     </div>
