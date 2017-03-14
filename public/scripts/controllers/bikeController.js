@@ -1,4 +1,4 @@
-angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, BikeService, ReservationService, editId) {
+angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, $interval, $routeParams, $location, $uibModalStack, ngCart, BikeService, ReservationService, editId) {
   console.log('loaded Bike Controller');
   var _this = this;
   var bikeService = BikeService;
@@ -9,6 +9,7 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
   _this.modalID = _this.bikeInfo.Id;
   _this.start = new Date(Number(_this.bikeInfo.Start));
   _this.end = new Date(Number(_this.bikeInfo.End));
+
 
 
 
@@ -102,12 +103,25 @@ _this.checkDates = function() {
   closeOnCancel: false
 },
 function(isConfirm){
+  var id = _this.selectedBike._id;
+  var name = _this.selectedBike.bikeMake + " " + _this.selectedBike.bikeModel
+  var price = 1;
+  var quantity = 1;
+  var data = {};
+  data.pedal = _this.pedalType;
+  data.helmet = _this.helmetSize;
+  data.start = _this.start.getTime();
+  data.end = _this.end.getTime();
+  console.log("bike data", id, name, price, quantity, data);
   if (isConfirm) {
     console.log("Confirmed");
-      $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize + '/start/' + _this.start.getTime() + '/end/' + _this.end.getTime());
+      ngCart.addItem(id, name, price, quantity, data);
+      // $location.url('/customerDetails/' + _this.selectedBike._id +'/pedalType/' +_this.pedalType+'/helmetSize/' + _this.helmetSize + '/start/' + _this.start.getTime() + '/end/' + _this.end.getTime());
+      $location.url('/customerDetails/');
       $uibModalStack.dismissAll();
   } else {
-    swal("Cancelled", "Your imaginary file is safe :)", "error");
+    ngCart.addItem(id, name, price, quantity, data);
+    swal("Bike Reservation Added to Cart", "Please select another bike to add to your transaction", "error");
   }
 });
 

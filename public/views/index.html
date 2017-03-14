@@ -1,73 +1,101 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Angry Catfish</title>
-    <base href="/">
-    <script src="/public/vendors/angular.min.js"></script>
-    <script src="/public/vendors/angular-route.min.js"></script>
-    <script src="/public/vendors/angular-animate.min.js"></script>
-    <script src="/public/vendors/angular-sanitize.min.js"></script>
-    <script src="/public/vendors/ui-bootstrap-tpls.js"></script>
-    <script src="/public/vendors/select.min.js"></script>
-    <script src="/public/vendors/sweetalert.min.js"></script>
-    <script src="/public/scripts/app.js"></script>
-    <script src="/public/scripts/services/authFactory.js"></script>
-    <script src="/public/scripts/services/bikeService.js"></script>
-    <script src="/public/scripts/services/reservationService.js"></script>
-    <script src="/public/scripts/controllers/navController.js"></script>
-    <script src="/public/scripts/controllers/authController.js"></script>
-    <script src="/public/scripts/controllers/testController.js"></script>
-    <script src="/public/scripts/controllers/bikeController.js"></script>
-    <script src="/public/scripts/controllers/bikeEditController.js"></script>
-    <script src="/public/scripts/controllers/addBikeController.js"></script>
-    <script src="/public/scripts/controllers/custController.js"></script>
-    <script src="/public/scripts/controllers/viewResController.js"></script>
-    <script src="/public/scripts/controllers/resDetailsController.js"></script>
-    <script src="/public/scripts/controllers/adminController.js"></script>
+<head>
+  <title>Angry Catfish</title>
+  <base href="/">
+  <script src="/public/vendors/angular.min.js"></script>
+  <script src="/public/vendors/angular-route.min.js"></script>
+  <script src="/public/vendors/angular-animate.min.js"></script>
+  <script src="/public/vendors/angular-sanitize.min.js"></script>
+  <script src="/public/vendors/ui-bootstrap-tpls.js"></script>
+  <script src="/public/vendors/ngCart.js"></script>
+  <script src="/public/vendors/select.min.js"></script>
+  <script src="/public/vendors/sweetalert.min.js"></script>
+  <script src="/public/scripts/app.js"></script>
+  <script src="/public/scripts/services/authFactory.js"></script>
+  <script src="/public/scripts/services/bikeService.js"></script>
+  <script src="/public/scripts/services/reservationService.js"></script>
+  <script src="/public/scripts/controllers/navController.js"></script>
+  <script src="/public/scripts/controllers/authController.js"></script>
+  <script src="/public/scripts/controllers/testController.js"></script>
+  <script src="/public/scripts/controllers/bikeController.js"></script>
+  <script src="/public/scripts/controllers/bikeEditController.js"></script>
+  <script src="/public/scripts/controllers/addBikeController.js"></script>
+  <script src="/public/scripts/controllers/custController.js"></script>
+  <script src="/public/scripts/controllers/viewResController.js"></script>
+  <script src="/public/scripts/controllers/resDetailsController.js"></script>
+  <script src="/public/scripts/controllers/adminController.js"></script>
 
 
-    <link rel="stylesheet" type="text/css" href="/public/vendors/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="/public/vendors/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/public/vendors/ui-bootstrap-csp.css" />
-    <link rel="stylesheet" type="text/css" href="/public/vendors/select.min.css" />
-    <link rel="stylesheet" type="text/css" href="/public/vendors/sweetalert.css" />
-    <link rel="stylesheet" type="text/css" href="/public/styles/mainStylesheet.css" />
-    <link rel="stylesheet" type="text/css" href="/public/styles/bikeDetails.css" />
-    <link rel="stylesheet" type="text/css" href="/public/styles/searchForm.css" />
-    <link rel="stylesheet" href="/public/vendors/font-awesome/css/font-awesome.min.css"/>
-    <link rel="shortcut icon" href="public/assets/angryCatfishSmallLogo.jpg" type="image/x-icon">
-  </head>
-  <body>
-    <!-- Bring in the Angular app -->
-    <main class="container" ng-app="angryCatfish">
-      <!-- NavController is on every page -->
-      <header ng-controller="NavController as nav">
-        <a href="/searchForm"><h1>Angry Catfish</h1></a>
-        <nav>
-
-          <ul class="row">
+  <script type="text/ng-template" id="template/ngCart/addtocart.html">
+    <div ng-hide="attrs.id">
+      <a class="btn btn-lg btn-primary" ng-disabled="true" ng-transclude></a>
+    </div>
+    <div ng-show="attrs.id">
+      <div>
+        <span ng-show="quantityMax">
+          <select name="quantity" id="quantity" ng-model="q" ng-options=" v for v in qtyOpt"></select>
+        </span>
+        <a class="btn btn-sm btn-primary" ng-click="ngCart.addItem(id, name, price, q, data)" ng-transclude></a>
+      </div>
+      <span ng-show="inCart()">
+        <br>
+        <p class="alert alert-info">This item is in your cart. <a ng-click="ngCart.removeItemById(id)" style="cursor: pointer;">Remove</a></p>
+      </span>
+    </div>
+  </script>
 
 
-            <li class="two columns" ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
+  <script type="text/ng-template" id="template/ngCart/summary.html">
+    <span class="">{{ ngCart.getTotalItems() }}
+      <ng-pluralize count="ngCart.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+      <br />{{ ngCart.totalCost() | currency }}
+    </span>
+  </script>
 
-            <!-- Shown for users that are logged in -->
-            <section ng-show="nav.loggedIn">
-              <p>
-                You are logged in as an Admin!
-              </p>
-            </section>
+  <link rel="stylesheet" type="text/css" href="/public/vendors/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="/public/vendors/bootstrap/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="/public/vendors/ui-bootstrap-csp.css" />
+  <link rel="stylesheet" type="text/css" href="/public/vendors/select.min.css" />
+  <link rel="stylesheet" type="text/css" href="/public/vendors/sweetalert.css" />
+  <link rel="stylesheet" type="text/css" href="/public/styles/mainStylesheet.css" />
+  <link rel="stylesheet" type="text/css" href="/public/styles/bikeDetails.css" />
+  <link rel="stylesheet" type="text/css" href="/public/styles/searchForm.css" />
+  <link rel="stylesheet" href="/public/vendors/font-awesome/css/font-awesome.min.css"/>
+  <link rel="shortcut icon" href="public/assets/angryCatfishSmallLogo.jpg" type="image/x-icon">
+</head>
+<body>
+  <!-- Bring in the Angular app -->
+  <main class="container" ng-app="angryCatfish">
+    <!-- NavController is on every page -->
+    <header ng-controller="NavController as nav">
+      <a href="/searchForm"><h1>Angry Catfish</h1></a>
+      <nav>
 
-            <li class="six columns" ng-show="nav.displayLogout">Hi {{auth.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
-          </ul>
-        </nav>
-        <!-- Show a helpful message when needed -->
-        <section id="message" class="nav.message.type" ng-show="nav.message.text">
-          {{nav.message.text}}
-        </section>
-      </header>
-      <!-- Pull in views via ngRoutes here -->
-      <ng-view></ng-view>
+        <ul class="row">
 
-    </main>
-  </body>
+          <li class="two columns" ng-show="nav.loggedIn"><a href="/viewRes">View Reservations</a></li>
+
+
+          <!-- Shown for users that are logged in -->
+          <section ng-show="nav.loggedIn">
+            <p>
+              You are logged in as an Admin!
+            </p>
+          </section>
+
+          <li class="six columns" ng-show="nav.displayLogout">Hi {{auth.username}}! | <a href="#" ng-click="nav.logout()">Logout</a></li>
+        </ul>
+      </nav>
+      <!-- Show a helpful message when needed -->
+      <section id="message" class="nav.message.type" ng-show="nav.message.text">
+        {{nav.message.text}}
+      </section>
+      <!-- <ngcart-summary></ngcart-summary> -->
+    </header>
+    <!-- Pull in views via ngRoutes here -->
+    <ng-view></ng-view>
+
+  </main>
+</body>
 </html>
