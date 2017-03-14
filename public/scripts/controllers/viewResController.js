@@ -31,9 +31,13 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   };
   _this.getReservations();
 
-  _this.sweetAlert = function (){
-    // swal("Hi", "SweetAlert", "success")
-  };
+  _this.deleteReservation = function(id){
+    reservationService.deleteReservation(id).then(function(resList){
+      _this.resList = resList.data;
+      console.log('Post Delete bike list:', _this.resList);
+
+    })
+  }
 
 
   //Build Query Dates array

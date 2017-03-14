@@ -29,13 +29,13 @@
 
   <form id="searchForm" class="form">
 
-    <!-- NOTE to add select tags in search fields: add multiple to ui-select and replace $select.selected with $item in ui-select match-->
-      <!-- sample code from angular-ui that has not worked yet but may be used in place of unique filter  -->
+    <!-- NOTE to add select tags in search fields: add multiple to ui-select and replace $select.selected witd $item in ui-select match-->
+      <!-- sample code from angular-ui tdat has not worked yet but may be used in place of unique filter  -->
       <!-- propsFilter: {bikeCategory: $select.search, bikeMake: $select.search, bikeModel: $select.search, bikeSize: $select.search} | -->
 
       <div class="input-group search">
         <!-- <label>Category</label> -->
-        <ui-select class="" ng-model="viewRes.selected.bikeCategory" theme="bootstrap">
+        <ui-select class="" ng-model="viewRes.selected.bikeCategory" tdeme="bootstrap">
           <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
           <ui-select-choices repeat="bike.bikeCategory as bike in viewRes.bikeList | filter: viewRes.selected.bikeMake | filter : viewRes.selected.bikeModel | filter : viewRes.selected.bikeSize | unique : 'bikeCategory'  ">
             <div ng-bind-html="bike.bikeCategory | highlight: viewRes.selected"></div>
@@ -49,7 +49,7 @@
 
      <div class="input-group search">
        <!-- <label>Make</label> -->
-        <ui-select class="" ng-model="viewRes.selected.bikeMake" theme="bootstrap">
+        <ui-select class="" ng-model="viewRes.selected.bikeMake" tdeme="bootstrap">
           <ui-select-match placeholder="Make">{{$select.selected.bikeMake}}</ui-select-match>
           <ui-select-choices repeat="bike.bikeMake as bike in viewRes.bikeList | filter: viewRes.selected.bikeCategory | filter : viewRes.selected.bikeModel | filter : viewRes.selected.bikeSize | unique : 'bikeMake' ">
             <div ng-bind-html="bike.bikeMake | highlight: $select.selected"></div>
@@ -64,7 +64,7 @@
 
      <div class="input-group search">
        <!-- <label>Model</label> -->
-        <ui-select class="" ng-model="viewRes.selected.bikeModel" theme="bootstrap">
+        <ui-select class="" ng-model="viewRes.selected.bikeModel" tdeme="bootstrap">
           <ui-select-match placeholder="Model">{{$select.selected.bikeModel}}</ui-select-match>
           <ui-select-choices repeat="bike.bikeModel as bike in viewRes.bikeList | filter: viewRes.selected.bikeCategory | filter : viewRes.selected.bikeMake | filter : viewRes.selected.bikeSize | unique : 'bikeModel' ">
             <div ng-bind-html="bike.bikeModel | highlight: $select.selected"></div>
@@ -79,7 +79,7 @@
 
      <div class="input-group search">
        <!-- <label>Size</label> -->
-       <ui-select class="" ng-model="viewRes.selected.bikeSize" theme="bootstrap">
+       <ui-select class="" ng-model="viewRes.selected.bikeSize" tdeme="bootstrap">
         <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
         <ui-select-choices repeat="bike.bikeSize as bike in viewRes.bikeList | filter: viewRes.selected.bikeCategory | filter : viewRes.selected.bikeMake | filter : viewRes.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
       </ui-select>
@@ -92,7 +92,7 @@
     <div class="input-group search">
       <!-- <label>Search</label> -->
       <!-- <input type="text" ng-model="customPopupSelected" placeholder="Search" uib-typeahead="bike as bike.searchTags for bike in viewRes.bikeList | filter:{searchTags:$viewValue}" typeahead-popup-template-url="customPopupTemplate.html" class="form-control"> -->
-      <input class="form-control" placeholder="Search" ng-model="viewRes.selected.searchTags" theme="bootstrap"></input>
+      <input class="form-control" placeholder="Search" ng-model="viewRes.selected.searchTags" tdeme="bootstrap"></input>
     </div>
 
     <div class="input-group searchClear">
@@ -117,9 +117,26 @@
   <ul>
 
 
-  <span class="row" ng-repeat="res in viewRes.resList | filter: viewRes.selected.searchTags | dateMatch:viewRes.dates | bikeMatch:viewRes.selected:viewRes.bikeList as results">
-    <li><a ng-click="openModalResPopup(res.transactionID)"> {{res.transactionID}}</a>  {{res.custName}}  {{res.custEmail}} <span ng-repeat="bike in res.bikeID">{{bike}}</span>  </li>
 
+    <!-- <li><a ng-click="openModalResPopup(res.transactionID)"> {{res.transactionID}}</a>  {{res.custName}}  {{res.custEmail}} <span ng-repeat="bike in res.bikeID">{{bike}}</span>  </li> -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <!-- <th>Bike ID</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="res in viewRes.resList | filter: viewRes.selected.searchTags | dateMatch:viewRes.dates | bikeMatch:viewRes.selected:viewRes.bikeList as results">
+          <td><a ng-click="openModalResPopup(res.transactionID)">{{res.transactionID}}</a></td>
+          <td>{{res.custName}}</td>
+          <td>{{res.custEmail}}</td>
+          <td><button ng-click="viewRes.deleteReservation(res._id)" class="delete">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
 
         <!-- <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div> -->
         <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
