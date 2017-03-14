@@ -12,6 +12,10 @@
   background-color: #FFFCF7;
 }
 
+#bikeIcon {
+  margin-left: 10px;
+}
+
 
 
 /* bike display on search*/
@@ -24,9 +28,8 @@
   transition: all 1s ease;
   background-color: white;
   border: 2px solid brown;
-  /*position: relative;*/
-  /*position: absolute;*/
-  /*bottom: 6%;*/
+  position: relative;
+
 }
 
 
@@ -34,11 +37,10 @@
   width: auto;
   height: auto;
   margin: 0 auto;
-  /*justify-content: center;
-  align-items: center;*/
-  /*display: flex;*/
-  /*position: absolute;*/
-  /*bottom: 0;*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .bikeBox:hover {

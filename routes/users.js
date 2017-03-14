@@ -5,6 +5,9 @@ var path = require('path');
 router.get('/currentUser', function(req, res){
   var adminstatus = false;
   console.log("USER INCOMING:",req.user);
+  if(req.user == undefined){
+    req.user = ""
+  }
   var currentUser = req.user;
   if(currentUser.admin == null || currentUser.admin == false){
     adminstatus = false;
