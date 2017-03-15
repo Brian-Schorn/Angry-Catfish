@@ -39,7 +39,7 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   if(_this.dates.length > 4){
     _this.priceRate = 0;
     _this.cart.forEach(function(item){
-      _this.priceRate += item._data.pricing[3]
+      _this.priceRate += item._data.pricing[2]
     });
   }
   _this.totalPrice = _this.priceRate * _this.dates.length;
