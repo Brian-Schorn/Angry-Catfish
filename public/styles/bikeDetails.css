@@ -47,9 +47,7 @@
   background-color: white;
   border: 2px solid brown;
   position: relative;
-
 }
-
 
 .bikeBoxText {
   width: auto;
@@ -75,6 +73,18 @@
   /*max-height: 200px;*/
   /*width: auto;*/
 }
+
+.addBikeBox {
+  margin-right: 50px;
+}
+@media (max-width: 1200px)
+{
+    .addBikeBox
+    {
+        margin: 25px;
+    }
+}
+
 
 .previewImage {
   height: 100px;

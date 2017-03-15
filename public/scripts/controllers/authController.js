@@ -5,6 +5,14 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var _this = this;
   var authFactory = AuthFactory;
 
+  _this.clearSearch = function(){
+    console.log ("Clear All Search Fields")
+    $scope.dt = {};
+    $scope.dt.start = new Date();
+    $scope.dt.end = new Date();
+    _this.selected = undefined;
+  }
+
   _this.loggedIn = authFactory.checkLoggedIn(); // NOTE: only updated on page load
   console.log("Are you logged in? ", _this.loggedIn);
   var bikeService = BikeService;
