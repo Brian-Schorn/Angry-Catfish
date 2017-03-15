@@ -21,7 +21,8 @@ var bikeSchema = mongoose.Schema({
   buyPrice: String,
   rentalPrice: Number,
   bulletPoints: [String],
-  bikeDesc: String
+  bikeDesc: String,
+  bikePricing: [Number]
 });
 
 module.exports = mongoose.model('Bike', bikeSchema);

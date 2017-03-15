@@ -14,7 +14,6 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
 
 
 
-
   //Grabs all the bikes from the DB
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
