@@ -16,6 +16,24 @@
   margin-left: 10px;
 }
 
+/*.rentPriceList li {
+  display: inline;
+}*/
+
+.rentPriceList li {
+  list-style: none;
+  float: left;
+  margin-left: 15px;
+}
+
+.rentPriceList li:before {
+  content: '\ffed';
+  margin-right: 0.5em;
+}
+
+.rentPriceList li:first-child:before {
+  content: none;
+}
 
 
 /* bike display on search*/
