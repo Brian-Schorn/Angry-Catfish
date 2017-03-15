@@ -11,3 +11,10 @@ body {
 .reservationTable {
   background-color: #f78b78;
 }
+
+.mainHeader {
+  text-align: right;
+}
+ul {
+  list-style-type: none;
+}
