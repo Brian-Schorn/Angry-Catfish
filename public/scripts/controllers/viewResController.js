@@ -15,7 +15,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList.data;
-      console.log('bike list', _this.bikeList);
+      // console.log('bike list', _this.bikeList);
     });
   };
   _this.getBikes();
@@ -24,7 +24,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   _this.getReservations = function(){
     reservationService.getReservations().then(function(resList){
       _this.resList = resList.data;
-      console.log("reservation list", _this.resList);
+      // console.log("reservation list", _this.resList);
       _this.checkDates();
       _this.pageLoad = true;
     });
@@ -42,11 +42,11 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
       closeOnConfirm: true
     },
     function(){
-      console.log("Deleting", id);
+      // console.log("Deleting", id);
       $timeout(function(){
         reservationService.deleteReservation(id).then(function(resList){
           _this.resList = resList.data;
-          console.log('Post Delete bike list:', _this.resList);
+          // console.log('Post Delete bike list:', _this.resList);
 
         });
     });
@@ -65,6 +65,11 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
     _this.start.setHours(0,0,0,0);
     _this.end.setHours(23,59,59,999);
     while (_this.start <= _this.end){
+      if(_this.start.getTime() == 1489298400000){
+        console.log("DST");
+        _this.start.setTime(_this.start.getTime() - 3600000);
+      }
+      console.log("START DATE",_this.start);
       _this.dates.push(new Date(_this.start).getTime());
       _this.start.setTime(_this.start.getTime() + 86400000);
     }
@@ -98,7 +103,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
       controller: 'resDetailsController as resDetails',
       resolve: {
         editId: function() {
-          console.log("Modal Reservation ID", Id);
+          // console.log("Modal Reservation ID", Id);
           var resInfo = {
             Id: Id,
           }
@@ -125,7 +130,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
       controller: 'bikeEditController as bikeEdit',
       resolve: {
         editId: function() {
-          console.log("Modal EditBike Id",Id);
+          // console.log("Modal EditBike Id",Id);
           return Id;
         }
       }
@@ -144,7 +149,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
       closeOnConfirm: true
     },
     function(){
-      console.log("Deleting",Id);
+      // console.log("Deleting",Id);
       bikeService.deleteBike(Id).then(function(bikeList){
         _this.getBikes();
       });
@@ -185,7 +190,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
 
   //---------Calendar Stuff---------------
   _this.today = function() {
-    console.log('today')
+    // console.log('today')
     $scope.dt = {};
     $scope.dt.start = new Date();
     $scope.dt.end = new Date();
@@ -231,9 +236,9 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
 
   //Changes other date if first conflicts
   $scope.$watch('dt.start', function (newValue) {
-    console.log("NewValue", newValue);
+    // console.log("NewValue", newValue);
     if($scope.dt.end.getTime()<$scope.dt.start.getTime()){
-      console.log('conflict');
+      // console.log('conflict');
       $scope.dt.end = $scope.dt.start;
     }
     if(_this.pageLoad == true){
@@ -241,9 +246,9 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   }
   });
   $scope.$watch('dt.end', function (newValue) {
-    console.log("NewValue", newValue);
+    // console.log("NewValue", newValue);
     if($scope.dt.end.getTime() < $scope.dt.start.getTime()){
-      console.log('conflict');
+      // console.log('conflict');
       $scope.dt.start = $scope.dt.end;
     }
     if(_this.pageLoad == true){
@@ -373,7 +378,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
 
 // filter to remove duplicate items on ng repeat
 angryCatfishApp.filter('unique', function() {
-  console.log('Unique filter hit');
+  // console.log('Unique filter hit');
   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
     var output = [], // we define our output and keys array;
     keys = [];
@@ -409,7 +414,7 @@ angryCatfishApp.filter('dateMatch', function() {
 
 
   return function(item, dates) {
-      console.log("DateMatch", item);
+      // console.log("DateMatch", item);
       var output = [];
       angular.forEach(item, function (item){
         item.resDate.some(function (v) {
@@ -425,7 +430,7 @@ angryCatfishApp.filter('dateMatch', function() {
 angryCatfishApp.filter('bikeMatch', function() {
 
   return function(item, query, bikeList) {
-    console.log("bikeMatch query", query);
+    // console.log("bikeMatch query", query);
     var output = [];
     var selectedBike;
     angular.forEach(item, function(item){
@@ -433,7 +438,7 @@ angryCatfishApp.filter('bikeMatch', function() {
       bikeList.forEach(function(bike){
         if (bike._id == item.bikeID[0]){
           selectedBike = bike;
-          console.log(selectedBike);
+          // console.log(selectedBike);
         }
       })// Ends of bikeList.forEach
       if(!query){
