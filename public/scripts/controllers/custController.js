@@ -176,7 +176,7 @@ _this.calcPrice();
         _this.calcPrice();
         if(_this.cart.length == 0){
           $location.url('/searchForm/')
-          
+
         }
 
     });
