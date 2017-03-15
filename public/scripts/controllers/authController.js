@@ -61,6 +61,7 @@ _this.clearCart = function(){
     console.log(_this.filter.end);
     console.log("Reservation List",_this.resList);
     _this.resList.forEach(function(res){
+      _this.filter.resBikeId = [];
       res.bikeID.forEach(function(id){
         _this.filter.resBikeId.push(id);
       })

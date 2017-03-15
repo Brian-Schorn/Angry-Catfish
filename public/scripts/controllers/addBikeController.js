@@ -4,6 +4,9 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
   var bikeService = BikeService;
   var reservationService = ReservationService;
 
+  // _this.bikePricing = false;
+
+  console.log(_this.bikePricing);
   $scope.file='';
   $scope.uploads=[];
   $scope.comment='';

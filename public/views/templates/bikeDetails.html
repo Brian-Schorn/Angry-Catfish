@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class=col-xs-6>
         <div name="bikeFrame">Frame Material: {{bike.selectedBike.bikeFrame}} </div>
         <div name="bikeWheelSize">Wheel Size: {{bike.selectedBike.bikeWheelSize}} </div>
@@ -38,29 +38,38 @@
         <div name="bikeTravelFront">Bike Travel (Front): {{bike.selectedBike.bikeTravelFront}} </div>
         <div name="bikeTravelRear">Bike Travel (Rear): {{bike.selectedBike.bikeTravelRear}} </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="row">
       <div class="col-xs-8" name="manufacURL">
         <a ng-href="{{bike.selectedBike.manufacURL}}" target="_blank">Go to {{bike.selectedBike.bikeMake}} {{bike.selectedBike.bikeModel}} website</a>
       </div>
 
-      <div class="col-xs-4">
+      <!-- <div class="col-xs-4">
         <div name="bikeBuyPrice">Price: {{bike.selectedBike.bikeBuyPrice}} </div>
         <div name="bikeBuyPrice">Rent Price:
           <ul>
             <li>1 Day: $75</li>
-            <li>2-5 Days: $65</li>
-            <li>6+ Day: $55</li>
+            <li>2-4 Days: $65</li>
+            <li>5+ Day: $55</li>
           </ul>
         </div>
-      </div>
+      </div> -->
     </div>
 
   </div>
 
   <div class="modal-footer">
+<div class="row">
 
+    <ul class="rentPriceList">
+      <li>Rent Price:</li>
+
+      <li>1 Day: $75</li>
+      <li>2-4 Days: $65 /Day</li>
+      <li>5+ Day: $55 /Day</li>
+    </ul>
+</div>
     <div class="row">
 
       <div class="col-xs-4">
@@ -89,7 +98,7 @@
 
       <div class="col-xs-4">
 
-        <button type="submit" class="btn btn-primary" ng-click="bike.submitBike()">Select Bike</button>
+        <button type="submit" class="btn btn-primary" ng-click="bike.submitBike()">Select<i id="bikeIcon" class="fa fa-bicycle fa-lg"></i></button>
       </div>
     </div>
   </div>

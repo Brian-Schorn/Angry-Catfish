@@ -78,7 +78,7 @@
   <!-- IMAGE URLS -->
   Saved Images:
   <ul>
-    <li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="bikeEdit.deleteImage($index)" /> </li>
+    <li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><button class="btn btn-warning" ng-click="bikeEdit.deleteImage($index)"><i class="fa fa-trash"></i></button></li>
     <!-- <label>Image URL: <input type="string" ng-model="bikeEdit.newImage.newImage" name="imageURL" /></label> -->
     <span ng-show="editBikeForm.$submitted">
         <span ng-hide="bikeEdit.selectedBike.imageUrls.length > 0" class="error">One Image Required</span>
@@ -114,7 +114,7 @@
   <!-- Bullet Points -->
   Bullet Points:
   <ul>
-    <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="bikeEdit.deleteBullet($index)" /></li>
+    <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<button class="btn btn-warning" ng-click="bikeEdit.deleteBullet($index)"><i class="fa fa-trash"></i></button></li>
     <label>Bullet Point Highlight: <input type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" /></label>
     <span ng-show="editBikeForm.$submitted">
         <span ng-hide="bikeEdit.selectedBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
@@ -126,6 +126,31 @@
   <span ng-show="editBikeForm.$submitted || editBikeForm.bikeDesc.$touched">
       <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
     </span><br />
+
+    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" ng-init="bikeEdit.bikePricing = 'false'">
+      <option value='false'>Default pricing</option>
+      <option value='true'>Custom</option>
+    </select></label>
+    <br />
+    <span ng-show="bikeEdit.bikePricing == 'true'">
+
+      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" ng-init="bikeEdit.oneDayPrice = 75" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
+        <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
+      </span><br />
+
+      <label>2-4 Day Pricing</label> <input type="number" ng-model="bikeEdit.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.twoDayPrice.$touched)">
+        <span ng-show="editBikeForm.twoDayPrice.$error.required" class="error">2-4 Day Price Required</span>
+      </span><br />
+
+      <label>5+ Day Pricing</label> <input type="number" ng-model="bikeEdit.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.fiveDayPrice.$touched)">
+        <span ng-show="editBikeForm.fiveDayPrice.$error.required" class="error">Five Day Price Required</span>
+      </span><br />
+
+    </span>
+    <br />
 
   <input type="button" ng-click="bikeEdit.reset(editBikeForm)" value="Undo Changes" />
   <input type="submit"  ng-click="bikeEdit.bikeEdit(editBikeForm.$valid)" value="Save Changes" />

@@ -14,6 +14,9 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   _this.dates = [];
   _this.start.setHours(0,0,0,0);
   _this.end.setHours(0,0,0,0);
+  _this.startDisplay = _this.start.toDateString();
+  _this.endDisplay = _this.end.toDateString();
+
   while (_this.start <= _this.end){
     _this.dates.push(new Date(_this.start));
     _this.start.setTime(_this.start.getTime() + 86400000);

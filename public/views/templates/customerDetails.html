@@ -1,4 +1,4 @@
-Customer Details Page
+
 <form class="form-horizontal">
   <div class="form-group">
     <label class="control-label col-sm-2" for="name">Name:</label>
@@ -26,7 +26,26 @@ Customer Details Page
   </div>
 </div>
   <!-- <div ng-repeat="tbd"></div> -->
+  <hr />
+  <div class="row">
 
+    <!-- CART VIEW -->
+    <div class="col-sm-8">
+      Checkout Date: <strong>{{cust.startDisplay}}</strong> <br />
+      Return Date: <strong>{{cust.endDisplay}}</strong>
+    <ul>
+      <li ng-repeat="item in cust.cart">
+        {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: {{item._data.helmet}}
+      </li>
+
+    </ul>
+
+
+    </div>
+
+<div class="col-sm-4">
+
+  <!-- Price Total -->
   <p align="right">Daily Price: ${{cust.priceRate}}.00/Day per Bike</p>
   <p align="right">Number of Bikes: {{cust.cart.length}}</p>
   <p align="right">Days Reserved: {{cust.numberofDays}}</p>
@@ -35,5 +54,6 @@ Customer Details Page
   <p align="right">Total: ${{cust.totalPrice}}</p>
   <button type="button" class="btn btn-danger pull-right" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Cancel</button>
   <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Book Reservation</button>
-
+</div>
+</div>
 </form>
