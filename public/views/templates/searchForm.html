@@ -2,15 +2,7 @@
 
 <div class="container searchContainer">
 
-  <div id="cart" class="pull-right">
-    <i class="fa fa-shopping-cart fa-lg"></i>
-    <span>{{ auth.getTotalItems() }}
-      <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
-      <br />
-      <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
-      <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">Checkout</a>
-    </span>
-  </div>
+
 
   <div id="calenderSearchZone">
     <div class="row">
@@ -36,6 +28,15 @@
       <!-- <div class="col-sm-2">
         <input type="button" class="btn" ng-click="auth.checkDates()" value="Update Dates" />
       </div> -->
+      <div id="cart" class="col-sm-2">
+        <i class="fa fa-shopping-cart fa-lg"></i>
+        <span>{{ auth.getTotalItems() }}
+          <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
+          <br />
+          <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
+          <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">Checkout</a>
+        </span>
+      </div>
     </div>
   </div>
 
