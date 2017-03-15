@@ -61,15 +61,17 @@ _this.clearCart = function(){
   _this.checkDates = function() {
 
     _this.availability = [];
-    $scope.dt.start.setHours(0,0,0,0);
-    $scope.dt.end.setHours(23,59,59,999);
     _this.filter = {};
     _this.filter.resBikeId = [];
-    _this.filter.start = $scope.dt.start.getTime();
-    _this.filter.end = $scope.dt.end.getTime();
+    _this.filter.start = new Date($scope.dt.start);
+    _this.filter.end = new Date($scope.dt.end);
+    _this.filter.start.setHours(0,0,0,0);
+    _this.filter.end.setHours(23,59,59,999);
+    _this.filter.start = _this.filter.start.getTime();
+    _this.filter.end = _this.filter.end.getTime();
 
-    console.log(_this.filter.start);
-    console.log(_this.filter.end);
+    console.log("Start Date",Date(_this.filter.start));
+    console.log("End Date",_this.filter.end);
     console.log("Reservation List",_this.resList);
     _this.resList.forEach(function(res){
       _this.filter.resBikeId = [];
@@ -280,7 +282,8 @@ _this.clearCart = function(){
 
   //Changes other date if first conflicts
   $scope.$watch('dt.start', function (newValue) {
-    console.log("NewValue", newValue);
+    console.log("NewValueStart", newValue);
+
     if($scope.dt.end.getTime()<$scope.dt.start.getTime()){
       console.log('conflict');
       $scope.dt.end = $scope.dt.start;
@@ -290,7 +293,7 @@ _this.clearCart = function(){
   }
   });
   $scope.$watch('dt.end', function (newValue) {
-    console.log("NewValue", newValue);
+    console.log("NewValueEnd", newValue);
     if($scope.dt.end.getTime() < $scope.dt.start.getTime()){
       console.log('conflict');
       $scope.dt.start = $scope.dt.end;
