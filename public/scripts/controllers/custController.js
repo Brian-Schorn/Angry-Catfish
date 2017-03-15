@@ -89,6 +89,7 @@ _this.calcPrice();
   _this.addRes = function(){
     _this.addResStatus = true;
     console.log("Dates",_this.dates);
+    console.log("Total Price", _this.totalPrice);
     _this.bikes = _this.selectedBike;
     _this.reservationObj = {
       "bikeID" : _this.bikes,
