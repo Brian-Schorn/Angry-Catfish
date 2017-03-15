@@ -36,6 +36,10 @@
     <ul>
       <li ng-repeat="item in cust.cart">
         {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: {{item._data.helmet}}
+        <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
+        <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
+        <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[3]}}/Day</p>
+
       </li>
 
     </ul>
@@ -46,8 +50,8 @@
 <div class="col-sm-4">
 
   <!-- Price Total -->
-  <p align="right">Daily Price: ${{cust.priceRate}}.00/Day per Bike</p>
-  <p align="right">Number of Bikes: {{cust.cart.length}}</p>
+  <p align="right">Daily Price: ${{cust.priceRate}}.00/Day</p>
+  <p align="right">Number of Bikes Reserved: {{cust.cart.length}}</p>
   <p align="right">Days Reserved: {{cust.numberofDays}}</p>
   <!-- <p align="right">Subtotal = $150</p> -->
   <hr align="right" width="10%"/>

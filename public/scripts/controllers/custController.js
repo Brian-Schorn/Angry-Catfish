@@ -23,15 +23,26 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   }
   console.log("dates",_this.dates.length)
   console.log(_this.dates);
-  _this.priceRate = 75;
   _this.numberofDays = _this.dates.length;
-  if(_this.dates.length > 1){
-    _this.priceRate = 65;
+  if(_this.dates.length == 1){asdf
+    _this.priceRate = 0;
+    _this.cart.forEach(function(item){
+      _this.priceRate += item._data.pricing[0]
+    });
   }
-  if(_this.dates.length > 5){
-    _this.priceRate = 55;
+  if(_this.dates.length > 1 && _this.dates.length < 5){
+    _this.priceRate = 0;
+    _this.cart.forEach(function(item){
+      _this.priceRate += item._data.pricing[1]
+    });
   }
-  _this.totalPrice = _this.priceRate * _this.dates.length * _this.cart.length;
+  if(_this.dates.length > 4){
+    _this.priceRate = 0;
+    _this.cart.forEach(function(item){
+      _this.priceRate += item._data.pricing[3]
+    });
+  }
+  _this.totalPrice = _this.priceRate * _this.dates.length;
   console.log("totalPrice", _this.totalPrice);
 
   //Grabs all the bikes from the DB

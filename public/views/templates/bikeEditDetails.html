@@ -127,14 +127,14 @@
       <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
     </span><br />
 
-    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" ng-init="bikeEdit.bikePricing = 'false'">
+    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" >
       <option value='false'>Default pricing</option>
       <option value='true'>Custom</option>
     </select></label>
     <br />
     <span ng-show="bikeEdit.bikePricing == 'true'">
 
-      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" ng-init="bikeEdit.oneDayPrice = 75" required=""  /></label>
+      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" required=""  /></label>
     <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
         <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
       </span><br />
