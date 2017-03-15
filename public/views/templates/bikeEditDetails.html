@@ -127,6 +127,31 @@
       <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
     </span><br />
 
+    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" ng-init="bikeEdit.bikePricing = 'false'">
+      <option value='false'>Default pricing</option>
+      <option value='true'>Custom</option>
+    </select></label>
+    <br />
+    <span ng-show="bikeEdit.bikePricing == 'true'">
+
+      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" ng-init="bikeEdit.oneDayPrice = 75" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
+        <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
+      </span><br />
+
+      <label>2-4 Day Pricing</label> <input type="number" ng-model="bikeEdit.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.twoDayPrice.$touched)">
+        <span ng-show="editBikeForm.twoDayPrice.$error.required" class="error">2-4 Day Price Required</span>
+      </span><br />
+
+      <label>5+ Day Pricing</label> <input type="number" ng-model="bikeEdit.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.fiveDayPrice.$touched)">
+        <span ng-show="editBikeForm.fiveDayPrice.$error.required" class="error">Five Day Price Required</span>
+      </span><br />
+
+    </span>
+    <br />
+
   <input type="button" ng-click="bikeEdit.reset(editBikeForm)" value="Undo Changes" />
   <input type="submit"  ng-click="bikeEdit.bikeEdit(editBikeForm.$valid)" value="Save Changes" />
 <!-- ng-disabled="editBikeForm.$invalid" -->
