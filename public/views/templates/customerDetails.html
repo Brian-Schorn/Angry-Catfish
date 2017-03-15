@@ -39,6 +39,7 @@
         <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
         <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
         <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[2]}}/Day</p>
+        <button class="btn btn-warning" ng-click="cust.deleteItem($index)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
 
       </li>
 

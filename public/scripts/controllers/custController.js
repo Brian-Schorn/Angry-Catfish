@@ -24,7 +24,8 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   console.log("dates",_this.dates.length)
   console.log(_this.dates);
   _this.numberofDays = _this.dates.length;
-  if(_this.dates.length == 1){asdf
+  _this.calcPrice = function(){
+  if(_this.dates.length == 1){
     _this.priceRate = 0;
     _this.cart.forEach(function(item){
       _this.priceRate += item._data.pricing[0]
@@ -44,6 +45,8 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
   }
   _this.totalPrice = _this.priceRate * _this.dates.length;
   console.log("totalPrice", _this.totalPrice);
+}
+_this.calcPrice();
 
   //Grabs all the bikes from the DB
   _this.getBikes = function(){
@@ -155,7 +158,32 @@ angryCatfishApp.controller('custController', function ($http, $scope, $timeout, 
     });
   };
 
+  _this.deleteItem = function(index){
+    console.log("Removing", index);
+    swal({
+      title: "This will remove the bike from your cart",
+      text: "If you have no bikes left in your cart you will be returned to the home page",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, remove it!",
+      closeOnConfirm: true
+    },
+    function(){
+      console.log("Deleting", index);
+      $timeout(function(){
+        ngCart.removeItem(index);
+        _this.calcPrice();
+        if(_this.cart.length == 0){
+          $location.url('/searchForm/')
+          
+        }
 
+    });
+  });
+
+
+  }
 
 
 
