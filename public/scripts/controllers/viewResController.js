@@ -32,11 +32,26 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
   _this.getReservations();
 
   _this.deleteReservation = function(id){
-    reservationService.deleteReservation(id).then(function(resList){
-      _this.resList = resList.data;
-      console.log('Post Delete bike list:', _this.resList);
+    swal({
+      title: "This will remove the reservation",
+      text: "You will not be able to recover any reservation information",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, remove it!",
+      closeOnConfirm: true
+    },
+    function(){
+      console.log("Deleting", id);
+      $timeout(function(){
+        reservationService.deleteReservation(id).then(function(resList){
+          _this.resList = resList.data;
+          console.log('Post Delete bike list:', _this.resList);
 
-    })
+        });
+    });
+  });
+
   }
 
 

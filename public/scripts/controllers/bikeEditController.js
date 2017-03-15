@@ -6,6 +6,9 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
 
   _this.modalID = editId;
 
+  _this.oneDayPrice = 75;
+  _this.twoDayPrice = 65;
+  _this.fiveDayPrice = 55;
 
 
   //Grabs all the bikes from the DB
@@ -21,6 +24,17 @@ angryCatfishApp.controller('bikeEditController', function ($http, $scope, $timeo
       _this.bikeList.forEach(function(bike){
         if (bike._id == _this.bikeID){
           _this.selectedBike = bike;
+          console.log("Pricing", _this.selectedBike.bikePricing);
+          if(_this.selectedBike.bikePricing[0] == 75 && _this.selectedBike.bikePricing[1] == 65 && _this.selectedBike.bikePricing[2] == 55){
+            _this.bikePricing = 'false';
+          }else{
+            _this.bikePricing = 'true';
+            _this.oneDayPrice = _this.selectedBike.bikePricing[0];
+            _this.twoDayPrice = _this.selectedBike.bikePricing[1];
+            _this.fiveDayPrice = _this.selectedBike.bikePricing[2];
+
+            console.log(_this.oneDayPrice);
+          }
           console.log(_this.selectedBike);
         }
       })
@@ -81,7 +95,7 @@ $scope.comment='';
          $scope.file='';
          $scope.comment='';
          getImages();
-        //  _this.newBike.imageUrls.push(resp.data)
+        //  _this.selectedBike.imageUrls.push(resp.data)
      }, function(resp) {
          console.log('Error status: ' + resp.status);
      }, function(evt) {
@@ -109,6 +123,7 @@ $scope.comment='';
   //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.bikeEdit = function(valid){
     if(valid){
+
       if(_this.selectedBike.imageUrls.length > 0 || $scope.uploads.length > 0){
       $scope.uploads.forEach(function(img){
         _this.selectedBike.imageUrls.push(img.file.location)
@@ -116,6 +131,16 @@ $scope.comment='';
       $http.delete('uploads').then(function(){
         getImages();
       });
+      _this.selectedBike.bikePricing = [];
+      if(_this.bikePricing){
+        _this.selectedBike.bikePricing.push(_this.oneDayPrice);
+        _this.selectedBike.bikePricing.push(_this.twoDayPrice);
+        _this.selectedBike.bikePricing.push(_this.fiveDayPrice);
+      }else{
+        _this.selectedBike.bikePricing.push(75);
+        _this.selectedBike.bikePricing.push(65);
+        _this.selectedBike.bikePricing.push(55);
+      }
       bike = _this.selectedBike;
       console.log(bike);
       bikeService.updateBike(_this.bikeID, bike).then(function(bikeList){

@@ -39,10 +39,43 @@
         <span ng-show="editBikeForm.bikeSize.$error.required" class="error">Bike Size Required</span>
       </span><br />
 
+
     <!-- Bike Frame -->
     <label>Bike Frame Material: <input type="text" ng-model="bikeEdit.selectedBike.bikeFrame" name="bikeFrame" required=""  /></label>
     <span ng-show="editBikeForm.$submitted || editBikeForm.bikeFrame.$touched">
         <span ng-show="editBikeForm.bikeFrame.$error.required" class="error">Bike Frame Material Required</span>
+         <input type="button" ng-click="submitPic()" value="Upload" />
+  </div>
+  </ul>
+
+  <!-- Buy Price -->
+  <!-- Rental Price -->
+  <!-- Bullet Points -->
+  Bullet Points:
+  <ul>
+    <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteBullet($index)"><i class="fa fa-trash"></i></button></li>
+    <label>Bullet Point Highlight: <input type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" /></label>
+    <span ng-show="editBikeForm.$submitted">
+        <span ng-hide="bikeEdit.selectedBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
+      </span><input type="button" ng-click="bikeEdit.addBullet(bikeEdit.newBullet)" value="Add Bullet Point" /><br />
+
+  </ul>
+  <!-- Description -->
+  <label>Description: <input type="text" ng-model="bikeEdit.selectedBike.bikeDesc" name="bikeDesc" required=""  /></label>
+  <span ng-show="editBikeForm.$submitted || editBikeForm.bikeDesc.$touched">
+      <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
+    </span><br />
+
+    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" >
+      <option value='false'>Default pricing</option>
+      <option value='true'>Custom</option>
+    </select></label>
+    <br />
+    <span ng-show="bikeEdit.bikePricing == 'true'">
+
+      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" required=""  /></label>
+    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
+        <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
       </span><br />
 
     <!-- Bike Wheel Size -->
@@ -94,7 +127,7 @@
       <img class="previewImage" ng-src="{{picture.file.location}}"/>
       <div>
       {{picture.comment}}
-      <button class="btn btn-warning" ng-click="deletePic(picture._id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+      <button class="btn btn-warning bikeBulletDelete" ng-click="deletePic(picture._id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
       </div>
       </div>
 

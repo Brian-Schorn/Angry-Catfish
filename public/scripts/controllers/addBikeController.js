@@ -86,6 +86,16 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
 //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.addBike = function(valid){
     if(valid){
+      _this.newBike.bikePricing = [];
+      if(_this.bikePricing){
+        _this.newBike.bikePricing.push(_this.oneDayPrice);
+        _this.newBike.bikePricing.push(_this.twoDayPrice);
+        _this.newBike.bikePricing.push(_this.fiveDayPrice);
+      }else{
+        _this.newBike.bikePricing.push(75);
+        _this.newBike.bikePricing.push(65);
+        _this.newBike.bikePricing.push(55);
+      }
       _this.newBike.searchTags.push(_this.newBike.bikeCategory);
       _this.newBike.searchTags.push(_this.newBike.bikeMake);
       _this.newBike.searchTags.push(_this.newBike.bikeModel);
