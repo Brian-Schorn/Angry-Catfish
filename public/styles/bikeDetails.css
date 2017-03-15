@@ -2,7 +2,9 @@
 .bikeModal .row {
   margin: 10px;
 }
-
+.bikeModal {
+  padding: 20px;
+}
 .modal-header {
   text-align: center;
   font-size: 1.4em;
@@ -96,4 +98,15 @@
 
 #unavailable {
   color: #3F2D24;
+}
+
+.addBikeForm {
+  padding: 20px;
+}
+#modalWarning {
+  color: #F23F1E;
+}
+
+.bikeBulletDelete {
+  margin-left: 20px;
 }

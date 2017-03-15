@@ -2,11 +2,10 @@
 
 <div class="container searchContainer">
 
-
-
   <div id="calenderSearchZone">
     <div class="row">
       <div class="col-sm-4 col-sm-offset-2">
+
         Checkout Date:
         <p class="input-group" tooltip-placement="top" uib-tooltip="Choose the start date">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-disabled="auth.getTotalItems() > 0" />
@@ -17,8 +16,10 @@
       </div>
 
       <div class="col-sm-4">
+
         Checkin Date:
         <p class="input-group" tooltip-placement="top" uib-tooltip="Choose the end date">
+
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-disabled="auth.getTotalItems() > 0" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -34,7 +35,7 @@
           <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
           <br />
           <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
-          <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">Checkout</a>
+          <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">View Cart</a>
         </span>
       </div>
     </div>
@@ -129,7 +130,8 @@
           <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
           <div class="bikeBoxText">
             <span>{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}</span>
-            <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
+            <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1 && auth.selectedBikes.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span>
+            <span class="inCart" ng-hide="auth.selectedBikes.indexOf(cycle._id)==-1">Selected</span></div>
           </div>
         </div>
 

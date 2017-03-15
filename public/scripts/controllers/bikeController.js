@@ -14,7 +14,6 @@ angryCatfishApp.controller('bikeController', function ($http, $scope, $timeout, 
 
 
 
-
   //Grabs all the bikes from the DB
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
@@ -112,6 +111,7 @@ function(isConfirm){
   data.helmet = _this.helmetSize;
   data.start = _this.start.getTime();
   data.end = _this.end.getTime();
+  data.pricing = _this.selectedBike.bikePricing
   console.log("bike data", id, name, price, quantity, data);
   if (isConfirm) {
     console.log("Confirmed");
