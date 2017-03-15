@@ -57,13 +57,13 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
 
   //Build Query Dates array
   _this.checkDates = function() {
-    $scope.dt.start.setHours(0,0,0,0);
-    $scope.dt.end.setHours(23,59,59,999);
-    _this.start = new Date(Number($scope.dt.start));
-    _this.end = new Date(Number($scope.dt.end));
+    // $scope.dt.start.setHours(0,0,0,0);
+    // $scope.dt.end.setHours(23,59,59,999);
+    _this.start = new Date($scope.dt.start);
+    _this.end = new Date($scope.dt.end);
     _this.dates = [];
     _this.start.setHours(0,0,0,0);
-    _this.end.setHours(0,0,0,0);
+    _this.end.setHours(23,59,59,999);
     while (_this.start <= _this.end){
       _this.dates.push(new Date(_this.start).getTime());
       _this.start.setTime(_this.start.getTime() + 86400000);
@@ -71,16 +71,16 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
     console.log("selected dates", _this.dates);
   };
 
-  //Date Filtering for Reservation Results
-  _this.dateMatch =  function (haystack, arr) {
-    console.log("haystack",haystack);
-    console.log("arr",arr);
-
-    return arr.some(function (v) {
-      console.log(new Date(v).getTime());
-        return haystack.indexOf(new Date(v).getTime()) >= 0;
-    });
-};
+//   //Date Filtering for Reservation Results
+//   _this.dateMatch =  function (haystack, arr) {
+//     console.log("haystack",haystack);
+//     console.log("arr",arr);
+//
+//     return arr.some(function (v) {
+//       console.log(new Date(v).getTime());
+//         return haystack.indexOf(new Date(v).getTime()) >= 0;
+//     });
+// };
   //VIEW MODAL
   $scope.openModalResPopup = function (Id) {
     modalResPopup(Id).result
@@ -203,7 +203,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
     // dateDisabled: disabled,
     formatYear: 'yy',
     maxDate: new Date(2020, 5, 22),
-    minDate: new Date(),
+    minDate: new Date(2017, 1, 1),
     startingDay: 1
   };
 
@@ -387,22 +387,22 @@ angryCatfishApp.filter('unique', function() {
   return output;// return our array which should be devoid of any duplicates
 };
 });
-
-angryCatfishApp.filter('unique', function() {
-  console.log('Unique filter hit');
-  return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
-    var output = [], // we define our output and keys array;
-    keys = [];
-    angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
-      var key = item[keyname];// we check to see whether our object exists
-      if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
-      keys.push(key); // add it to our keys array
-      output.push(item);// push this item to our final output array
-    }
-  });
-  return output;// return our array which should be devoid of any duplicates
-};
-});  // end of unique filter
+//
+// angryCatfishApp.filter('unique', function() {
+//   console.log('Unique filter hit');
+//   return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+//     var output = [], // we define our output and keys array;
+//     keys = [];
+//     angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+//       var key = item[keyname];// we check to see whether our object exists
+//       if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+//       keys.push(key); // add it to our keys array
+//       output.push(item);// push this item to our final output array
+//     }
+//   });
+//   return output;// return our array which should be devoid of any duplicates
+// };
+// });  // end of unique filter
 
 
 angryCatfishApp.filter('dateMatch', function() {
