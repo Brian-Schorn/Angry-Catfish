@@ -12,6 +12,10 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var userService = UserService;
 
   _this.pageLoad = false;
+  _this.selected = [];
+
+
+
 
   _this.checkAdminStatus = function() {
         userService.getCurrentUser().then(function(res) {
@@ -40,6 +44,12 @@ _this.clearCart = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList.data;
       console.log('bike list', _this.bikeList);
+      _this.selectedBikes = [];
+      _this.cart = ngCart.getItems();
+      _this.cart.forEach(function(cartBike){
+        console.log("Cart",cartBike);
+        _this.selectedBikes.push(cartBike._id)
+      })
     });
   };
   _this.getBikes();
@@ -49,6 +59,7 @@ _this.clearCart = function(){
   _this.availability = [];
 
   _this.checkDates = function() {
+
     _this.availability = [];
     $scope.dt.start.setHours(0,0,0,0);
     $scope.dt.end.setHours(23,59,59,999);

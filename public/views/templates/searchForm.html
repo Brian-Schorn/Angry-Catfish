@@ -125,7 +125,8 @@
           <!-- <div><a ng-href="/bikeDetails/{{cycle._id}}"><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></a></div> -->
           <div class="bikeBoxText">
             <span>{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}</span>
-            <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span></div>
+            <div><span id="available" ng-show="auth.availability.indexOf(cycle._id)==-1 && auth.selectedBikes.indexOf(cycle._id)==-1">Available</span><span id="unavailable" ng-hide="auth.availability.indexOf(cycle._id)==-1">Unavailable</span>
+            <span class="inCart" ng-hide="auth.selectedBikes.indexOf(cycle._id)==-1">Selected</span></div>
           </div>
         </div>
 
