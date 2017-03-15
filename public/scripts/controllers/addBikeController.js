@@ -161,5 +161,8 @@ _this.deleteTag = function(index){
   _this.newBike.searchTags.splice(index, 1);
 }
 
+_this.closeModal = function(){
+  $uibModalStack.dismissAll();
+}
 
 });

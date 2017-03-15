@@ -102,6 +102,7 @@ $scope.comment='';
       getImages();
     });
     _this.getBikes();
+    _this.newTag = null;
   }
   _this.reset();
 

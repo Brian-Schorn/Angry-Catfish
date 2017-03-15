@@ -18,6 +18,7 @@
       <div class="col-sm-4">
 
         Checkin Date:
+        <p class="input-group" tooltip-placement="top" uib-tooltip="Choose the end date">
 
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-disabled="auth.getTotalItems() > 0" />
           <span class="input-group-btn">
