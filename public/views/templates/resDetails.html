@@ -1,19 +1,22 @@
 <div class="resModal">
 
   <div class="modal-header">
+    <!-- controller: 'resDetailsController as resDetails', -->
 
     <div class="modal-title">
       <div class="row">
-        <ul>
+        <ul id="resModalView">
         <li >Transaction ID: {{resDetails.resData.transactionID}} </li>
         <li >Customer Name: {{resDetails.resData.custName}} </li>
         <li >Customer Email: {{resDetails.resData.custEmail}} </li>
         <li >Customer Phone Number: {{resDetails.resData.custPhone}} </li>
         <li >Customer Address: {{resDetails.resData.custAddress}} </li>
-        <li >Bikes Reserved: {{resDetails.resData.bikeID[0]}} </li>
-        <li >Pedal Type: {{resDetails.resData.pedalType}} </li>
-        <li >Helmet Required: {{resDetails.resData.needHelmet}} </li>
-        <li >Waiver Signed: {{resDetails.resData.waiverSigned}} </li>
+        Bikes Reserved:
+        <span ng-repeat="item in resDetails.resData.bikeID">
+        <li > {{resDetails.bikeNames[$index]}}<br />
+        Pedal Type: {{resDetails.resData.pedalType[$index]}}<br />
+        Helmet Required: {{resDetails.resData.needHelmet[$index]}} </li>
+        </span>
         <li >Total Price: {{resDetails.resData.totalPrice}} </li>
         </ul>
       </div>
