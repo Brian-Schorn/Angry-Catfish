@@ -1,64 +1,68 @@
 
-<form class="form-horizontal">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="name">Name:</label>
+<div id="checkoutPage container">
+
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="name">Name:</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="name" ng-model="cust.custName" placeholder="Enter name">
+          </div>
+          </div>
+    <div class="form-group">
+    <label class="control-label col-sm-2" for="email">Email:</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="name" ng-model="cust.custName" placeholder="Enter name">
+          <input type="email" class="form-control" id="email" ng-model="cust.email"placeholder="Enter email">
         </div>
-        </div>
-  <div class="form-group">
-  <label class="control-label col-sm-2" for="email">Email:</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="email" ng-model="cust.email"placeholder="Enter email">
       </div>
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="phoneNumber">Phone Number:</label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="phoneNumber" ng-model="cust.phoneNumber" placeholder="Phone number here">
     </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="phoneNumber">Phone Number:</label>
-    <div class="col-sm-10">
-    <input type="text" class="form-control" id="phoneNumber" ng-model="cust.phoneNumber" placeholder="Phone number here">
-  </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="address">Address:</label>
-    <div class="col-sm-10">
-    <input type="text" class="form-control" id="address" ng-model="cust.address" placeholder="Address here">
-  </div>
-</div>
-  <!-- <div ng-repeat="tbd"></div> -->
-  <hr />
-  <div class="row">
-
-    <!-- CART VIEW -->
-    <div class="col-sm-8">
-      Checkout Date: <strong>{{cust.startDisplay}}</strong> <br />
-      Return Date: <strong>{{cust.endDisplay}}</strong>
-    <ul>
-      <li ng-repeat="item in cust.cart">
-        {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: {{item._data.helmet}}
-        <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
-        <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
-        <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[2]}}/Day</p>
-        <button class="btn btn-warning" ng-click="cust.deleteItem($index)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
-
-      </li>
-
-    </ul>
-
-
     </div>
 
-<div class="col-sm-4">
+    <div class="form-group">
+      <label class="control-label col-sm-2" for="address">Address:</label>
+      <div class="col-sm-10">
+      <input type="text" class="form-control" id="address" ng-model="cust.address" placeholder="Address here">
+    </div>
+  </div>
+    <!-- <div ng-repeat="tbd"></div> -->
+    <hr />
+    <div class="row">
 
-  <!-- Price Total -->
-  <p align="right">Daily Price: ${{cust.priceRate}}.00/Day</p>
-  <p align="right">Number of Bikes Reserved: {{cust.cart.length}}</p>
-  <p align="right">Days Reserved: {{cust.numberofDays}}</p>
-  <!-- <p align="right">Subtotal = $150</p> -->
-  <hr align="right" width="10%"/>
-  <p align="right">Total: ${{cust.totalPrice}}</p>
-  <button type="button" class="btn btn-danger pull-right" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Cancel</button>
-  <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Book Reservation</button>
+      <!-- CART VIEW -->
+      <div class="col-sm-8">
+        Checkout Date: <strong>{{cust.startDisplay}}</strong> <br />
+        Return Date: <strong>{{cust.endDisplay}}</strong>
+      <ul>
+        <li ng-repeat="item in cust.cart">
+          {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: {{item._data.helmet}}
+          <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
+          <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
+          <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[2]}}/Day</p>
+          <button class="btn btn-warning" ng-click="cust.deleteItem($index)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
+
+        </li>
+
+      </ul>
+
+
+      </div>
+
+  <div class="col-sm-4">
+
+    <!-- Price Total -->
+    <p align="right">Daily Price: ${{cust.priceRate}}.00/Day</p>
+    <p align="right">Number of Bikes Reserved: {{cust.cart.length}}</p>
+    <p align="right">Days Reserved: {{cust.numberofDays}}</p>
+    <!-- <p align="right">Subtotal = $150</p> -->
+    <hr align="right" width="10%"/>
+    <p align="right">Total: ${{cust.totalPrice}}</p>
+    <button type="button" class="btn btn-danger pull-right" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Cancel</button>
+    <button type="submit" class="btn btn-success pull-right" ng-click="cust.addRes()" ng-disabled="cust.addResStatus">Book Reservation</button>
+  </div>
+  </div>
+  </form>
+
 </div>
-</div>
-</form>
