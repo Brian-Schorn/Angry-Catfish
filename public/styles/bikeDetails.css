@@ -37,7 +37,6 @@
   content: none;
 }
 
-
 /* bike display on search*/
 .bikeBox {
   text-align: center;
@@ -87,7 +86,6 @@
     }
 }
 
-
 .previewImage {
   height: 100px;
   width: auto;
@@ -109,4 +107,13 @@
 
 .bikeBulletDelete {
   margin-left: 20px;
+}
+
+#bikeSelectDiv {
+  margin-top: 20px;
+}
+
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div {
+  padding: 0;
+  margin: 0;
 }
