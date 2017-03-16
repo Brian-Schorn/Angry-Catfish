@@ -8,9 +8,9 @@
 }
 
 #searchForm input:focus, #searchForm input:active {
-  border: none !important;
+  /*border: none !important;
   outline: none !important;
-  box-shadow: none !important;
+  box-shadow: none !important;*/
 }
 
 .ui-select-match-text {
