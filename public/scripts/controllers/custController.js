@@ -86,7 +86,8 @@ _this.calcPrice();
 
   _this.addResStatus = false;
 
-  _this.addRes = function(){
+  _this.addRes = function(valid){
+    if(valid){
     _this.addResStatus = true;
     console.log("Dates",_this.dates);
     console.log("Total Price", _this.totalPrice);
@@ -129,7 +130,7 @@ _this.calcPrice();
       });
     });
   };
-
+};
   _this.cancelRes = function(){
     _this.addResStatus = true;
 

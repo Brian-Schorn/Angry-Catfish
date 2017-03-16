@@ -74,7 +74,7 @@
 
       <div class="col-xs-6 col-sm-4">
         <label>Pedal:</label>
-        <select ng-model="bike.pedalType">
+        <select id="pedalDropdown" ng-model="bike.pedalType">
           <option value="">Please select</option>
           <option value="Flat">Flat Pedal</option>
           <option value="Shimano">Shimano SPD</option>
@@ -82,20 +82,17 @@
           <option value="Crank Brothers">Crank Brothers</option>
           <option value="None">I'm not sure</option>
           <option value="None">None (I will bring my own)</option>
-
-
-
         </select>
         <span ng-show="bike.pedalNeeded">Pedal Type Required!</span>
       </div>
 
       <div class="col-xs-6 col-sm-4">
         <label>Helmet:</label>
-        <select ng-model="bike.helmetSize" ng-init="bike.helmetSize = 'true'">
+        <select id="helmetDropdown" ng-model="bike.helmetSize" ng-init="bike.helmetSize = 'true'">
           <option value=true>Need</option>
           <option value=false>Don't need</option>
         </select>
-        <span ng-show="bike.helmetNeeded">Helmet Size Required!</span>
+        <!-- <span ng-show="bike.helmetNeeded">Helmet Size Required!</span> -->
       </div>
 
       <div id="bikeSelectDiv" class="col-xs-6 col-sm-4 pull-right">
