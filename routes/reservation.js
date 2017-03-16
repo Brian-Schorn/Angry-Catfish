@@ -91,29 +91,21 @@ router.get('/date', function (req, res) {
 router.post('/', function (req, res) {
   console.log("POST request, add new reservation:",req.body);
   var name = req.body.custName;
-  var dates = new Date(req.body.resDate);
-  dates = dates.toDateString();
+  var pickupDate = new Date(req.body.resDate[0]);
+  pickupDate = pickupDate.toDateString();
   var resLength = req.body.resDate.length
+  var returnDate = new Date(req.body.resDate[resLength - 1]);
+  returnDate = returnDate.toDateString();
+
   var price = req.body.totalPrice;
   var dayPrice = price/resLength;
   var bikeID = req.body.bikeID;
   var email = req.body.custEmail;
   var bikeInfo = '';
 
+  console.log("BIKEID", bikeID);
 // mailgun email message
-Bike.findById(bikeID, function (err, result) {
-  if (err){
-    console.log("Error Getting Info From The DB", err);
-    res.sendStatus(500);
-    return;
-  }
-  console.log("Bike GET request:",result);
-  bikeInfo = result;
-  // var bikeResDetails = bikeInfo.bikeMake;
-  console.log("resBikeInfo:", bikeInfo.bikeMake);
-
-}).then(function(){
-  console.log("Then Fired:", bikeInfo.bikeMake);
+  console.log("Then Fired:", bikeID[0].bikeMake);
   var emailTemplate = "<img src='http://angrycatfishbicycle.com/wp-content/themes/twentyten/images/logo.png'>" +
   "<br><br><p style='font-family:sans-serif'>Dear " + name +
   ",<br><br>Thank you for booking your upcoming adventure with us! When you come to pick up the bike we'll work with you to setup such things like fit, suspension settings and adjustments, tire pressure, and run you through the controls to make sure you're comfortable before you get shredding!" +
@@ -123,8 +115,11 @@ Bike.findById(bikeID, function (err, result) {
   "<br><br>Thank you again for booking with us.  We're looking forward to getting you out on the trails!" +
   "<br><br>Ride on," +
   "<br><br>ACF</p>" +
-  "<br><br><table style='border: 1px solid black; border-collapse:collapse;'><tr><caption style='font-size: 18px'>Reservation Details</caption><th style='border: 1px solid black;'>Bike(s) Reserved</th><th style='border: 1px solid black;'>Reservation Dates</th><th style='border: 1px solid black;'>Number of Days</th><th style='border: 1px solid black;'>Price Per Day</th><th style='border: 1px solid black;'>Total Price</th></tr><tr><td style='border: 1px solid black; text-align: center'>"+ bikeInfo.bikeMake + ' ' + bikeInfo.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ dates +"</td><td style='border: 1px solid black; text-align: center'>"+ resLength +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + dayPrice +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + price +"</td></tr></table>"
-
+  "<br><br><table style='border: 1px solid black; border-collapse:collapse;'><tr><caption style='font-size: 18px'>Reservation Details</caption><th style='border: 1px solid black;'>Bike(s) Reserved</th><th style='border: 1px solid black;'>Pick-Up Date</th><th style='border: 1px solid black;'>Return Date:</th><th style='border: 1px solid black;'>Price Per Day</th><th style='border: 1px solid black;'>Total Price</th></tr>"
+  bikeID.forEach(function(bikeItem){
+    emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>"+ bikeItem.bikeMake + ' ' + bikeItem.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + dayPrice +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + price +"</td></tr>";
+  });
+  emailTemplate += "</table>";
   var data = {
     from: 'Angry Catfish <tjherman32@gmail.com>',
     to: email,
@@ -140,7 +135,7 @@ Bike.findById(bikeID, function (err, result) {
       console.log('Mailgun e-mail sent:', body);
     }
   });
-})
+
   //////////////////
 
   Counter.find({}, function (err, result){
