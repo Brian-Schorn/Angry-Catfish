@@ -112,14 +112,14 @@ Bike.findById(bikeID, function (err, result) {
 
 }).then(function(){
   console.log("Then Fired:", bikeInfo.bikeMake);
-  var emailTemplate = "Dear " + name +
-  ", <br><br> Thank you for booking your upcoming adventure with us! When you come to pick up the bike we'll work with you to setup such things like fit, suspension settings and adjustments, tire pressure, and run you through the controls to make sure you're comfortable before you get shredding!" +
+  var emailTemplate = "<p style='font-family:sans-serif'>Dear <em>" + name +
+  "</em>, <br><br>Thank you for booking your upcoming adventure with us! When you come to pick up the bike we'll work with you to setup such things like fit, suspension settings and adjustments, tire pressure, and run you through the controls to make sure you're comfortable before you get shredding!" +
   "<br><br>Feel free to reach out to us beforehand if you have any questions or concerns.  We understand things happen, Mother Nature doesn't cooperate, and there might be scheduling conflicts so please let us know if we need to re-schedule your appointment as soon as you can!  Rental Appointments are non-refundable, but completely transferable to another future date." +
-  "<br><br> We have some AMAZING trails in the area for you to get AWESOME!  Please make sure you check up on trail conditions before you ride (all seasons).  If you're in the immediate Minneapolis/St. Paul, the Minnesota Off-Road Cyclists will have all the information you need.  If you're headed north check out the Cyclists of the Gitchee Gumee Shores in the Duluth area, Cuyuna Lakes MTB for trails in the Brainard area, and our friends over at the Chequamegon Area Mountain Bike Associated for their incredible trail system over in northern Wisconsin." +
+  "<br><br>We have some AMAZING trails in the area for you to get AWESOME!  Please make sure you check up on trail conditions before you ride (all seasons).  If you're in the immediate Minneapolis/St. Paul, the Minnesota Off-Road Cyclists will have all the information you need.  If you're headed north check out the Cyclists of the Gitchee Gumee Shores in the Duluth area, Cuyuna Lakes MTB for trails in the Brainard area, and our friends over at the Chequamegon Area Mountain Bike Associated for their incredible trail system over in northern Wisconsin." +
   "<br><br>And remember, if you happen to purchase a bike from us within 30 days of the rental, we'll deduct the cost of the rental off of your total." +
-  "<br><br> Thank you again for booking with us.  We're looking forward to getting you out on the trails!" +
+  "<br><br>Thank you again for booking with us.  We're looking forward to getting you out on the trails!" +
   "<br><br>Ride on," +
-  "<br><br>ACF"
+  "<br><br>ACF<p>"
 
   var data = {
     from: 'Angry Catfish <tjherman32@gmail.com>',
