@@ -1,7 +1,16 @@
 
 var angryCatfishApp = angular.module('angryCatfish', ['ngRoute', 'ngAnimate', 'ngSanitize','ui.select', 'ui.bootstrap', 'ngCart', 'ngFileUpload']);
 
-angryCatfishApp.config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
+angryCatfishApp.config(['$routeProvider','$locationProvider','$uibTooltipProvider', function ($routeProvider, $locationProvider, $uibTooltipProvider) {
+
+     var parser = new UAParser();
+     var result = parser.getResult();
+     var touch = result.device && (result.device.type === 'tablet' || result.device.type === 'mobile');
+     if ( touch ){
+         $uibTooltipProvider.options({trigger: 'dontTrigger'});
+     } else {
+         $uibTooltipProvider.options({trigger: 'mouseenter'});
+    }
 
   $locationProvider.html5Mode({
     enabled: true,
