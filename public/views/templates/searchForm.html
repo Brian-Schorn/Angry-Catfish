@@ -45,7 +45,7 @@
 
     <div class="col-sm-2 col-sm-offset-1">
       <div class="input-group search">
-        <ui-select multiple ng-model="auth.selected.bikeCategory">
+        <ui-select ng-model="auth.selected.bikeCategory">
           <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
           <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
             <div ng-bind-html="bike.bikeCategory | highlight: auth.selected"></div>
