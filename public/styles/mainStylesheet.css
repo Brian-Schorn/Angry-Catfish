@@ -15,6 +15,13 @@ body {
 .mainHeader {
   text-align: right;
 }
-ul {
+
+/* I commented this out because it removes all bullet points*/
+/*ul {
   list-style-type: none;
+}*/
+
+#checkoutPage {
+  padding-bottom: 100px;
+  margin-bottom: 100px;
 }
