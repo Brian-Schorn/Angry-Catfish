@@ -8,6 +8,9 @@ body {
   margin: 50px;
 }
 
+.error {
+  color: red;
+}
 .reservationTable {
   background-color: #f78b78;
 }
@@ -16,10 +19,10 @@ body {
   text-align: right;
 }
 
-/* I commented this out because it removes all bullet points*/
-/*ul {
+
+.adminHeader {
   list-style-type: none;
-}*/
+}
 
 #checkoutPage {
   padding-bottom: 100px;

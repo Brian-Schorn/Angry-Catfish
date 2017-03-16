@@ -132,11 +132,13 @@ $scope.comment='';
         getImages();
       });
       _this.selectedBike.bikePricing = [];
-      if(_this.bikePricing){
+      if(_this.bikePricing == 'true'){
+        console.log("Custom Pricing", _this.bikePricing);
         _this.selectedBike.bikePricing.push(_this.oneDayPrice);
         _this.selectedBike.bikePricing.push(_this.twoDayPrice);
         _this.selectedBike.bikePricing.push(_this.fiveDayPrice);
       }else{
+        console.log("Default Pricing");
         _this.selectedBike.bikePricing.push(75);
         _this.selectedBike.bikePricing.push(65);
         _this.selectedBike.bikePricing.push(55);
@@ -160,7 +162,8 @@ $scope.comment='';
         }
       });
     };
-  };
+  }else{
+  console.log("Not Valid");}
   };
 
   //ADD IMAGE URL TO ARRAY

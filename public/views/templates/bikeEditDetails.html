@@ -5,6 +5,7 @@
       <button class="btn btn-warning"  type="button" ng-click="bikeEdit.closeModal()"><i class="fa fa-times"></i></button>
     </div>
 
+
   <div class="modal-title">
     <div class="row">
       <h3 class="modal-title">Edit Bike Details</h3>
@@ -44,39 +45,18 @@
     <label>Bike Frame Material: <input type="text" ng-model="bikeEdit.selectedBike.bikeFrame" name="bikeFrame" required=""  /></label>
     <span ng-show="editBikeForm.$submitted || editBikeForm.bikeFrame.$touched">
         <span ng-show="editBikeForm.bikeFrame.$error.required" class="error">Bike Frame Material Required</span>
-         <input type="button" ng-click="submitPic()" value="Upload" />
-  </div>
-  </ul>
+      </span><br />
+
 
   <!-- Buy Price -->
   <!-- Rental Price -->
   <!-- Bullet Points -->
-  Bullet Points:
-  <ul>
-    <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteBullet($index)"><i class="fa fa-trash"></i></button></li>
-    <label>Bullet Point Highlight: <input type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" /></label>
-    <span ng-show="editBikeForm.$submitted">
-        <span ng-hide="bikeEdit.selectedBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
-      </span><input type="button" ng-click="bikeEdit.addBullet(bikeEdit.newBullet)" value="Add Bullet Point" /><br />
 
-  </ul>
   <!-- Description -->
   <label>Description: <input type="text" ng-model="bikeEdit.selectedBike.bikeDesc" name="bikeDesc" required=""  /></label>
   <span ng-show="editBikeForm.$submitted || editBikeForm.bikeDesc.$touched">
       <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
     </span><br />
-
-    <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" >
-      <option value='false'>Default pricing</option>
-      <option value='true'>Custom</option>
-    </select></label>
-    <br />
-    <span ng-show="bikeEdit.bikePricing == 'true'">
-
-      <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" required=""  /></label>
-    <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
-        <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
-      </span><br />
 
     <!-- Bike Wheel Size -->
     <label>Bike Wheel Size: <input type="text" ng-model="bikeEdit.selectedBike.bikeWheelSize" name="bikeWheelSize" required=""  /></label>
@@ -100,17 +80,18 @@
         <span ng-show="editBikeForm.manufacURL.$error.url" class="error">Valid URL Required</span>
       </span><br />
     <!-- SEARCH TAGS -->
-    Search Tags
+    <strong>Search Tags</strong>
     <ul>
       <li class="repeatList" ng-repeat="tag in bikeEdit.selectedBike.searchTags track by $index">{{tag}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" ng-click="bikeEdit.deleteTag($index)"  /></li>
-      <label>Search Tags: <input type="string" ng-model="bikeEdit.newTag" name="searchTag" /></label>
+          </ul>
+      <label> <input type="string" ng-model="bikeEdit.newTag" name="searchTag" /></label>
       <span ng-show="editBikeForm.$submitted">
           <!-- <span ng-hide="bikeEdit.selectedBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
         </span><input type="button" ng-click="bikeEdit.addTag(bikeEdit.newTag)" value="Add Search Tag" /><br />
 
-    </ul>
+
     <!-- IMAGE URLS -->
-    Saved Images:
+    <strong>Saved Images:</strong>
     <ul>
       <li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteImage($index)"><i class="fa fa-trash"></i></button></li>
       <!-- <label>Image URL: <input type="string" ng-model="bikeEdit.newImage.newImage" name="imageURL" /></label> -->
@@ -121,7 +102,7 @@
 
     </ul>
 
-    New Images:
+    <strong>New Images:</strong>
     <ul>
       <div ng-repeat="picture in uploads | orderBy: 'created' : true ">
       <img class="previewImage" ng-src="{{picture.file.location}}"/>
@@ -129,37 +110,29 @@
       {{picture.comment}}
       <button class="btn btn-warning bikeBulletDelete" ng-click="deletePic(picture._id)"><i class="fa fa-trash" aria-hidden="true"></i></button>
       </div>
-      </div>
 
+      </div>
+</ul>
       <div>
 
-           <span ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}">
-               <button>Select Picture</button> <span> {{file.$ngfName}} </span>
-               </span>
+           <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}">
+
                <!-- <img ngf-thumbnail="file || '/images/upload.svg'"></div> -->
            <input type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
 
            <input type="button" ng-click="submitPic()" value="Upload" />
     </div>
-    </ul>
+<div>
 
-    <!-- Buy Price -->
-    <!-- Rental Price -->
-    <!-- Bullet Points -->
-    Bullet Points:
+</div>
+    <strong>Bullet Points:</strong>
     <ul>
-      <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteBullet($index)"><i class="fa fa-trash"></i></button></li>
-      <label>Bullet Point Highlight: <input type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" /></label>
+      <li class="repeatList" ng-repeat="bullet in bikeEdit.selectedBike.bulletPoints track by $index">{{bullet}}<button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteBullet($index)"><i class="fa fa-trash"></i></button></li>    </ul>
+      <label> <input type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" /></label>
       <span ng-show="editBikeForm.$submitted">
           <span ng-hide="bikeEdit.selectedBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
         </span><input type="button" ng-click="bikeEdit.addBullet(bikeEdit.newBullet)" value="Add Bullet Point" /><br />
 
-    </ul>
-    <!-- Description -->
-    <label>Description: <input type="text" ng-model="bikeEdit.selectedBike.bikeDesc" name="bikeDesc" required=""  /></label>
-    <span ng-show="editBikeForm.$submitted || editBikeForm.bikeDesc.$touched">
-        <span ng-show="editBikeForm.bikeDesc.$error.required" class="error">Bike Description</span>
-      </span><br />
 
       <label>Bike Pricing:<select ng-model="bikeEdit.bikePricing" ng-init="bikeEdit.bikePricing = 'false'">
         <option value='false'>Default pricing</option>
@@ -168,17 +141,17 @@
       <br />
       <span ng-show="bikeEdit.bikePricing == 'true'">
 
-        <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" ng-init="bikeEdit.oneDayPrice = 75" required=""  /></label>
+        <label>1 Day Pricing</label> <input type="number" ng-model="bikeEdit.oneDayPrice" name="oneDayPrice" ng-init="bikeEdit.oneDayPrice = 75" ng-required="bikeEdit.bikePricing == 'true'"  /></label>
       <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.oneDayPrice.$touched)">
           <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
         </span><br />
 
-        <label>2-4 Day Pricing</label> <input type="number" ng-model="bikeEdit.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" required=""  /></label>
+        <label>2-4 Day Pricing</label> <input type="number" ng-model="bikeEdit.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" ng-required="bikeEdit.bikePricing == 'true'"  /></label>
       <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.twoDayPrice.$touched)">
           <span ng-show="editBikeForm.twoDayPrice.$error.required" class="error">2-4 Day Price Required</span>
         </span><br />
 
-        <label>5+ Day Pricing</label> <input type="number" ng-model="bikeEdit.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" required=""  /></label>
+        <label>5+ Day Pricing</label> <input type="number" ng-model="bikeEdit.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" ng-required="bikeEdit.bikePricing == 'true'"  /></label>
       <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.fiveDayPrice.$touched)">
           <span ng-show="editBikeForm.fiveDayPrice.$error.required" class="error">Five Day Price Required</span>
         </span><br />
@@ -192,4 +165,5 @@
     <!-- <input type="submit"  ng-click="bikeEdit.bikeEdit(editBikeForm.$valid)" value="Save Changes" /> -->
   <!-- ng-disabled="editBikeForm.$invalid" -->
   </form>
+
   </div>
