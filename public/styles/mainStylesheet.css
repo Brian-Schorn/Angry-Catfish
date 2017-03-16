@@ -26,7 +26,16 @@ body {
 }
 .googLogin {
   text-align: center;
-
+  margin: 50px;
+}
+.adminImage{
+  width: 100%;
+  float: left;
+  text-align: center;
+}
+.giphyEmbed{
+  /*display: block;*/
+  margin: 0 auto;
 }
 .jumbotron {
   height: 400px;
