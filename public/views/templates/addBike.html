@@ -1,9 +1,18 @@
-
-<form name="addBikeForm" class="addBikeForm" novalidate>
+<div class="modal-header">
   <div id="modalClose" class="pull-right">
     <button class="btn btn-warning"  type="button" ng-click="addBike.closeModal()"><i class="fa fa-times"></i></button>
   </div>
-  <h2>Add Bike</h2>
+
+<div class="modal-title">
+  <div class="row">
+    <h3 class="modal-title">Add Bike Details</h3>
+    <h4 id="modalWarning"> If you click outside of the modal, changes will not be saved!</h4>
+    <!-- <button class="btn btn-warning" type="button" ng-click="bikeEdit.closeModal()"><i class="fa fa-times fa-lg"></i></button> -->
+  </div>
+</div>
+</div>
+<form name="addBikeForm" class="addBikeForm" novalidate>
+
 
   <!-- Bike Cateogry -->
   <label>Bike Category: <input type="text" ng-model="addBike.newBike.bikeCategory" name="bikeCategory" required=""  /></label>
@@ -57,17 +66,18 @@
       <span ng-show="addBikeForm.manufacURL.$error.url" class="error">Valid URL Required</span>
     </span><br />
   <!-- SEARCH TAGS -->
-  Search Tags
+  <strong>Search Tags</strong>
   <ul>
     <li class="repeatList" ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}    <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteTag($index)"/></li>
-    <label>Search Tags: <input type="string" ng-model="addBike.newTag" name="searchTag" /></label>
+
+  </ul>  <label> <input type="string" ng-model="addBike.newTag" name="searchTag" /></label>
     <span ng-show="addBikeForm.$submitted">
         <!-- <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
       </span><input type="button" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag" /><br />
 
-  </ul>
+
   <!-- IMAGE URLS -->
-  Images Uploaded:
+  <strong>Images Uploaded:</strong>
   <!-- <ul>
     <li class="repeatList" ng-repeat="image in addBike.newBike.imageUrls track by $index">{{image}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteImage($index)"/></li>
     <label>Image URL: <input type="string" ng-model="addBike.newImage.newImage" name="imageURL" /></label>
@@ -103,15 +113,16 @@
   <!-- Buy Price -->
   <!-- Rental Price -->
   <!-- Bullet Points -->
-  Bullet Points:
+  <strong>Bullet Points:</strong>
   <ul>
     <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"/></li>
-    <label>Bullet Point Highlight: <input type="string" ng-model="addBike.newBullet" name="bulletPoint" /></label>
+</ul>
+    <label><input type="string" ng-model="addBike.newBullet" name="bulletPoint" /></label>
     <span ng-show="addBikeForm.$submitted">
         <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
       </span><input type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point" /><br />
 
-  </ul>
+
   <!-- Description -->
   <label>Description: <input type="text" ng-model="addBike.newBike.bikeDesc" name="bikeDesc" required=""  /></label>
   <span ng-show="addBikeForm.$submitted || addBikeForm.bikeDesc.$touched">

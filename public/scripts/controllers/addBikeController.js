@@ -78,6 +78,7 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
       getImages();
     });
     _this.newBike = {};
+    _this.newBike.manufacURL = 'http://'
     _this.newBike.imageUrls = [];
     _this.newBike.bulletPoints = [];
     _this.newBike.searchTags = [];
