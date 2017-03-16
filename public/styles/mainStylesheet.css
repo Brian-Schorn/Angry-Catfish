@@ -12,6 +12,22 @@ body {
   background-color: transparent;
   color: blue;
 }
+
+.adminHeader {
+  font-size: 2.0em;
+  font-style: bold;
+  text-align: center;
+}
+
+.adminBody {
+  font-size: 1.5em;
+  font-style: bold;
+  text-align: center;
+}
+.googLogin {
+  text-align: center;
+
+}
 .jumbotron {
   height: 400px;
   width: 100%;

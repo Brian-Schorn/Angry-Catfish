@@ -1,9 +1,15 @@
-Admin Page
+<div class="adminHeader">Admin Login</div>
 
-<section ng-hide="auth.loggedIn">
+
+
+<section class="googLogin" ng-hide="auth.loggedIn">
   <!-- I got this button image from Googles sign-in button brand guidelines page -->
   <a href="/auth/google" target="_self"><img src="/public/assets/btn_google_signin_dark_normal_web.png" /></a>
 </section>
+
+<div class="adminBody">
+  Login to Add/Edit/Remove bikes, and to view Reservations
+</div>
 <!-- Shown for users that are logged in -->
 <section ng-show="admin.loggedIn">
   <p>
