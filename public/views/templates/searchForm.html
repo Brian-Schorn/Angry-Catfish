@@ -45,7 +45,7 @@
 
     <div class="col-sm-2 col-sm-offset-1">
       <div class="input-group search">
-        <ui-select ng-model="auth.selected.bikeCategory">
+        <ui-select multiple ng-model="auth.selected.bikeCategory">
           <ui-select-match placeholder="Category">{{$select.selected.bikeCategory}}</ui-select-match>
           <ui-select-choices repeat="bike.bikeCategory as bike in auth.bikeList | filter: auth.selected.bikeMake | filter : auth.selected.bikeModel | filter : auth.selected.bikeSize | unique : 'bikeCategory'  ">
             <div ng-bind-html="bike.bikeCategory | highlight: auth.selected"></div>
@@ -106,7 +106,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-1" >
+    <div class="col-sm-1 pull-right" >
       <div class="input-group searchClearAll">
         <button tooltip-placement="bottom-left" uib-tooltip="Clear all search fields" type="button" class="btn btn-sm btn-warning" ng-click="auth.clearSearch()"><span class="glyphicon glyphicon-refresh"></span></button>
         <!-- ng-click="auth.selected = undefined" -->
