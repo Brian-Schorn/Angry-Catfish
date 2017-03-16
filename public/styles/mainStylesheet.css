@@ -7,6 +7,11 @@ body {
 #acLogo {
   margin: 50px;
 }
+
+.idButton{
+  background-color: transparent;
+  color: blue;
+}
 .jumbotron {
   height: 400px;
   width: 100%;
