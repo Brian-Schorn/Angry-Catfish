@@ -91,12 +91,14 @@ router.get('/date', function (req, res) {
 router.post('/', function (req, res) {
   console.log("POST request, add new reservation:",req.body);
   var name = req.body.custName;
-  var dates = req.body.resDate;
+  var dates = new Date(req.body.resDate);
+  dates = dates.toDateString();
+  var resLength = req.body.resDate.length
   var price = req.body.totalPrice;
+  var dayPrice = price/resLength;
   var bikeID = req.body.bikeID;
   var email = req.body.custEmail;
   var bikeInfo = '';
-
 
 // mailgun email message
 Bike.findById(bikeID, function (err, result) {
@@ -112,14 +114,16 @@ Bike.findById(bikeID, function (err, result) {
 
 }).then(function(){
   console.log("Then Fired:", bikeInfo.bikeMake);
-  var emailTemplate = "<p style='font-family:sans-serif'>Dear <em>" + name +
-  "</em>, <br><br>Thank you for booking your upcoming adventure with us! When you come to pick up the bike we'll work with you to setup such things like fit, suspension settings and adjustments, tire pressure, and run you through the controls to make sure you're comfortable before you get shredding!" +
+  var emailTemplate = "<img src='http://angrycatfishbicycle.com/wp-content/themes/twentyten/images/logo.png'>" +
+  "<br><br><p style='font-family:sans-serif'>Dear " + name +
+  ",<br><br>Thank you for booking your upcoming adventure with us! When you come to pick up the bike we'll work with you to setup such things like fit, suspension settings and adjustments, tire pressure, and run you through the controls to make sure you're comfortable before you get shredding!" +
   "<br><br>Feel free to reach out to us beforehand if you have any questions or concerns.  We understand things happen, Mother Nature doesn't cooperate, and there might be scheduling conflicts so please let us know if we need to re-schedule your appointment as soon as you can!  Rental Appointments are non-refundable, but completely transferable to another future date." +
   "<br><br>We have some AMAZING trails in the area for you to get AWESOME!  Please make sure you check up on trail conditions before you ride (all seasons).  If you're in the immediate Minneapolis/St. Paul, the Minnesota Off-Road Cyclists will have all the information you need.  If you're headed north check out the Cyclists of the Gitchee Gumee Shores in the Duluth area, Cuyuna Lakes MTB for trails in the Brainard area, and our friends over at the Chequamegon Area Mountain Bike Associated for their incredible trail system over in northern Wisconsin." +
   "<br><br>And remember, if you happen to purchase a bike from us within 30 days of the rental, we'll deduct the cost of the rental off of your total." +
   "<br><br>Thank you again for booking with us.  We're looking forward to getting you out on the trails!" +
   "<br><br>Ride on," +
-  "<br><br>ACF<p>"
+  "<br><br>ACF</p>" +
+  "<br><br><table style='border: 1px solid black; border-collapse:collapse;'><tr><caption style='font-size: 18px'>Reservation Details</caption><th style='border: 1px solid black;'>Bike(s) Reserved</th><th style='border: 1px solid black;'>Reservation Dates</th><th style='border: 1px solid black;'>Number of Days</th><th style='border: 1px solid black;'>Price Per Day</th><th style='border: 1px solid black;'>Total Price</th></tr><tr><td style='border: 1px solid black; text-align: center'>"+ bikeInfo.bikeMake + ' ' + bikeInfo.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ dates +"</td><td style='border: 1px solid black; text-align: center'>"+ resLength +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + dayPrice +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + price +"</td></tr></table>"
 
   var data = {
     from: 'Angry Catfish <tjherman32@gmail.com>',
