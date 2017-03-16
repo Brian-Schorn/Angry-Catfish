@@ -45,6 +45,7 @@ _this.getTotalItems = function(){
 
 _this.clearCart = function(){
   ngCart.empty();
+  _this.getBikes();
 }
 // console.log("Total Items",_this.ngCart.getTotalItems);
 
