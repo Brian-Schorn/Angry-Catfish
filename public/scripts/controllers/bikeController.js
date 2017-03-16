@@ -121,7 +121,7 @@ function(isConfirm){
       $uibModalStack.dismissAll();
   } else {
     ngCart.addItem(id, name, price, quantity, data);
-    swal("Bike Reservation Added to Cart", "Please select another bike to add to your transaction", "error");
+    swal("Bike Reservation Added to Cart", "Please select another bike to add to your transaction");
   }
 });
 
