@@ -135,11 +135,11 @@ _this.calcPrice();
 
     swal({
     title: "Are You Sure?",
-    text: "You will lose all information entered",
+    text: "You will lose all customer information entered",
     type: "info",
     showCancelButton: true,
     confirmButtonColor: "#DD6B55",
-    confirmButtonText: "Cancel",
+    confirmButtonText: "Return to Browsing",
     cancelButtonText: "Continue Booking",
     closeOnConfirm: true,
     closeOnCancel: true
