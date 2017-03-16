@@ -116,9 +116,26 @@ router.post('/', function (req, res) {
   "<br><br>Ride on," +
   "<br><br>ACF</p>" +
   "<br><br><table style='border: 1px solid black; border-collapse:collapse;'><tr><caption style='font-size: 18px'>Reservation Details</caption><th style='border: 1px solid black;'>Bike(s) Reserved</th><th style='border: 1px solid black;'>Pick-Up Date</th><th style='border: 1px solid black;'>Return Date:</th><th style='border: 1px solid black;'>Price Per Day</th><th style='border: 1px solid black;'>Total Price</th></tr>"
+
+  if (resLength == 1){
   bikeID.forEach(function(bikeItem){
-    emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>"+ bikeItem.bikeMake + ' ' + bikeItem.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + dayPrice +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + price +"</td></tr>";
+    emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>"+ bikeItem.bikeMake + ' ' + bikeItem.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[0] +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[0] +"</td></tr>";
   });
+}
+if (resLength > 1 && resLength < 5){
+bikeID.forEach(function(bikeItem){
+  emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>"+ bikeItem.bikeMake + ' ' + bikeItem.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[1] +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[1]*resLength +"</td></tr>";
+});
+}
+if (resLength > 4){
+bikeID.forEach(function(bikeItem){
+  emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>"+ bikeItem.bikeMake + ' ' + bikeItem.bikeModel +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[2] +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + bikeItem.bikePricing[2]*resLength +"</td></tr>";
+});
+}
+
+
+  emailTemplate += "<tr><td style='border: 1px solid black; text-align: center'>" + "<strong>TOTAL</strong>" +"</td><td style='border: 1px solid black; text-align: center'>"+ pickupDate +"</td><td style='border: 1px solid black; text-align: center'>"+ returnDate +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + dayPrice +"</td><td style='border: 1px solid black; text-align: center'>"+ "$" + price +"</td></tr>";
+
   emailTemplate += "</table>";
   var data = {
     from: 'Angry Catfish <tjherman32@gmail.com>',
