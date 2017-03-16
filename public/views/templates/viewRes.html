@@ -118,7 +118,7 @@
         <tr ng-repeat="res in viewRes.resList | filter: viewRes.selected.searchTags | dateMatch:viewRes.dates | bikeMatch:viewRes.selected:viewRes.bikeList as results track by $index ">
           <td><a ng-click="openModalResPopup(res.transactionID)">{{res.transactionID}}</a></td>
           <td>{{res.custName}}</td>
-          <td>{{res.custEmail}}</td>
+          <td><a href="mailto:{{res.custEmail}}">{{res.custEmail}}</a></td>
           <td><button ng-click="viewRes.deleteReservation(res._id)" class="delete"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button></td>
         </tr>
       </tbody>
