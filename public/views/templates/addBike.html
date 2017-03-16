@@ -67,7 +67,7 @@
 
   </ul>
   <!-- IMAGE URLS -->
-  Image URLs:
+  Images Uploaded:
   <!-- <ul>
     <li class="repeatList" ng-repeat="image in addBike.newBike.imageUrls track by $index">{{image}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteImage($index)"/></li>
     <label>Image URL: <input type="string" ng-model="addBike.newImage.newImage" name="imageURL" /></label>
@@ -87,13 +87,12 @@
 
   <div>
 
-       <span ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}">
-           <button>Select Picture</button> <span> {{file.$ngfName}} </span>
-           </span>
+       <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"/>
            <!-- <img ngf-thumbnail="file || '/images/upload.svg'"></div> -->
        <input type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
 
        <input type="button" ng-click="submitPic()" value="Upload" />
+       <span ng-show="addBike.needImage" class="error">One Image Required</span>
 </div>
 
 

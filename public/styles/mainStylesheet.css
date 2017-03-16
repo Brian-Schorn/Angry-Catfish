@@ -8,6 +8,9 @@ body {
   margin: 50px;
 }
 
+.error {
+  color: red;
+}
 .reservationTable {
   background-color: #f78b78;
 }

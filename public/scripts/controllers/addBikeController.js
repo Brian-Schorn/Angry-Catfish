@@ -11,6 +11,7 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
   $scope.uploads=[];
   $scope.comment='';
 
+
   //loads any already uploaded images
 
 
@@ -80,11 +81,13 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
     _this.newBike.imageUrls = [];
     _this.newBike.bulletPoints = [];
     _this.newBike.searchTags = [];
+    _this.needImage = false;
   }
   _this.reset();
 
 //SUBMIT BUTTON FOR ADD BIKE FORM
   _this.addBike = function(valid){
+    if($scope.uploads.length > 0){
     if(valid){
       _this.newBike.bikePricing = [];
       if(_this.bikePricing){
@@ -131,7 +134,12 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
     }else{
       console.log("Not Valid");
     }
+} else{
+  console.log("You need at least one picture");
+  console.log(_this.needImage);
+  _this.needImage = true;
 
+}
   };
 
 //ADD IMAGE URL TO ARRAY
