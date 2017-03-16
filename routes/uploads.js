@@ -59,7 +59,7 @@ router.delete('/', function (req, res) {
       res.sendStatus(500);
       return
     }
-    res.send(200);
+    res.sendStatus(200);
   })
 })
 

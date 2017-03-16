@@ -128,7 +128,9 @@ angryCatfishApp.controller('addBikeController', function ($http, $scope, $timeou
           }
         });
       });
-    };
+    }else{
+      console.log("Not Valid");
+    }
 
   };
 
