@@ -3,10 +3,15 @@ body {
   background: url(/public/assets/bg-main-tile.jpg) center 0 repeat;
 }
 
+/* Main Page header and jumbotron*/
+
 #acLogo {
   margin: 50px;
 }
 
+.homeContainer {
+  overflow: visible;
+}
 .jumbotron {
   font-size: 1.1em;
   height: 400px !important;
@@ -41,16 +46,18 @@ body {
   padding: 15px;
 }
 
+/* Admin Res View*/
+
+.reservationTable {
+  background-color: #f78b78;
+}
+
 .idButton{
   background-color: transparent;
   color: blue;
 }
 
-
-.homeContainer {
-  overflow: visible;
-}
-
+/* Admin Login */
 
 .adminHeader {
   font-size: 2.0em;
@@ -81,14 +88,9 @@ body {
   color: red;
 }
 
-.reservationTable {
-  background-color: #f78b78;
-}
-
 .mainHeader {
   text-align: right;
 }
-
 
 .adminHeader {
   list-style-type: none;
