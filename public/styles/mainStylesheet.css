@@ -24,7 +24,7 @@ body {
 @media (max-width: 768px) {
     .jumbotron {
         height: auto !important;
-        min-height: 200px;
+        min-height: 200px !important;
         background-repeat: repeat !important;;
     }
 }
@@ -35,7 +35,7 @@ body {
   max-width: 1000px;
   margin: 120px auto 0;
 }
-@media (max-width: 944px) {
+@media (max-width: 1200px) {
     #landingTextBlock  {
       margin: auto;
     }
@@ -96,10 +96,10 @@ body {
   list-style-type: none;
 }
 
-#checkoutPage {
-  padding-bottom: 100px;
-  margin-bottom: 100px;
+#checkoutPage\20 container > form {
+  padding: 40px;
 }
+
 
 #resModalView {
   list-style-type: square;
