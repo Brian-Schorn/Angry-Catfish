@@ -7,6 +7,40 @@ body {
   margin: 50px;
 }
 
+.jumbotron {
+  font-size: 1.1em;
+  height: 400px !important;
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
+  margin-bottom: 20px !important;
+  /*background: url("/public/assets/jumbotronBikes.jpeg") no-repeat;
+  background-position: bottom;*/
+}
+@media (max-width: 768px) {
+    .jumbotron {
+        height: auto !important;
+        min-height: 200px;
+        background-repeat: repeat !important;;
+    }
+}
+
+#landingTextBlock {
+  background-color: #E0EAF3;
+  opacity: 0.85;
+  max-width: 1000px;
+  margin: 120px auto 0;
+}
+@media (max-width: 944px) {
+    #landingTextBlock  {
+      margin: auto;
+    }
+}
+#landingText {
+  color: #3f2d24;
+  opacity: 1;
+  padding: 15px;
+}
+
 .idButton{
   background-color: transparent;
   color: blue;
@@ -43,40 +77,10 @@ body {
   margin: 0 auto;
 }
 
-.jumbotron {
-  height: 400px !important;
-  /*width: 100%;*/
-  /*background: url("/public/assets/jumbotronBikes.jpeg") no-repeat;
-  background-size: 100%;
-  color: black;
-  background-position: bottom;*/
-}
-@media (max-width: 768px)
-{
-    .jumbotron
-    {
-        height: auto !important;
-    }
-}
-
-body > main > ng-view > div.jumbotron.col-sm-12.ng-scope.ng-isolate-scope {
-  background-size: 100% !important;
-  background-repeat: no-repeat !important;
-}
-
-#landingText {
-  color: #3f2d24;
-  opacity: 1;
-}
-
-#landingTextBlock {
-  background-color: #E0EAF3;
-  opacity: 0.85;
-}
-
 .error {
   color: red;
 }
+
 .reservationTable {
   background-color: #f78b78;
 }

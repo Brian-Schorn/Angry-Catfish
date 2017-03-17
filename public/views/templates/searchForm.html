@@ -1,10 +1,11 @@
-<div class="jumbotron col-sm-12" ng-init="myPattern='public/assets/jumbotronBikes.jpeg'" ng-parallax pattern="myPattern" speed="0" reverse="true">
-  <div id="landingTextBlock" class="col-sm-10 col-sm-offset-1">
-    <div id="landingText" class="col-sm-10 col-sm-offset-1">
-    "For as long as we can remember we've prided ourselves on riding, testing, and truly believing in all of the products we carry and sell.  We spend so much time testing and comparing bikes, we feel that its only fair that we've give you that same opportunity.  So whether you're testing bikes before you decide on the next addition to your fleet, or your just want to go out and rip it up on a new super-bike, we've got you covered."
+<div class="jumbotron col-sm-12" ng-init="myPattern='public/assets/jumbotronBikes.jpeg'" ng-parallax pattern="myPattern" speed="5" reverse="true">
+  <div id="landingTextBlock">
+    <!-- class="col-sm-10 col-sm-offset-1" -->
+    <div id="landingText" >
+      <!-- class="col-sm-10 col-sm-offset-1" -->
+      "For as long as we can remember we've prided ourselves on riding, testing, and truly believing in all of the products we carry and sell.  We spend so much time testing and comparing bikes, we feel that its only fair that we've give you that same opportunity.  So whether you're testing bikes before you decide on the next addition to your fleet, or your just want to go out and rip it up on a new super-bike, we've got you covered."
     </div>
   </div>
-
 </div>
 
 <div class="searchContainer">
@@ -12,7 +13,6 @@
   <div id="calenderSearchZone">
     <div class="row">
       <div class="col-sm-4 col-sm-offset-2">
-
         Checkout Date:
         <p class="input-group" tooltip-placement="top" uib-tooltip="Choose the start date">
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.start" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" ng-disabled="auth.getTotalItems() > 0" />
@@ -23,19 +23,15 @@
       </div>
 
       <div class="col-sm-4">
-
         Checkin Date:
         <p class="input-group" tooltip-placement="top" uib-tooltip="Choose the end date">
-
           <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt.end" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" ng-disabled="auth.getTotalItems() > 0" />
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
         </p>
       </div>
-      <!-- <div class="col-sm-2">
-        <input type="button" class="btn" ng-click="auth.checkDates()" value="Update Dates" />
-      </div> -->
+
       <div id="cart" class="col-sm-2">
         <i class="fa fa-shopping-cart fa-lg"></i>
         <span>{{ auth.getTotalItems() }}
@@ -98,7 +94,7 @@
         <ui-select class="" ng-model="auth.selected.bikeSize" theme="bootstrap">
          <ui-select-match placeholder="Size">{{$select.selected.bikeSize}}</ui-select-match>
          <ui-select-choices repeat="bike.bikeSize as bike in auth.bikeList | filter: auth.selected.bikeCategory | filter : auth.selected.bikeMake | filter : auth.selected.bikeModel | unique : 'bikeSize' ">{{bike.bikeSize}}</ui-select-choices>
-       </ui-select>
+        </ui-select>
        <div class="input-group-btn searchClear">
          <button type="button" class="btn btn-sm btn-warning" ng-click="auth.selected.bikeSize = undefined" tooltip-placement="bottom" uib-tooltip="Clear search field"><span class="fa fa-times"></span></button>
        </div>
