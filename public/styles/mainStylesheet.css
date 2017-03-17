@@ -44,19 +44,24 @@ body {
 }
 
 .jumbotron {
-  height: 400px;
+  height: 400px !important;
   /*width: 100%;*/
-  background: url(https://scontent.cdninstagram.com/t51.2885-15/e35/17125437_702367546602161_1527450650047152128_n.jpg) no-repeat;
+  /*background: url("/public/assets/jumbotronBikes.jpeg") no-repeat;
   background-size: 100%;
   color: black;
-  background-position: bottom;
+  background-position: bottom;*/
 }
 @media (max-width: 768px)
 {
     .jumbotron
     {
-        height: auto;
+        height: auto !important;
     }
+}
+
+body > main > ng-view > div.jumbotron.col-sm-12.ng-scope.ng-isolate-scope {
+  background-size: 100% !important;
+  background-repeat: no-repeat !important;
 }
 
 #landingText {

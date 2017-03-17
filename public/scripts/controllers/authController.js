@@ -5,8 +5,10 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
   var _this = this;
   var authFactory = AuthFactory;
 
+  $scope.myPattern = 'public/assets/jumbotronBikes.jpeg'
+
   _this.clearSearch = function(){
-    console.log ("Clear All Search Fields")
+    // console.log ("Clear All Search Fields")
     $scope.dt = {};
     $scope.dt.start = new Date();
     $scope.dt.end = new Date();
@@ -52,7 +54,7 @@ _this.clearCart = function(){
   _this.getBikes = function(){
     bikeService.getBikes().then(function(bikeList){
       _this.bikeList = bikeList.data;
-      console.log('bike list', _this.bikeList);
+      // console.log('bike list', _this.bikeList);
       _this.selectedBikes = [];
       _this.cart = ngCart.getItems();
       _this.cart.forEach(function(cartBike){
@@ -79,21 +81,21 @@ _this.clearCart = function(){
     _this.filter.start = _this.filter.start.getTime();
     _this.filter.end = _this.filter.end.getTime();
 
-    console.log("Start Date",Date(_this.filter.start));
-    console.log("End Date",_this.filter.end);
-    console.log("Reservation List",_this.resList);
+    // console.log("Start Date",Date(_this.filter.start));
+    // console.log("End Date",_this.filter.end);
+    // console.log("Reservation List",_this.resList);
     _this.resList.forEach(function(res){
       _this.filter.resBikeId = [];
       res.bikeID.forEach(function(id){
         _this.filter.resBikeId.push(id);
       })
       // _this.filter.resBikeId = res.bikeID[0];
-      console.log("BikeId",_this.filter.resBikeId);
+      // console.log("BikeId",_this.filter.resBikeId);
       res.resDate.forEach(function(resDate){
         _this.filter.query = new Date(resDate).getTime();
-        console.log("resDate",_this.filter.query);
+        // console.log("resDate",_this.filter.query);
         if((_this.filter.query >= _this.filter.start) && (_this.filter.query < _this.filter.end)){
-          console.log("Conflict!", _this.filter.resBikeId);
+          // console.log("Conflict!", _this.filter.resBikeId);
           _this.filter.resBikeId.forEach(function(id){
                       _this.availability.push(id);
           })
@@ -101,13 +103,13 @@ _this.clearCart = function(){
         }
       })
     })
-    console.log("Availability Conflicts", _this.availability);
+    // console.log("Availability Conflicts", _this.availability);
   };
 
   _this.getReservations = function(){
     reservationService.getReservations().then(function(resList){
       _this.resList = resList.data;
-      console.log("reservation list", _this.resList);
+      // console.log("reservation list", _this.resList);
       _this.checkDates();
       _this.pageLoad = true;
     });
