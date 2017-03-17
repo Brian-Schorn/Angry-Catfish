@@ -175,6 +175,7 @@ _this.calcPrice();
       console.log("Deleting", index);
       $timeout(function(){
         ngCart.removeItem(index);
+        _this.getBikes();
         _this.calcPrice();
         if(_this.cart.length == 0){
           $location.url('/searchForm/')

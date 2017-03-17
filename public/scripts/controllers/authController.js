@@ -9,9 +9,14 @@ angryCatfishApp.controller('AuthController', function (AuthFactory, $http, $scop
 
   _this.clearSearch = function(){
     // console.log ("Clear All Search Fields")
-    $scope.dt = {};
-    $scope.dt.start = new Date();
-    $scope.dt.end = new Date();
+
+    var isCartEmpty = _this.getTotalItems();
+    console.log("CartSize",isCartEmpty);
+    if(isCartEmpty == 0){
+      $scope.dt = {};
+      $scope.dt.start = new Date();
+      $scope.dt.end = new Date();
+    }
     _this.selected = undefined;
   }
 
