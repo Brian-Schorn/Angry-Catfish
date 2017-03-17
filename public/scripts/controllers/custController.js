@@ -190,3 +190,19 @@ _this.calcPrice();
 
 
 });
+
+angryCatfishApp.filter('unique', function() {
+  console.log('Unique filter hit');
+  return function(collection, keyname) { // we will return a function which will take in a collection and a keyname
+    var output = [], // we define our output and keys array;
+    keys = [];
+    angular.forEach(collection, function(item) {// this takes in our original collection and an iterator function
+      var key = item[keyname];// we check to see whether our object exists
+      if(keys.indexOf(key) === -1) { // if it's not already part of our keys array
+      keys.push(key); // add it to our keys array
+      output.push(item);// push this item to our final output array
+    }
+  });
+  return output;// return our array which should be devoid of any duplicates
+};
+});
