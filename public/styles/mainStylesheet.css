@@ -99,7 +99,9 @@ body {
 #checkoutPage\20 container > form {
   padding: 40px;
 }
-
+#checkoutPage\20 container > form > div.col-sm-12 {
+  margin-bottom: 100px;
+}
 
 #resModalView {
   list-style-type: square;
