@@ -76,20 +76,29 @@
 }
 
 .addBikeBox {
-  margin-right: 50px;
+  margin-right: -18px;
 }
-@media (max-width: 1200px)
+@media (max-width: 992px)
 {
     .addBikeBox
     {
-        margin: 25px;
+        margin-right: 35px;
     }
 }
+@media (min-width: 1200px)
+{
+    .addBikeBox
+    {
+        margin-right: 50px;
+    }
+}
+
 
 .previewImage {
   height: 100px;
   width: auto;
 }
+
 #available {
   color: #F23F1E;
 }
