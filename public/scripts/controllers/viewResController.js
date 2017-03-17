@@ -45,7 +45,7 @@ angryCatfishApp.controller('viewResController', function (AuthFactory, $http, $s
       // console.log("Deleting", id);
       $timeout(function(){
         reservationService.deleteReservation(id).then(function(resList){
-          _this.resList = resList.data;
+          _this.getReservations();
           // console.log('Post Delete bike list:', _this.resList);
 
         });
