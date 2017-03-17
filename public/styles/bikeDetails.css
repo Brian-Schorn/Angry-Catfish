@@ -49,7 +49,6 @@
   border: 2px solid brown;
   position: relative;
   cursor: pointer;
-
 }
 
 .bikeBoxText {
@@ -80,17 +79,13 @@
 .addBikeBox {
   margin-right: -18px;
 }
-@media (max-width: 992px)
-{
-    .addBikeBox
-    {
+@media (max-width: 992px) {
+    .addBikeBox {
         margin-right: 35px;
     }
 }
-@media (min-width: 1200px)
-{
-    .addBikeBox
-    {
+@media (min-width: 1200px) {
+    .addBikeBox {
         margin-right: 50px;
     }
 }
@@ -129,10 +124,14 @@
   padding-bottom: 0;
 }*/
 
-#pedalDropdown {
-  width: 100px;
+.bikeBookDrop {
+  width: auto;
+  background-color: #c6dcef;
+	color: black;
+  height: 24px;
 }
-
-#helmetDropdown {
-  width: 100px;
+@media (max-width: 400px) {
+    .bikeBookDrop {
+        max-width: 110px;
+    }
 }
