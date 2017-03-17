@@ -93,7 +93,7 @@ _this.checkDates = function() {
     swal({
   title: "Success! Bike Added to Cart",
   text: "Would you like to proceed to Booking or add another Bike?",
-  type: "info",
+  type: "success",
   showCancelButton: true,
   confirmButtonColor: "#DD6B55",
   confirmButtonText: "Book Reservation",
@@ -122,7 +122,7 @@ function(isConfirm){
   } else {
     ngCart.addItem(id, name, price, quantity, data);
 
-    swal("Bike Reservation Added to Cart", "Please select another bike to add to your transaction", "success");
+    swal("Bike Reservation Added to Cart", "Please select another bike to add to your transaction", "info");
     $uibModalStack.dismissAll();
 
   }
