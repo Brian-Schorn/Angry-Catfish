@@ -4,23 +4,16 @@
 }
 .bikeModal {
   padding: 20px;
+
 }
 .modal-header {
   text-align: center;
   font-size: 1.4em;
 }
 
-#modalClose {
-  background-color: #FFFCF7;
-}
-
 #bikeIcon {
   margin-left: 10px;
 }
-
-/*.rentPriceList li {
-  display: inline;
-}*/
 
 .rentPriceList li {
   list-style: none;
@@ -90,12 +83,6 @@
     }
 }
 
-
-.previewImage {
-  height: 100px;
-  width: auto;
-}
-
 #available {
   color: #F23F1E;
 }
@@ -104,25 +91,9 @@
   color: #3F2D24;
 }
 
-.addBikeForm {
-  padding: 20px;
-}
-#modalWarning {
-  color: #F23F1E;
-}
-
-.bikeBulletDelete {
-  margin-left: 20px;
-}
-
 #bikeSelectDiv {
   margin-top: 20px;
 }
-
-/*#bikeModal .modal-footer {
-  margin-bottom: 0;
-  padding-bottom: 0;
-}*/
 
 .bikeBookDrop {
   width: auto;

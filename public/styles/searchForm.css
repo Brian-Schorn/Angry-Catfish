@@ -11,12 +11,6 @@
   margin-bottom: 100px;
 }
 
-#searchForm input:focus, #searchForm input:active {
-  /*border: none !important;
-  outline: none !important;
-  box-shadow: none !important;*/
-}
-
 .ui-select-match-text {
     overflow: auto;
     text-overflow: ellipsis;
