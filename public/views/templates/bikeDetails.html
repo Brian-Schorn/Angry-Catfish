@@ -42,7 +42,7 @@
 
     <div class="row">
       <div class="col-xs-8" name="manufacURL">
-        <a ng-href="{{bike.selectedBike.manufacURL}}" target="_blank">Go to {{bike.selectedBike.bikeMake}} {{bike.selectedBike.bikeModel}} website</a>
+        <a ng-href="{{bike.selectedBike.manufacURL}}" target="_blank">More info at the official {{bike.selectedBike.bikeMake}} {{bike.selectedBike.bikeModel}} website</a>
       </div>
 
       <!-- <div class="col-xs-4">
@@ -83,7 +83,7 @@
           <option value="None">I'm not sure</option>
           <option value="None">None (I will bring my own)</option>
         </select>
-        <span ng-show="bike.pedalNeeded">Pedal Type Required!</span>
+        <span ng-show="bike.pedalNeeded">Please Pick a Pedal</span>
       </div>
 
       <div class="col-xs-6 col-sm-4">
