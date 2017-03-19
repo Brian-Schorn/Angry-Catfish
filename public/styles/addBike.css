@@ -73,3 +73,29 @@ body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div > di
   padding: 0;
   margin-left: 5px;
 }
+
+/* edit bike details button positioning */
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div > div > div > div > p {
+  margin-top: 25px;
+  height: 32px;
+  margin-left: 10px;
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div > div > div > div > button {
+  margin-top: 25px;
+  height: 32px;
+  margin-left: 10px;
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div > div > ul > li > i {
+  margin-left: 5px;
+  padding: 0;
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div.row.addBikeBottomRow > div:nth-child(2) > div.input-group > label > span {
+  cursor: pointer;
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div.row.addBikeBottomRow > div:nth-child(2) > div.input-group > label > span:hover {
+  background-color: lightblue
+}
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > div > form > div.row.addBikeBottomRow > div:nth-child(2) > div.ng-scope > div > button {
+  padding: 0;
+  height: 18px;
+}
