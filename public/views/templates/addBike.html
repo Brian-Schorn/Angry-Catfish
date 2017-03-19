@@ -127,7 +127,7 @@
           </div>
         </div>
         <ul>
-          <li class="repeatList" ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}<img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteTag($index)"/></li>
+          <li class="repeatList" ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}<i class="btn btn-danger btn-xs fa fa-times" alt="Add A Bike" ng-click="addBike.deleteTag($index)"></i></li>
         </ul>
       </div>
 
@@ -143,7 +143,7 @@
           </div>
         </div>
         <ul>
-          <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"/></li>
+          <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}<i class="btn btn-danger btn-xs fa fa-times" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"></i></li>
         </ul>
       </div>
 
@@ -152,7 +152,7 @@
 <div class="row addBikeBottomRow">
 
   <div class="col-sm-5 col-sm-offset-1">
-    <div class="form-group">
+    <div class="input-group">
       <label>Bike Pricing:</label>
         <select id="bikePricingDropdown" class="form-control btn btn-info pull-right" ng-model="addBike.bikePricing" ng-init="addBike.bikePricing = 'false'">
           <option value='false'>Default pricing</option>
@@ -180,33 +180,6 @@
     </div>
 
   </div>
-
-
-  <!-- IMAGE URLS -->
-
-  <!-- <button class="btn btn-primary" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image</button>
-  <span> {{file.$ngfName}} </span>
-  <img ngf-thumbnail="file || '/public/assets/upload1.png'">
-  <input type="text" ng-model="comment" placeholder="Add details... "/>
-  <button class="btn btn-primary" ng-click="submit()"><i class="fa fa-cloud-upload"></i> Upload</button> -->
-
-  <!-- <div class="col-sm-5">
-    <div class="input-group">
-      <label class="">Bullet Points:</label>
-      <input class="form-control" type="string" ng-model="addBike.newBullet" name="bulletPoint" />
-      <span ng-show="addBikeForm.$submitted">
-        <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
-      </span>
-      <div class="input-group-btn">
-        <button class="btn btn-info btn-sm editBikeFormBtn" type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point">Add Bullet Point</button>
-      </div>
-    </div>
-
-    <ul class="">
-      <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"/></li>
-    </ul>
-
-  </div> -->
 
   <div class="col-sm-5">
     <div class="input-group">

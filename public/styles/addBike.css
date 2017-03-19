@@ -66,3 +66,10 @@ body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-
 body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div.row.addBikeBottomRow > div:nth-child(2) > div > label > span > img {
 
 }
+/*repeatList img {
+  display: inline-block;
+}*/
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div > div > ul > li > i {
+  padding: 0;
+  margin-left: 5px;
+}
