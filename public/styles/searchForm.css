@@ -3,10 +3,6 @@
   /*#F23F1E #3F2D24*/
 }
 
-#calendarSearchZone {
-
-}
-
 #searchForm {
   margin-bottom: 100px;
 }
@@ -35,10 +31,6 @@
   margin-left: 25px;
 }
 
-.trashIcon {
-  height: 15px;
-  width: 15px;
-}
 .glyphicon-plus {
   font-size: 15em;
   margin: 0 0 10px 25px;
