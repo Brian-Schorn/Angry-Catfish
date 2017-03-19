@@ -16,55 +16,31 @@
   text-wrap: normal;
 }
 
-#bikePricingDropdown{
-  background-color: #5bc0de;
-  height: 26px;
-  color: white;
-  font-weight: 200;
-}
-
 .previewImage {
   height: 100px;
   width: auto;
 }
 
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(5) > div:nth-child(3) > div.pushItDown > div > label > input {
-  border: 1px solid black;
-  overflow: hidden;
-  /*width: 100%*/
-}
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div.col-sm-5.col-sm-offset-1 > div > div.input-group-btn > button{
-  margin-top: 25px;
-  height: 32px;
-  margin-left: 10px;
-}
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div:nth-child(2) > div > div > button {
-  margin-top: 25px;
-  height: 32px;
-  margin-left: 10px;
-}
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(3) > div.col-sm-5.col-sm-offset-1 > div > div.input-group-btn > button{
-  margin-top: 25px;
-  height: 32px;
-  margin-left: 10px;
-}
+/* Add bullet point button  */
 body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(3) > div:nth-child(2) > div > div > button {
   margin-top: 25px;
   height: 32px;
   margin-left: 10px;
 }
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div:nth-child(2) > div > div.input-group-btn > button{
-
+/* Add search tag button */
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(3) > div.col-sm-5.col-sm-offset-1 > div > div > p {
+  margin-top: 25px;
+  height: 32px;
+  margin-left: 10px;
 }
-
 /* Select Image Title and file select open */
 body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div:nth-child(2) > div > label > span {
   cursor: pointer;
+  margin-right: 30px;
 }
 body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div:nth-child(2) > div > label > span:hover {
   background-color: lightblue;
   padding: 10px;
-
 }
 /* Button : upload image */
 body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div.col-sm-5 > div > div > button {
@@ -72,19 +48,21 @@ body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-
   height: 32px;
   margin-left: 10px;
 }
-/*select image label and click to select file*/
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div.col-sm-5 > div > label > p {
-  border: .1px solid gray
-}
-/*#imageComment {
-  width: 100px;
-}
-body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div:nth-child(4) > div:nth-child(2) > div {
-  width: 200px;
-}*/
+
 #bikePricingDropdown {
   height: 30px;
   margin-left: 10px;
   font-weight: 200px;
   max-width: 140px;
+}
+
+#addBikeModalFooter {
+  margin: 5px 10px 0;
+}
+#addBikeModalFooter > div.btn.btn-primary {
+  margin-left: 10px;
+}
+/* upload image file display */
+body > div.modal.fade.ng-scope.ng-isolate-scope.in > div > div > form > div.row.addBikeBottomRow > div:nth-child(2) > div > label > span > img {
+
 }

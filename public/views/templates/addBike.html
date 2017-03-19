@@ -5,14 +5,13 @@
 
   <div class="modal-title">
     <div class="col-sm-8 col-sm-offset-2">
-      <h3 class="modal-title">Add Bike Details</h3>
+      <h3 class="modal-title">Add A Bike</h3>
       <h4 id="modalWarning"> If you click outside of the modal, changes will not be saved!</h4>
-      <!-- <button class="btn btn-warning" type="button" ng-click="bikeEdit.closeModal()"><i class="fa fa-times fa-lg"></i></button> -->
     </div>
   </div>
 </div>
 
-<form name="addBikeForm" class="addBikeForm form" novalidate>
+<form name="addBikeForm" class="addBikeForm" novalidate>
 
   <div class="row">
     <!-- Bike Cateogry -->
@@ -24,8 +23,6 @@
           <span ng-show="addBikeForm.bikeCategory.$error.required" class="error">Bike Category Required</span>
       </span>
     </div>
-
-
     <!-- Bike Make -->
     <div class="form-group col-sm-4">
       <label>Brand:
@@ -35,8 +32,6 @@
         <span ng-show="addBikeForm.bikeMake.$error.required" class="error">Bike Make Required</span>
       </span>
     </div>
-
-
     <!-- Bike Model -->
     <div class="form-group col-sm-4">
       <label>Model:
@@ -46,12 +41,11 @@
         <span ng-show="addBikeForm.bikeModel.$error.required" class="error">Bike Model Required</span>
       </span>
     </div>
-
   </div>
 
-  <!-- Bike Size -->
-  <div class="row">
 
+  <div class="row">
+  <!-- Bike Size -->
     <div class="form-group col-sm-4">
       <label>Size:
         <input class="form-control" type="text" ng-model="addBike.newBike.bikeSize" name="bikeSize" required=""  />
@@ -60,8 +54,6 @@
         <span ng-show="addBikeForm.bikeSize.$error.required" class="error">Bike Size Required</span>
       </span>
     </div>
-
-
     <!-- Bike Frame -->
     <div class="form-group col-sm-4">
       <label>Frame Material:
@@ -71,7 +63,6 @@
           <span ng-show="addBikeForm.bikeFrame.$error.required" class="error">Bike Frame Material Required</span>
       </span>
     </div>
-
     <!-- Manufacturer's Website -->
     <div class="form-group col-sm-4">
       <label>Manufacturer's Website:
@@ -127,13 +118,12 @@
       <div class="col-sm-5 col-sm-offset-1">
         <div class="input-group">
           <label>Search Tags:</label>
-          <div class="">
-            <input class="form-control" type="string" ng-model="addBike.newTag" name="searchTag" />
-          </div>
-          <span ng-show="addBikeForm.$submitted"></span>
-                <!-- <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span> -->
+          <input class="form-control" type="string" ng-model="addBike.newTag" name="searchTag" />
+          <span ng-show="addBikeForm.$submitted">
+            <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span>
+          </span>
           <div class="input-group-btn">
-            <button class="btn btn-info btn-sm" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag">Add Search Tag</button>
+            <p class="btn btn-info btn-sm" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag">Add Search Tag</p>
           </div>
         </div>
         <ul>
@@ -146,34 +136,30 @@
           <label class="">Bullet Points:</label>
           <input class="form-control" type="string" ng-model="addBike.newBullet" name="bulletPoint" />
           <span ng-show="addBikeForm.$submitted">
-          <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
+            <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
           </span>
           <div class="input-group-btn">
             <button class="btn btn-info btn-sm editBikeFormBtn" type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point">Add Bullet Point</button>
           </div>
         </div>
-
-        <ul class="">
+        <ul>
           <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}  <img class="img-responsive trashIcon" src="public/assets/trash.png" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"/></li>
         </ul>
       </div>
 
     </div>
 
-<div class="row">
-  <!-- SEARCH TAGS -->
+<div class="row addBikeBottomRow">
 
   <div class="col-sm-5 col-sm-offset-1">
     <div class="form-group">
       <label>Bike Pricing:</label>
-        <select id="bikePricingDropdown" class="form-control" ng-model="addBike.bikePricing" ng-init="addBike.bikePricing = 'false'">
+        <select id="bikePricingDropdown" class="form-control btn btn-info pull-right" ng-model="addBike.bikePricing" ng-init="addBike.bikePricing = 'false'">
           <option value='false'>Default pricing</option>
           <option value='true'>Custom</option>
         </select>
 
-
       <div ng-show="addBike.bikePricing == 'true'">
-
         <label>1 Day Pricing</label> <input type="number" ng-model="addBike.oneDayPrice" name="oneDayPrice" ng-init="addBike.oneDayPrice = 75" required=""  /></label>
         <span ng-show="addBike.bikePricing == 'true' && (addBikeForm.$submitted || addBikeForm.oneDayPrice.$touched)">
           <span ng-show="addBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
@@ -189,8 +175,8 @@
         <span ng-show="addBike.bikePricing == 'true' && (addBikeForm.$submitted || addBikeForm.fiveDayPrice.$touched)">
           <span ng-show="addBikeForm.fiveDayPrice.$error.required" class="error">Five Day Price Required</span>
         </span>
-
       </div>
+
     </div>
 
   </div>
@@ -224,40 +210,39 @@
 
   <div class="col-sm-5">
     <div class="input-group">
-      <!-- <label class=""><i class="fa fa-search-plus"></i> Select Image: </label> -->
-
       <label>
-        <span class="" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image: </span>
+        <span class="" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image:
+          <!-- <span class="pull-right">{{file.$ngfName}}
+            <img ngf-thumbnail="file || '/public/assets/upload1.png'">
+          </span> -->
+        </span>
       </label>
-      <!-- <div>
-        <input type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"/>
-      </div> -->
-               <!-- <img ngf-thumbnail="file || '/images/upload.svg'"></div> -->
+
        <input id="imageComment" class="form-control" type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
        <span ng-show="addBike.needImage" class="error">One Image Required</span>
        <div class="input-group-btn">
-        <button class="btn btn-info btn-sm" type="button" ng-click="submitPic()" value="Upload">Upload</button>
+        <button class="btn btn-info btn-sm" type="button" ng-click="submitPic()" value="Upload"><i class="fa fa-cloud-upload"></i> Upload</button>
        </div>
     </div>
 
-
-
-      <div class="" ng-repeat="picture in uploads | orderBy: 'created' : true ">
-        <img class="previewImage" ng-src="{{picture.file.location}}"/>
-        <div>
+    <div class="" ng-repeat="picture in uploads | orderBy: 'created' : true ">
+      <img class="previewImage" ng-src="{{picture.file.location}}"/>
+      <div>
         {{picture.comment}}
         <button class="btn btn-warning btn-sm" ng-click="deletePic(picture._id)"><i class="fa fa-trash fa-sm" aria-hidden="true"></i></button>
-        </div>
       </div>
+    </div>
   </div>
 </div>
 
-<!-- <div class="row"> -->
-  <div class="pull-right">
-    <button class="btn btn-warning" type="button" ng-click="addBike.reset(addBikeForm)" value="Reset">Reset</button>
-    <button class="btn btn-primary" type="submit"  ng-click="addBike.addBike(addBikeForm.$valid)" value="Add Bike">Add Bike</button>
+<hr/>
+
+<div class="row">
+  <div id="addBikeModalFooter" class="pull-right">
+    <div class="btn btn-warning" type="button" ng-click="addBike.reset(addBikeForm)" value="Reset">Reset</div>
+    <div class="btn btn-primary" type="submit"  ng-click="addBike.addBike(addBikeForm.$valid)" value="Add Bike">Add Bike</div>
   </div>
-<!-- </div> -->
+</div>
 
 
 </form>
