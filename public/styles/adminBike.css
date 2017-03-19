@@ -1,0 +1,49 @@
+.addBikeForm {
+  padding: 20px;
+  overflow: hidden;
+}
+
+.modalWarning {
+  color: #F23F1E;
+}
+
+.selectImageFile:hover {
+  background-color: lightblue;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.imageUpload {
+  margin: 10px;
+}
+.previewImage {
+  height: 100px;
+  width: auto;
+}
+
+#bikePricingDropdown {
+  height: 30px;
+  margin-top: 2px;
+  font-weight: 200px;
+  max-width: 140px;
+}
+
+.adminBikeModalBtn {
+  margin-top: 25px;
+  height: 32px;
+  margin-left: 10px !important;
+}
+.adminBikeModalFooter {
+  margin: 5px 10px 5px 0;
+}
+.adminBikeModalFooter button {
+  margin-left: 10px;
+}
+.adminDeletePointBtn {
+  padding: 0px;
+  margin-left: 8px;
+}
+.error {
+  color: red;
+  font-size: .9em
+}

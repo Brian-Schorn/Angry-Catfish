@@ -84,11 +84,6 @@ body {
   margin: 0 auto;
 }
 
-.error {
-  color: red;
-  font-size: .9em
-}
-
 .mainHeader {
   text-align: right;
 }

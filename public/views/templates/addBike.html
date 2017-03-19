@@ -1,14 +1,16 @@
 <div class="modal-header">
-  <div id="modalClose" class="pull-right">
+
+  <div class="modalClose pull-right">
     <button class="btn btn-warning"  type="button" ng-click="addBike.closeModal()"><i class="fa fa-times"></i></button>
   </div>
 
   <div class="modal-title">
     <div class="col-sm-8 col-sm-offset-2">
       <h3 class="modal-title">Add A Bike</h3>
-      <h4 id="modalWarning"> If you click outside of the modal, changes will not be saved!</h4>
+      <h4 class="modalWarning"> If you click outside of the modal, changes will not be saved!</h4>
     </div>
   </div>
+
 </div>
 
 <form name="addBikeForm" class="addBikeForm" novalidate>
@@ -122,12 +124,12 @@
           <span ng-show="addBikeForm.$submitted">
             <span ng-hide="addBike.newBike.searchTags.length > 0" class="error">One Search Tag Required</span>
           </span>
-          <div class="input-group-btn">
-            <p class="btn btn-info btn-sm" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag">Add Search Tag</p>
+          <div class="input-group-btn ">
+            <p class="btn btn-info btn-sm adminBikeModalBtn" ng-click="addBike.addTag(addBike.newTag)" value="Add Search Tag">Add Search Tag</p>
           </div>
         </div>
         <ul>
-          <li class="repeatList" ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}<i class="btn btn-danger btn-xs fa fa-times" alt="Add A Bike" ng-click="addBike.deleteTag($index)"></i></li>
+          <li class="repeatList" ng-repeat="tag in addBike.newBike.searchTags track by $index">{{tag}}<i class="btn btn-danger btn-xs fa fa-times adminDeletePointBtn" alt="Add A Bike" ng-click="addBike.deleteTag($index)"></i></li>
         </ul>
       </div>
 
@@ -139,11 +141,11 @@
             <span ng-hide="addBike.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
           </span>
           <div class="input-group-btn">
-            <button class="btn btn-info btn-sm editBikeFormBtn" type="button" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point">Add Bullet Point</button>
+            <p class="btn btn-info btn-sm adminBikeModalBtn" ng-click="addBike.addBullet(addBike.newBullet)" value="Add Bullet Point">Add Bullet Point</p>
           </div>
         </div>
         <ul>
-          <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}<i class="btn btn-danger btn-xs fa fa-times" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"></i></li>
+          <li class="repeatList" ng-repeat="bullet in addBike.newBike.bulletPoints track by $index">{{bullet}}<i class="btn btn-danger btn-xs fa fa-times adminDeletePointBtn" alt="Add A Bike" ng-click="addBike.deleteBullet($index)"></i></li>
         </ul>
       </div>
 
@@ -154,7 +156,7 @@
   <div class="col-sm-5 col-sm-offset-1">
     <div class="input-group">
       <label>Bike Pricing:</label>
-        <select id="bikePricingDropdown" class="form-control btn btn-info pull-right" ng-model="addBike.bikePricing" ng-init="addBike.bikePricing = 'false'">
+        <select id="bikePricingDropdown" class="form-control btn btn-info pull-right adminBikeModalBtn" ng-model="addBike.bikePricing" ng-init="addBike.bikePricing = 'false'">
           <option value='false'>Default pricing</option>
           <option value='true'>Custom</option>
         </select>
@@ -184,7 +186,7 @@
   <div class="col-sm-5">
     <div class="input-group">
       <label>
-        <span class="" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image:
+        <span class="selectImageFile" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image:
           <!-- <span class="pull-right">{{file.$ngfName}}
             <img ngf-thumbnail="file || '/public/assets/upload1.png'">
           </span> -->
@@ -194,15 +196,15 @@
        <input id="imageComment" class="form-control" type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
        <span ng-show="addBike.needImage" class="error">One Image Required</span>
        <div class="input-group-btn">
-        <button class="btn btn-info btn-sm" type="button" ng-click="submitPic()" value="Upload"><i class="fa fa-cloud-upload"></i> Upload</button>
+        <button class="btn btn-info btn-sm adminBikeModalBtn" type="button" ng-click="submitPic()" value="Upload"><i class="fa fa-cloud-upload"></i> Upload</button>
        </div>
     </div>
 
-    <div class="" ng-repeat="picture in uploads | orderBy: 'created' : true ">
+    <div class="imageUpload" ng-repeat="picture in uploads | orderBy: 'created' : true ">
       <img class="previewImage" ng-src="{{picture.file.location}}"/>
       <div>
         {{picture.comment}}
-        <button class="btn btn-warning btn-sm" ng-click="deletePic(picture._id)"><i class="fa fa-trash fa-sm" aria-hidden="true"></i></button>
+        <button class="btn btn-danger adminDeletePointBtn" ng-click="deletePic(picture._id)"><i class="fa fa-times fa-xs " aria-hidden="true"></i></button>
       </div>
     </div>
   </div>
@@ -211,7 +213,7 @@
 <hr/>
 
 <div class="row">
-  <div id="addBikeModalFooter" class="pull-right">
+  <div class="adminBikeModalFooter pull-right">
     <button class="btn btn-warning" type="button" ng-click="addBike.reset(addBikeForm)" value="Reset">Reset</button>
     <button class="btn btn-primary" type="submit"  ng-click="addBike.addBike(addBikeForm.$valid)" value="Add Bike">Add Bike</button>
   </div>
