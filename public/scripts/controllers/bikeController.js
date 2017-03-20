@@ -103,7 +103,7 @@ _this.checkDates = function() {
 },
 function(isConfirm){
   var id = _this.selectedBike._id;
-  var name = _this.selectedBike.bikeMake + " " + _this.selectedBike.bikeModel
+  var name = _this.selectedBike.bikeSize + " " + _this.selectedBike.bikeMake + " " + _this.selectedBike.bikeModel 
   var price = 1;
   var quantity = 1;
   var data = {};
