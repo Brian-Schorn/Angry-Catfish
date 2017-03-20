@@ -173,13 +173,13 @@
 
     <div class="col-sm-5">
       <div class="input-group">
-        <label>
+        <label class="">
           <span class="selectImageFile" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image:
-            <span class="pull-right">{{file.$ngfName}}
               <!-- <img ngf-thumbnail="file || '/public/assets/upload1.png'"> -->
-            </span>
           </span>
         </label>
+        <span class="">{{file.$ngfName}}</span>
+
 
          <input id="imageComment" class="form-control" type="text" ng-model="comment" placeholder="Add comment.. " class="u-full-width" />
          <span ng-show="bikeEdit.needImage" class="error">One Image Required</span>
@@ -187,6 +187,7 @@
           <button class="btn btn-info btn-sm adminBikeModalBtn" type="button" ng-click="submitPic()" value="Upload"><i class="fa fa-cloud-upload"></i> Upload</button>
          </div>
       </div>
+      <p class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><button class="btn btn-danger adminDeletePointBtn" ng-click="bikeEdit.deleteImage($index)"><i class="fa fa-times fa-sm"></i></button></p>
 
       <div class="imageUpload" ng-repeat="picture in uploads | orderBy: 'created' : true ">
         <img class="previewImage" ng-src="{{picture.file.location}}"/>
@@ -200,7 +201,6 @@
 
 <hr />
 
-<li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteImage($index)"><i class="fa fa-trash"></i></button></li>
     <div class="row">
       <div class="adminBikeModalFooter pull-right">
         <button class="btn btn-warning btn-sm" ng-click="bikeEdit.reset(editBikeForm)">Undo Changes</button>
