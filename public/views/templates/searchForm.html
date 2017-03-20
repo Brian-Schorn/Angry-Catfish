@@ -37,8 +37,8 @@
         <span>{{ auth.getTotalItems() }}
           <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
           <br />
-          <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
-             |
+          <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart |</a>
+
              <!-- added to clearly delineate between the clear cart and view cart hyperlinks -->
 
 
