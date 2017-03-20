@@ -53,7 +53,7 @@
           <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
           <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
           <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[2]}}/Day</p>
-          <button class="btn btn-warning" ng-click="cust.deleteItem($index)"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></button>
+          <button class="btn btn-warning btn-sm" ng-click="cust.deleteItem($index)"><i class="fa fa-trash" aria-hidden="true"></i></button>
 
         </li>
 
@@ -71,8 +71,8 @@
   <!-- <p align="right">Subtotal = $150</p> -->
   <hr align="right" width="10%"/>
   <p align="right">Total: ${{cust.totalPrice}}</p>
-  <button type="button" class="btn btn-danger pull-right" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Return to Browsing</button>
-  <input type="submit" class="btn btn-success pull-right" ng-click="cust.addRes(addResForm.$valid)" ng-disabled="cust.addResStatus" value="Book Reservation">
+  <button type="button" class="btn btn-warning pull-right checkoutButtons" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Return to Browsing</button>
+  <input type="submit" class="btn btn-info pull-right checkoutButtons" ng-click="cust.addRes(addResForm.$valid)" ng-disabled="cust.addResStatus" value="Book Reservation">
 </div>
 </div>
 <br />

@@ -193,3 +193,7 @@ body {
 mark {
   color: #F23F1E;
 }
+
+.checkoutButtons {
+  margin-left: 10px;
+}
