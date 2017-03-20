@@ -180,7 +180,9 @@ $scope.comment='';
   //ADD BULLET POINT TO ARRAY
   _this.addBullet = function(bullet){
     console.log(bullet);
+    if(bullet != "" && bullet != undefined){
     _this.selectedBike.bulletPoints.push(bullet);
+  }
     _this.newBullet= null;
   }
 
@@ -191,7 +193,9 @@ $scope.comment='';
   //ADD BULLET POINT TO ARRAY
   _this.addTag = function(tag){
     console.log(tag);
+    if(tag != "" && tag != undefined){
     _this.selectedBike.searchTags.push(tag);
+  }
     _this.newTag= null;
   }
 

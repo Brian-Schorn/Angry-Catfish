@@ -110,7 +110,7 @@
         <label>Search Tags:</label>
         <input class="form-control" type="string" ng-model="bikeEdit.newTag" name="searchTag" />
         <span ng-show="editBikeForm.$submitted">
-          <span ng-hide="bikeEdit.newBike.searchTags.length > 0" class="error">One Search Tag Required</span>
+          <span ng-hide="bikeEdit.selectedBike.searchTags.length > 0" class="error">One Search Tag Required</span>
         </span>
         <div class="input-group-btn">
           <p class="btn btn-info btn-sm adminBikeModalBtn" ng-click="bikeEdit.addTag(bikeEdit.newTag)" value="Add Search Tag">Add Search Tag</p>
@@ -126,7 +126,7 @@
         <label class="">Bullet Points:</label>
         <input class="form-control" type="string" ng-model="bikeEdit.newBullet" name="bulletPoint" />
         <span ng-show="editBikeForm.$submitted">
-          <span ng-hide="bikeEdit.newBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
+          <span ng-hide="bikeEdit.selectedBike.bulletPoints.length > 0" class="error">One Bullet Point Required</span>
         </span>
         <div class="input-group-btn">
           <button class="btn btn-info btn-sm adminBikeModalBtn" type="button" ng-click="bikeEdit.addBullet(bikeEdit.newBullet)" value="Add Bullet Point">Add Bullet Point</button>
@@ -155,13 +155,13 @@
         <span ng-show="editBikeForm.oneDayPrice.$error.required" class="error">One Day Price Required</span>
       </span>
 
-      <label>2-4 Day Pricing</label> <input type="number" ng-model="addBike.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" required=""  /></label>
+      <label>2-4 Day Pricing</label> <input type="number" ng-model="bikeEdit.twoDayPrice" name="twoDayPrice" ng-init="bikeEdit.twoDayPrice = 65" required=""  /></label>
       <span ng-show="bikeEditbikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.twoDayPrice.$touched)">
         <span ng-show="editBikeForm.twoDayPrice.$error.required" class="error">2-4 Day Price Required</span>
       </span>
 
       <label>5+ Day Pricing</label>
-      <input type="number" ng-model="addBike.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" required=""  /></label>
+      <input type="number" ng-model="bikeEdit.fiveDayPrice" name="fiveDayPrice" ng-init="bikeEdit.fiveDayPrice = 55" required=""  /></label>
       <span ng-show="bikeEdit.bikePricing == 'true' && (editBikeForm.$submitted || editBikeForm.fiveDayPrice.$touched)">
         <span ng-show="editBikeForm.fiveDayPrice.$error.required" class="error">Five Day Price Required</span>
       </span>
@@ -175,9 +175,9 @@
       <div class="input-group">
         <label>
           <span class="selectImageFile" type="file" ngf-select ng-model="file" name="file" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" ngf-resize="{width: 800, height: 800}"><i class="fa fa-search-plus"></i> Select Image:
-            <!-- <span class="pull-right">{{file.$ngfName}}
-              <img ngf-thumbnail="file || '/public/assets/upload1.png'">
-            </span> -->
+            <span class="pull-right">{{file.$ngfName}}
+              <!-- <img ngf-thumbnail="file || '/public/assets/upload1.png'"> -->
+            </span>
           </span>
         </label>
 
@@ -200,6 +200,7 @@
 
 <hr />
 
+<li class="repeatList" ng-repeat="image in bikeEdit.selectedBike.imageUrls track by $index"><img ng-src="{{image}}" style="height:100px;width:auto;" /><button class="btn btn-warning bikeBulletDelete" ng-click="bikeEdit.deleteImage($index)"><i class="fa fa-trash"></i></button></li>
     <div class="row">
       <div class="adminBikeModalFooter pull-right">
         <button class="btn btn-warning btn-sm" ng-click="bikeEdit.reset(editBikeForm)">Undo Changes</button>

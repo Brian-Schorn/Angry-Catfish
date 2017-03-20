@@ -95,10 +95,10 @@ body {
 #checkoutPage\20 container > form {
   padding: 40px;
 }
-<<<<<<< HEAD
+
 #checkoutPage\20 container > form > div.col-sm-12 {
   margin-bottom: 100px;
-=======
+}
 
 /*this block of code animates the header on the viewres screen*/
 .resModal {
@@ -183,7 +183,6 @@ body {
       0 0 .2em blue,
       0 .5em .5em blue;
   }
->>>>>>> master
 }
 
 #resModalView {
