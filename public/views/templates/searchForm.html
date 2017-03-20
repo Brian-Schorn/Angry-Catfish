@@ -38,6 +38,12 @@
           <ng-pluralize count="auth.getTotalItems()" when="{1: 'item', 'other':'items'}"></ng-pluralize>
           <br />
           <a ng-show="auth.getTotalItems() > 0" ng-click="auth.clearCart()">Clear Cart</a>
+             |
+             <!-- added to clearly delineate between the clear cart and view cart hyperlinks -->
+
+
+
+
           <a ng-show="auth.getTotalItems() > 0" href="/customerDetails">View Cart</a>
         </span>
       </div>
@@ -154,7 +160,7 @@
     <div class="row">
       <div id="bikeDisplay" class="col-xs-12 col-sm-6 col-md-4 col-xl-3" ng-repeat="cycle in auth.bikeList | filter: auth.selected | orderBy: orderByFunction as results">
 
-          <div class="bikeBox" tooltip-placement="top" uib-tooltip="Click bike for more info and reservations." ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
+          <div class="bikeBox" tooltip-placement="top" uib-tooltip="Click bike for more info and reservations" ng-click="openModalPopup(cycle._id, dt.start, dt.end)">
             <div><img class="img-responsive" src={{cycle.imageUrls[0]}} alt="bike"/></div>
             <div class="bikeBoxText">
               <span>{{cycle.bikeMake}} - {{cycle.bikeModel}} - {{cycle.bikeSize}}</span>

@@ -2,22 +2,22 @@
 
   <div class="modal-header">
     <!-- controller: 'resDetailsController as resDetails', -->
-
+    <h2>Reservation Details</h2>
     <div class="modal-title">
       <div class="row">
         <ul id="resModalView">
-        <li >Transaction ID: {{resDetails.resData.transactionID}} </li>
-        <li >Customer Name: {{resDetails.resData.custName}} </li>
-        <li >Customer Email: {{resDetails.resData.custEmail}} </li>
-        <li >Customer Phone Number: {{resDetails.resData.custPhone}} </li>
-        <li >Customer Address: {{resDetails.resData.custAddress}} </li>
-        Bikes Reserved:
+        <li ><strong>Transaction ID:</strong> {{resDetails.resData.transactionID}} </li>
+        <li ><strong>Customer Name:</strong> {{resDetails.resData.custName}} </li>
+        <li ><strong>Customer Email:</strong> <a>{{resDetails.resData.custEmail}}</a> </li>
+        <li ><strong>Customer Phone Number:</strong> {{resDetails.resData.custPhone}} </li>
+        <li ><strong>Customer Address:</strong> {{resDetails.resData.custAddress}} </li>
+        <strong>Bikes Reserved:</strong>
         <span ng-repeat="item in resDetails.resData.bikeID">
-        <li > {{resDetails.bikeNames[$index]}}<br />
-        Pedal Type: {{resDetails.resData.pedalType[$index]}}<br />
-        Helmet Required: {{resDetails.resData.needHelmet[$index]}} </li>
+        <li > <mark>{{resDetails.bikeNames[$index]}}</mark><br />
+        <strong>Pedal Type:</strong> {{resDetails.resData.pedalType[$index]}}<br />
+        <strong>Helmet Required:</strong> {{resDetails.resData.needHelmet[$index]}} </li>
         </span>
-        <li >Total Price: {{resDetails.resData.totalPrice}} </li>
+        <li ><strong>Total Price:</strong> {{resDetails.resData.totalPrice}} </li>
         </ul>
       </div>
     </div>
