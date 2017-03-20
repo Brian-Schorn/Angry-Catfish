@@ -65,8 +65,9 @@
 }
 
 .bikeBox img {
-  /*max-height: 200px;*/
-  /*width: auto;*/
+  max-height: 185px;
+  width: auto;
+  margin: auto;
 }
 
 .addBikeBox {
