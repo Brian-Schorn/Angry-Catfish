@@ -15,7 +15,7 @@
         <span ng-repeat="item in resDetails.resData.bikeID">
         <li > <mark>{{resDetails.bikeNames[$index]}}</mark><br />
         <strong>Pedal Type:</strong> {{resDetails.resData.pedalType[$index]}}<br />
-        <strong>Helmet Required:</strong> {{resDetails.resData.needHelmet[$index]}} </li>
+        <strong>Helmet Required:</strong> <span ng-show="resDetails.resData.needHelmet[$index]">Yes</span><span ng-hide="resDetails.resData.needHelmet[$index]">No</span> </li>
         </span>
         <li ><strong>Total Price:</strong> {{resDetails.resData.totalPrice}} </li>
         </ul>

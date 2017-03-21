@@ -50,7 +50,8 @@
         Return Date: <strong>{{cust.endDisplay}}</strong>
       <ul>
         <li ng-repeat="item in cust.cart">
-          {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: {{item._data.helmet}}
+          {{item._name}}<br />Pedal Type: {{item._data.pedal}}<br />Helmet Needed: <span ng-show="item._data.helmet">Yes</span><span ng-hide="item._data.helmet">No</span>
+          <!-- {{item._data.helmet}} -->
           <p ng-if="cust.dates.length == 1">Price: ${{item._data.pricing[0]}}</p>
           <p ng-if="cust.dates.length > 1 && cust.dates.length < 5">Price: ${{item._data.pricing[1]}}/Day</p>
           <p ng-if="cust.dates.length > 4">Price: ${{item._data.pricing[2]}}/Day</p>
@@ -73,7 +74,7 @@
   <hr align="right" width="10%"/>
   <p align="right">Total: ${{cust.totalPrice}}</p>
   <input type="submit" class="btn btn-info pull-right checkoutButtons" ng-click="cust.addRes(addResForm.$valid)" ng-disabled="cust.addResStatus" value="Book Reservation">
-  
+
   <button type="button" class="btn btn-warning pull-right checkoutButtons" ng-click="cust.cancelRes()" ng-disabled="cust.addResStatus">Return to Browsing</button>
 </div>
 </div>
